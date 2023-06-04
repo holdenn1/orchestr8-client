@@ -1,0 +1,15 @@
+@import 'src/assets/styles/variables';
+
+.signUpForm {
+  width: 720px;
+  height: 420px;
+  box-shadow: 2px 2px 24px 0px rgb(136, 147, 198);
+  border-radius: $primary-border-radius;
+  margin: $primary-margin;
+  padding: $primary-padding;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr ;
+  grid-template-rows: 80px auto 80px;
+
+}
