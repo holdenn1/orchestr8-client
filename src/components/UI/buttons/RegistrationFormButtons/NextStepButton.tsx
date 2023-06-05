@@ -1,14 +1,7 @@
-import React, { useContext } from 'react';
-import { SignUpFormContext } from '@/utils/context/signUpFormContext';
+import React from 'react';
 
 function NextStepButton() {
-  const { step, setStep } = useContext(SignUpFormContext);
-
-  return (
-    <button type='button' onClick={() => setStep(step + 1)}>
-      Next
-    </button>
-  );
+  return <button type='submit'>Next</button>;
 }
 
 export default NextStepButton;

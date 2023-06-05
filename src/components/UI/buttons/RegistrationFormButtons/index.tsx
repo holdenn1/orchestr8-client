@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PrevStepButton from '@/components/UI/buttons/RegistrationFormButtons/PrevStepButton';
 import NextStepButton from '@/components/UI/buttons/RegistrationFormButtons/NextStepButton';
 import SubmitButton from '@/components/UI/buttons/RegistrationFormButtons/SubmitButton';
-import { SignUpFormContext } from '@/utils/context/signUpFormContext';
+import { SignUpFormContext } from '@/components/forms/registrationForms/SignUpForm';
 
 function RegistrationFormButtons() {
   const { step } = useContext(SignUpFormContext);

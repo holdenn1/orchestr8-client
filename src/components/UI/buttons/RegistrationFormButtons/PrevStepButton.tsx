@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { SignUpFormContext } from '@/utils/context/signUpFormContext';
+import { SignUpFormContext } from '@/components/forms/registrationForms/SignUpForm';
 
 function PrevStepButton() {
   const { step, setStep } = useContext(SignUpFormContext);
