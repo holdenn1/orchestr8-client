@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
 import SignInButton from 'ui/buttons/RegistrationFormButtons/SignInButton';
 import RegistrationFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper/RegistrationFormInputsWrapper';
+import { Link } from 'react-router-dom';
 
 type InitialValuesSignInForm = {
   email: string;
@@ -37,7 +38,12 @@ function SignInForm(props) {
               label='Password'
             />
           </RegistrationFormInputsWrapper>
-          <SignInButton />
+          <div className={styles.btnContainer}>
+            <p className={styles.isAccount}>
+              Do you want to register? <Link to='/sign-up'>Sign Up</Link>
+            </p>
+            <SignInButton />
+          </div>
         </Form>
       )}
     </Formik>
