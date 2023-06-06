@@ -1,8 +1,12 @@
-import React from "react";
+import React from 'react';
+import SignInForm from 'components/forms/registrationForms/SignInForm';
+import RegistrationPagesWrapper from 'ui/wrappers/RegistrationPagesWrapper/RegistrationPagesWrapper';
 
-function SignInPage(props) {
+function SignInPage() {
   return (
-    <div>SignInPage</div>
+    <RegistrationPagesWrapper>
+      <SignInForm />
+    </RegistrationPagesWrapper>
   );
 }
 

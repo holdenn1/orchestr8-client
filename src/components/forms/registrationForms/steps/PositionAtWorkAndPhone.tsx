@@ -1,11 +1,12 @@
 import React from 'react';
-import SignUpFormInputsWrapper from '@/components/UI/wrappers/SignUpFormInputsWrapper/SignUpFormInputsWrapper';
-import TextInput from '@/components/UI/inputs/formInputs/TextInput';
-import SelectInput from '@/components/UI/inputs/formInputs/SelectInput';
+import SelectInput from 'ui/inputs/formInputs/SelectInput';
+import TextInput from 'ui/inputs/formInputs/TextInput';
+import RegistrationFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper/RegistrationFormInputsWrapper';
+
 
 function PositionAtWorkAndPhone() {
   return (
-    <SignUpFormInputsWrapper>
+    <RegistrationFormInputsWrapper>
       <SelectInput name='position' type='select' label='Position' >
         <option value="">Select a job type</option>
         <option value="designer">Designer</option>
@@ -14,7 +15,7 @@ function PositionAtWorkAndPhone() {
         <option value="other">Other</option>
       </SelectInput>
       <TextInput name='phone' type='tel' placeholder='Your phone' label='Phone number' />
-    </SignUpFormInputsWrapper>
+    </RegistrationFormInputsWrapper>
   );
 }
 

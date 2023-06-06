@@ -1,0 +1,18 @@
+@import 'src/assets/styles/variables';
+
+@mixin formNavButton($bg, $bg-hover) {
+  width: 160px;
+  height: 42px;
+  font-size: 16px;
+  border: none;
+  font-weight: $font-weight-title;
+  border-radius: $primary-border-radius;
+  background-color: $bg;
+  color: white;
+  transition-duration: 0.3s;
+  margin: 10px;
+  &:hover {
+    background-color: $bg-hover;
+    cursor: pointer;
+  }
+}

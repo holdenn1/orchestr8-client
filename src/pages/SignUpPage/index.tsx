@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './styles.module.scss';
-import SignUpForm from '@/components/forms/registrationForms/SignUpForm';
+import RegistrationPagesWrapper from 'ui/wrappers/RegistrationPagesWrapper/RegistrationPagesWrapper';
+import SignUpForm from 'components/forms/registrationForms/SignUpForm';
 
 function SignUpPage() {
   return (
-    <main className={styles.wrapper}>
+    <RegistrationPagesWrapper>
       <SignUpForm />
-    </main>
+    </RegistrationPagesWrapper>
   );
 }
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import MainWrapper from '@/components/UI/wrappers/MainWrapper/MainWrapper';
+import MainWrapper from 'ui/wrappers/MainWrapper/MainWrapper';
 import { Link } from 'react-router-dom';
 
 function HomePage() {

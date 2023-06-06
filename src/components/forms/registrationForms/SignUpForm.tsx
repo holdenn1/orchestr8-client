@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Form, Formik, FormikValues } from 'formik';
 import styles from './styles.module.scss';
-import Progress from '@/components/forms/registrationForms/Progress/Progress';
 import {
   EmailAndPassword,
   FullName,
   PositionAtWorkAndPhone,
-} from '@/components/forms/registrationForms/steps';
-import RegistrationFormButtons from '@/components/UI/buttons/RegistrationFormButtons';
+} from 'components/forms/registrationForms/steps';
 import signUpValidateSchema from '@/utils/validate/signUpValidateSchema';
+import Progress from 'components/forms/registrationForms/Progress/Progress';
+import RegistrationFormButtons from 'ui/buttons/RegistrationFormButtons';
 
 type InitialValuesSignUpForm = {
   name: string;
@@ -46,7 +46,6 @@ function SignUpForm(props) {
   };
 
   const handleSubmit = (values: FormikValues, resetForm: any) => {
-
     setStep(step + 1);
     if (step === 2) {
       resetForm();
@@ -59,7 +58,7 @@ function SignUpForm(props) {
     <SignUpFormContext.Provider value={{ step, setStep }}>
       <Formik
         initialValues={initialValues}
-        validationSchema={currentValidateSchema}
+        // validationSchema={currentValidateSchema}
         onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
       >
         {(props) => (

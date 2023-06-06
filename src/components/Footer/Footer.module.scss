@@ -1,5 +1,7 @@
+@import "src/assets/styles/variables";
+
 .footer {
   width: 100%;
   height: 60px;
-  background-color: #202076;
+  background-color: $primary-background-color;
 }
