@@ -10,6 +10,12 @@ export default [
       .string()
       .required('Surname is a required field')
       .matches(/^(?!\s)[^\s].*$/, 'Surname is a required field'),
+    phone: yup
+      .string()
+      .required('Phone is a required field')
+      .matches(/^[\d+]+$/, 'A phone number can only contain numbers')
+      .min(10, 'The phone number is not correct')
+      .max(14, 'The phone number is not correct'),
   }),
   yup.object().shape({
     email: yup.string().required('Email is required field').email('Invalid email address'),
@@ -21,14 +27,9 @@ export default [
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
         'Password must contain a letter, a number and one special character',
       ),
-  }),
-  yup.object().shape({
-    position: yup.string().required('Position is a required field'),
-    phone: yup
+    confirmPassword: yup
       .string()
-      .required('Phone is a required field')
-      .matches(/^[\d+]+$/, 'A phone number can only contain numbers')
-      .min(10, 'The phone number is not correct')
-      .max(14, 'The phone number is not correct'),
+      .oneOf([yup.ref('password'), null], 'Password must match')
+      .required('Confirm password is required'),
   }),
 ];

@@ -5,6 +5,7 @@ import TextInput from 'ui/inputs/formInputs/TextInput';
 import SignInButton from 'ui/buttons/RegistrationFormButtons/SignInButton';
 import RegistrationFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper/RegistrationFormInputsWrapper';
 import { Link } from 'react-router-dom';
+import signInValidateSchema from '@/utils/validate/signInValidateSchema';
 
 type InitialValuesSignInForm = {
   email: string;
@@ -24,7 +25,7 @@ function SignInForm(props) {
   return (
     <Formik
       initialValues={initialValues}
-      // validationSchema={currentValidateSchema}
+      //validationSchema={signInValidateSchema}
       onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
     >
       {(props) => (

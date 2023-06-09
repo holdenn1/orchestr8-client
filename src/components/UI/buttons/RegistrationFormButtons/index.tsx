@@ -14,7 +14,7 @@ function RegistrationFormButtons() {
         Already have an account? <Link to='/sign-in'>Sign In</Link>
       </p>
       {step > 0 && <PrevStepButton />}
-      {step === 0 || step <= 1 ? <NextStepButton /> : <SignUpButton />}
+      {step === 0  ? <NextStepButton /> : <SignUpButton />}
     </div>
   );
 }

@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Formik, FormikValues } from 'formik';
 import styles from './styles.module.scss';
-import {
-  EmailAndPassword,
-  FullName,
-  PositionAtWorkAndPhone,
-} from 'components/forms/registrationForms/steps';
+import { EmailAndPassword, FullNameAndPhone } from 'components/forms/registrationForms/steps';
 import signUpValidateSchema from '@/utils/validate/signUpValidateSchema';
 import Progress from 'components/forms/registrationForms/Progress/Progress';
 import RegistrationFormButtons from 'ui/buttons/RegistrationFormButtons';
@@ -13,10 +9,10 @@ import RegistrationFormButtons from 'ui/buttons/RegistrationFormButtons';
 type InitialValuesSignUpForm = {
   name: string;
   surname: string;
+  phone: string;
   email: string;
   password: string;
-  phone: string;
-  position: string;
+  confirmPassword: string
 };
 
 type SignUpFormContextProps = {
@@ -28,16 +24,16 @@ export const SignUpFormContext = React.createContext<SignUpFormContextProps | nu
 
 function SignUpForm(props) {
   const [step, setStep] = useState(0);
-  const stepComponents = [FullName, EmailAndPassword, PositionAtWorkAndPhone];
+  const stepComponents = [FullNameAndPhone, EmailAndPassword];
   const currentValidateSchema = signUpValidateSchema[step];
 
   const initialValues: InitialValuesSignUpForm = {
     name: '',
     surname: '',
+    phone: '',
     email: '',
     password: '',
-    position: '',
-    phone: '',
+    confirmPassword: ''
   };
 
   const renderSteps = (formikProps: any) => {
@@ -47,7 +43,7 @@ function SignUpForm(props) {
 
   const handleSubmit = (values: FormikValues, resetForm: any) => {
     setStep(step + 1);
-    if (step === 2) {
+    if (step === 1) {
       resetForm();
       setStep(0);
       console.log(values);
@@ -58,7 +54,7 @@ function SignUpForm(props) {
     <SignUpFormContext.Provider value={{ step, setStep }}>
       <Formik
         initialValues={initialValues}
-        // validationSchema={currentValidateSchema}
+        //validationSchema={currentValidateSchema}
         onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
       >
         {(props) => (

@@ -29,12 +29,13 @@
     border-right: none;
     border-bottom: 1px solid #4780ce;
     outline: none;
+    transition-duration: 0.3s;
     &:focus {
       border-top: none;
       border-left: none;
       border-right: none;
-      border-bottom: 1.5px solid #6289bf;
-      box-shadow: 2px 10px 14px 4px rgb(137, 148, 193);
+      border-bottom: 1.5px solid #36619a;
+      box-shadow:  0px 20px 20px -8px rgb(85, 109, 215);
     }
   }
 

@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  @media screen and (max-width: 419px){
+  @media screen and (max-width: 590px){
     flex-direction: column-reverse;
     align-items: center;
   }
@@ -15,9 +15,6 @@
     margin: 10px;
     color: #616060;
     text-align: center;
-    @media screen and (max-width: 419px){
-      margin: 10px 0 0 0;
-    }
     a{
       color: #2639dc;
       font-weight: $font-weight-title;
