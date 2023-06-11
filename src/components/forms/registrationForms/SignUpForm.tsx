@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import { Form, Formik, FormikValues } from 'formik';
 import styles from './styles.module.scss';
-import { EmailAndPassword, FullNameAndPhone } from 'components/forms/registrationForms/steps';
+import {
+  EmailAndPassword,
+  FullNameAndPhone,
+} from 'components/forms/registrationForms/steps';
 import signUpValidateSchema from '@/utils/validate/signUpValidateSchema';
-import Progress from 'components/forms/registrationForms/Progress/Progress';
-import RegistrationFormButtons from 'ui/buttons/RegistrationFormButtons';
+import Progress from 'components/forms/registrationForms/Progress';
+import FormNavigation from 'components/forms/registrationForms/FormNavigation';
 
-type InitialValuesSignUpForm = {
+export type InitialValuesSignUpForm = {
   name: string;
   surname: string;
   phone: string;
   email: string;
   password: string;
-  confirmPassword: string
+  confirmPassword: string;
 };
-
-type SignUpFormContextProps = {
-  step: number;
-  setStep: React.Dispatch<React.SetStateAction<number>>;
-};
-
-export const SignUpFormContext = React.createContext<SignUpFormContextProps | null>(null);
 
 function SignUpForm(props) {
   const [step, setStep] = useState(0);
@@ -33,7 +29,7 @@ function SignUpForm(props) {
     phone: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   };
 
   const renderSteps = (formikProps: any) => {
@@ -50,22 +46,27 @@ function SignUpForm(props) {
     }
   };
 
+  const handlePrev = () => {
+    setStep(step - 1);
+  };
+
   return (
-    <SignUpFormContext.Provider value={{ step, setStep }}>
-      <Formik
-        initialValues={initialValues}
-        //validationSchema={currentValidateSchema}
-        onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
-      >
-        {(props) => (
-          <Form className={styles.signUpForm}>
-            <Progress />
-            {renderSteps(props)}
-            <RegistrationFormButtons />
-          </Form>
-        )}
-      </Formik>
-    </SignUpFormContext.Provider>
+    <Formik
+      initialValues={initialValues}
+      //validationSchema={currentValidateSchema}
+    >
+      {({ values, resetForm }) => (
+        <Form className={styles.signUpForm}>
+          <Progress />
+          {renderSteps(props)}
+          <FormNavigation
+            handleSubmit={() => handleSubmit(values, resetForm)}
+            handlePrev={handlePrev}
+            step={step}
+          />
+        </Form>
+      )}
+    </Formik>
   );
 }
 

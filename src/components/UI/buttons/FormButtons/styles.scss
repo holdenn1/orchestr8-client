@@ -1,0 +1,12 @@
+@import 'src/assets/styles/variables';
+@import 'src/assets/styles/mixins/formNavButton';
+
+.btn-type-next {
+  @include formNavButton(#2639dc, #1e30c9);
+}
+.btn-type-prev {
+  @include formNavButton(#5293db, #3a76b8);
+}
+.btn-type-submit {
+  @include formNavButton(#0f0fba, #0c0c9e);
+}

@@ -1,7 +1,7 @@
 @import 'src/assets/styles/variables';
 @import 'src/assets/styles/mixins/columnCenterFlex';
 
-.signUpForm {
+.signUpForm,.signInForm {
   width: 720px;
   min-height: 420px;
   box-shadow: 2px 2px 24px 0px rgb(136, 147, 198);
@@ -15,37 +15,5 @@
 }
 
 .signInForm {
-  width: 720px;
-  min-height: 420px;
-  box-shadow: 2px 2px 24px 0px rgb(136, 147, 198);
-  border-radius: $primary-border-radius;
-  margin: $primary-margin;
-  padding: $primary-padding;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: 1fr;
   grid-template-rows: auto minmax(80px, 120px);
-  .btnContainer {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    @media screen and (max-width: 419px) {
-      flex-direction: column-reverse;
-      align-items: center;
-    }
-    .isAccount {
-      margin: 10px;
-      color: #616060;
-      text-align: center;
-      @media screen and (max-width: 419px) {
-        margin: 10px 0 0 0;
-      }
-      a {
-        color: #2639dc;
-        font-weight: $font-weight-title;
-      }
-    }
-  }
 }

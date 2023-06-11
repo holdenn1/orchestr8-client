@@ -1,4 +1,5 @@
 @import 'src/assets/styles/mixins/contentCenterFlex';
+
 .wrapper {
   flex: 1 1 auto;
   @include contentCenterFlex;

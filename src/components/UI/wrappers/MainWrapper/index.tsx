@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './MainWrapper.module.scss'
+import styles from './styles.module.scss';
 import { Children } from '@/types';
 
 function MainWrapper({ children }: Children) {

@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './Header.module.scss'
+import styles from './styles.module.scss';
 
 function Header() {
-  return <header className={styles.header}/>;
+  return <header className={styles.header} />;
 }
 
 export default Header;

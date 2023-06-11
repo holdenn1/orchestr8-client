@@ -2,10 +2,9 @@ import React from 'react';
 import { Form, Formik, FormikValues } from 'formik';
 import styles from './styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
-import SignInButton from 'ui/buttons/RegistrationFormButtons/SignInButton';
-import RegistrationFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper/RegistrationFormInputsWrapper';
-import { Link } from 'react-router-dom';
+import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
 import signInValidateSchema from '@/utils/validate/signInValidateSchema';
+import FormNavigation from 'components/forms/registrationForms/FormNavigation';
 
 type InitialValuesSignInForm = {
   email: string;
@@ -22,15 +21,15 @@ function SignInForm(props) {
     console.log(values);
     resetForm();
   };
+
   return (
     <Formik
       initialValues={initialValues}
       //validationSchema={signInValidateSchema}
-      onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
     >
-      {(props) => (
+      {({ values, resetForm }) => (
         <Form className={styles.signInForm}>
-          <RegistrationFormInputsWrapper>
+          <SignUpFormInputsWrapper>
             <TextInput name='email' type='email' placeholder='Your email' label='Email' />
             <TextInput
               name='password'
@@ -38,13 +37,8 @@ function SignInForm(props) {
               placeholder='Your password'
               label='Password'
             />
-          </RegistrationFormInputsWrapper>
-          <div className={styles.btnContainer}>
-            <p className={styles.isAccount}>
-              Do you want to register? <Link to='/sign-up'>Sign Up</Link>
-            </p>
-            <SignInButton />
-          </div>
+          </SignUpFormInputsWrapper>
+          <FormNavigation handleSubmit={() => handleSubmit(values, resetForm)} />
         </Form>
       )}
     </Formik>

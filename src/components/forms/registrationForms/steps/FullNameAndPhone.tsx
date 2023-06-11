@@ -1,14 +1,14 @@
 import React from 'react';
 import TextInput from 'ui/inputs/formInputs/TextInput';
-import RegistrationFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper/RegistrationFormInputsWrapper';
+import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
 
 function FullNameAndPhone() {
   return (
-    <RegistrationFormInputsWrapper>
+    <SignUpFormInputsWrapper>
       <TextInput name='name' type='text' placeholder='Your name' label='Name' />
       <TextInput name='surname' type='text' placeholder='Your surname' label='Surname' />
       <TextInput name='phone' type='tel' placeholder='Your phone' label='Phone number' />
-    </RegistrationFormInputsWrapper>
+    </SignUpFormInputsWrapper>
   );
 }
 

@@ -1,19 +1,24 @@
 import React from 'react';
 import TextInput from 'ui/inputs/formInputs/TextInput';
-import RegistrationFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper/RegistrationFormInputsWrapper';
+import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
 
 function EmailAndPassword() {
   return (
-    <RegistrationFormInputsWrapper>
+    <SignUpFormInputsWrapper>
       <TextInput name='email' type='email' placeholder='Your email' label='Email' />
-      <TextInput name='password' type='password' placeholder='Your password' label='Password' />
+      <TextInput
+        name='password'
+        type='password'
+        placeholder='Your password'
+        label='Password'
+      />
       <TextInput
         name='confirmPassword'
         type='password'
         placeholder='Confirm your password'
         label='Confirm your password'
       />
-    </RegistrationFormInputsWrapper>
+    </SignUpFormInputsWrapper>
   );
 }
 
