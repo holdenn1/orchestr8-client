@@ -57,7 +57,7 @@ function SignUpForm(props) {
     >
       {({ values, resetForm }) => (
         <Form className={styles.signUpForm}>
-          <Progress />
+          <Progress activeStep={step + 1}/>
           {renderSteps(props)}
           <FormNavigation
             handleSubmit={() => handleSubmit(values, resetForm)}
