@@ -1,0 +1,26 @@
+@import 'src/styles/mixins/contentCenterFlex';
+@import 'src/styles/mixins/mainButton';
+@import 'src/styles/variables';
+
+.wrapper {
+  width: 100%;
+  height: calc(100vh - 100px);
+  @include contentCenterFlex;
+  text-align: center;
+  .contentWrapper {
+    margin: 0 12px;
+    .title {
+      font-size: 36px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+    .description {
+      font-size: 24px;
+    }
+    .greetingBtn {
+      @include mainButton($primary-background-color, #232393);
+      max-width: 240px;
+      width: 100%;
+    }
+  }
+}

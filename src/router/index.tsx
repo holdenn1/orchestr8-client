@@ -1,9 +1,6 @@
 import App from '@/App';
 import { createBrowserRouter } from 'react-router-dom';
-import ErrorPage from '@/pages/ErrorPage';
-import HomePage from '@/pages/HomePage';
-import SignUpPage from '@/pages/SignUpPage';
-import SignInPage from '@/pages/SignInPage';
+import { AccountPage, ErrorPage, HomePage, SignInPage, SignUpPage } from '@/pages';
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: 'sign-in',
         element: <SignInPage />,
+      },
+      {
+        path: 'account',
+        element: <AccountPage />,
       },
     ],
   },

@@ -1,6 +1,6 @@
-@import 'src/assets/styles/variables';
+@import 'src/styles/variables';
 
-@mixin formNavButton($bg, $bg-hover) {
+@mixin mainButton($bg, $bg-hover) {
   width: 160px;
   height: 42px;
   font-size: 16px;

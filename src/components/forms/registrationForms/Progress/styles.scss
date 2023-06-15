@@ -1,4 +1,4 @@
-@import 'src/assets/styles/mixins/contentCenterFlex';
+@import 'src/styles/mixins/contentCenterFlex';
 
 .progress {
   position: relative;
@@ -42,7 +42,8 @@
     .active-step {
       border-color: #3041d0;
       background-color: #3041d0;
-      transition-duration: 0.5s;
+      transition-delay: 0.2s;
+      transition-duration: 0.3s;
       color: #fff;
     }
   }

@@ -1,7 +1,15 @@
-@import 'src/assets/styles/variables';
+@import 'src/styles/variables';
 
 .header {
   width: 100%;
   height: 60px;
   background-color: $primary-background-color;
+  padding: 5px 10px;
+  box-sizing: border-box;
+  position: fixed;
+  .accountIcon {
+    display: block;
+    margin-left: auto;
+    cursor: pointer;
+  }
 }
