@@ -7,9 +7,9 @@ type MainFormButtonProps = {
   onClick: () => void;
 };
 
-function MainFormButton({ type, title, onClick }: MainFormButtonProps) {
+function MainFormButton({ type, title, ...props }: MainFormButtonProps) {
   return (
-    <button type='button' className={`btn-type-${type}`} onClick={onClick}>
+    <button type='button' className={`btn-type-${type}`} {...props}>
       {title}
     </button>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouteError } from 'react-router-dom';
 import styles from './styles.module.scss';
 
-function ErrorPage() {
+function AppError() {
   const error: any = useRouteError();
   return (
     <div className={styles.wrapper}>
@@ -15,4 +15,4 @@ function ErrorPage() {
   );
 }
 
-export default ErrorPage;
+export default AppError;

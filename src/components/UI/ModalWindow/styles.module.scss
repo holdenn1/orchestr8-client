@@ -1,0 +1,57 @@
+@import 'src/styles/mixins/contentCenterFlex';
+
+.wrapper {
+  transform: scale(0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  transition-duration: 0.5s;
+  @include contentCenterFlex;
+
+  .modal {
+    min-width: 320px;
+    min-height: 160px;
+    padding: 20px;
+    margin: 20px;
+    background-color: #ce6464;
+    border-radius: 12px;
+    animation-name: hide-modal;
+    animation-duration: 0.3s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    @keyframes hide-modal {
+      0% {
+        transform: scale(1, 1);
+      }
+
+      100% {
+        transform: scale(0, 0);
+      }
+    }
+  }
+}
+
+.modalVisible {
+  transform: scale(1, 1);
+
+  .modal {
+    animation-name: show-modal;
+    animation-duration: 0.4s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    @keyframes show-modal {
+      0% {
+        transform: scale(0, 0);
+      }
+
+      100% {
+        transform: scale(1, 1);
+      }
+    }
+  }
+}
