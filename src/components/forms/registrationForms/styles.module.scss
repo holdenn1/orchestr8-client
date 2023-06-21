@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 80px auto minmax(80px, 1fr);
+  overflow: hidden;
 }
 
 .signInForm {

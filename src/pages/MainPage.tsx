@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Greeting from 'components/Greeting';
 import MainWrapper from 'ui/wrappers/MainWrapper';
 import ModalWindow from 'ui/ModalWindow';
+import ProjectForm from 'components/forms/ProjectForm';
 
 function MainPage() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -10,7 +11,7 @@ function MainPage() {
     <MainWrapper>
       <Greeting modalVisible={modalVisible} setModalVisible={setModalVisible} />
       <ModalWindow modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        lodads
+        <ProjectForm modalVisible={modalVisible} setModalVisible={setModalVisible} />
       </ModalWindow>
     </MainWrapper>
   );

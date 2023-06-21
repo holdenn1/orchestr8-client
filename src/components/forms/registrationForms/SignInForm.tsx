@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Formik, FormikValues } from 'formik';
+import { Form, Formik } from 'formik';
 import styles from './styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
 import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
@@ -17,7 +17,7 @@ function SignInForm(props) {
     password: '',
   };
 
-  const handleSubmit = (values: FormikValues, resetForm: any) => {
+  const handleSubmit = (values: InitialValuesSignInForm, resetForm: any) => {
     console.log(values);
     resetForm();
   };

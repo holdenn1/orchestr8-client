@@ -3,15 +3,14 @@ import { useField } from 'formik';
 import styles from './styles.module.scss';
 import classNames from 'classnames';
 
-type InputProps = {
+type TextAreaProps = {
   name: string;
-  type: string;
-  placeholder?: string;
   label?: string;
+  placeholder?: string;
   [key: string]: any;
 };
 
-function TextInput({ label, ...props }: InputProps) {
+function TextArea({ label, ...props }: TextAreaProps) {
   const [field, meta] = useField(props);
   return (
     <div className={styles.wrapper}>
@@ -22,8 +21,8 @@ function TextInput({ label, ...props }: InputProps) {
           </label>
         </div>
       )}
-      <input
-        className={classNames(styles.input, {
+      <textarea
+        className={classNames(styles.textarea, {
           [styles.inputError]: meta.touched && meta.error,
         })}
         {...field}
@@ -34,4 +33,4 @@ function TextInput({ label, ...props }: InputProps) {
   );
 }
 
-export default TextInput;
+export default TextArea;

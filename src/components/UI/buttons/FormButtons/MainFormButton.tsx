@@ -4,7 +4,7 @@ import './styles.scss';
 type MainFormButtonProps = {
   type: string;
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 function MainFormButton({ type, title, ...props }: MainFormButtonProps) {

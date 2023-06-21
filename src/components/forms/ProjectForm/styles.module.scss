@@ -1,0 +1,44 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins/scrollbar';
+@import 'src/styles/mixins/textInput';
+@import 'src/styles/mixins/mainButton';
+
+.wrapper {
+  width: 50vw;
+  height: 50vh;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @include scrollbar(10px, $primary-background-color);
+
+}
+.addUserInputWrapper {
+  width: 100%;
+  .labelWrapper {
+    width: 100%;
+    text-align: left;
+    .label {
+      font-size: 20px;
+      font-weight: $font-weight-title;
+    }
+  }
+  .inputAndButtonWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .input {
+      @include textInput;
+      margin-left: 0;
+    }
+  }
+  .btn {
+    @include mainButton(#1867bb, #0e5d9a);
+  }
+}
+
+.btnWrapper{
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0;
+}

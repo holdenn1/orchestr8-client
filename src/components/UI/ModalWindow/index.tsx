@@ -12,7 +12,10 @@ export type ModalProps = {
 function ModalWindow({ children, modalVisible, setModalVisible }: ModalProps) {
   return (
     <div
-      className={classNames(styles.wrapper, { [styles.modalVisible]: modalVisible })}
+      className={classNames(styles.wrapper, {
+        [styles.modalVisible]: modalVisible,
+        [styles.hideModal]: !modalVisible,
+      })}
       onClick={() => setModalVisible(!modalVisible)}
     >
       <div onClick={(e) => e.stopPropagation()} className={styles.modal}>

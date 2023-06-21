@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './styles.scss';
 
-function Progress({ activeStep }: number) {
+function Progress ({ activeStep }: number) {
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const stepsListRef = useRef<HTMLUListElement | null>(null);
 

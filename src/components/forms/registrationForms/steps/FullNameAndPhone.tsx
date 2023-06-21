@@ -5,8 +5,8 @@ import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
 function FullNameAndPhone() {
   return (
     <SignUpFormInputsWrapper>
-      <TextInput name='name' type='text' placeholder='Your name' label='Name' />
-      <TextInput name='surname' type='text' placeholder='Your surname' label='Surname' />
+      <TextInput name='firstName' type='text' placeholder='First name' label='First name' />
+      <TextInput name='lastName' type='text' placeholder='Last name' label='Last name' />
       <TextInput name='phone' type='tel' placeholder='Your phone' label='Phone number' />
     </SignUpFormInputsWrapper>
   );
