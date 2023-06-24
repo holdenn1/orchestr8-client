@@ -1,15 +1,15 @@
 import React from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
-import MainFormButton from 'ui/buttons/FormButtons/MainFormButton';
+import MainButton from 'ui/buttons/MainButton';
+import SubmitButton from 'ui/buttons/SubmitButton';
 
 type FormNavigation = {
-  handleSubmit: () => void;
   handlePrev?: () => void;
   step?: number;
 };
 
-function FormNavigation({ handlePrev, handleSubmit, step }: FormNavigation) {
+function FormNavigation({ handlePrev, step }: FormNavigation) {
   const { href } = location;
 
   const isRegistration = href.includes('sign-up');
@@ -27,17 +27,15 @@ function FormNavigation({ handlePrev, handleSubmit, step }: FormNavigation) {
       )}
       {isRegistration ? (
         <>
-          {step > 0 && (
-            <MainFormButton type='prev' title='Previous' onClick={handlePrev} />
-          )}
+          {step > 0 && <MainButton type='prev' title='Previous' onClick={handlePrev} />}
           {step === 0 ? (
-            <MainFormButton type='next' title='Next' onClick={handleSubmit} />
+            <SubmitButton>Next</SubmitButton>
           ) : (
-            <MainFormButton type='submit' title='Submit' onClick={handleSubmit} />
+            <SubmitButton>Submit</SubmitButton>
           )}
         </>
       ) : (
-        <MainFormButton type='submit' title='Submit' onClick={handleSubmit} />
+        <SubmitButton>Submit</SubmitButton>
       )}
     </div>
   );

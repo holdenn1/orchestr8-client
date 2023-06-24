@@ -11,7 +11,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   @include scrollbar(10px, $primary-background-color);
-
 }
 .addUserInputWrapper {
   width: 100%;
@@ -23,21 +22,32 @@
       font-weight: $font-weight-title;
     }
   }
-  .inputAndButtonWrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .inputAndBtnWrapper {
+    //display: flex;
+    //justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    .inputWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     .input {
       @include textInput;
-      margin-left: 0;
+    }
+    .inputError {
+      border-bottom: 1px solid red;
     }
   }
-  .btn {
-    @include mainButton(#1867bb, #0e5d9a);
-  }
+}
+.error {
+  margin: 6px 0 0 0;
+  text-align: center;
+  color: red;
 }
 
-.btnWrapper{
+.submitBtnWrapper,
+.addUserBtnWrapper {
   display: flex;
   justify-content: flex-end;
   margin: 10px 0;

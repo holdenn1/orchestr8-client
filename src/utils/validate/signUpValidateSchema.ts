@@ -2,11 +2,11 @@ import * as yup from 'yup';
 
 export default [
   yup.object().shape({
-    name: yup
+    firstName: yup
       .string()
       .required('Name is a required field')
       .matches(/^(?!\s)[^\s].*$/, 'Name is a required field'),
-    surname: yup
+    lastName: yup
       .string()
       .required('Surname is a required field')
       .matches(/^(?!\s)[^\s].*$/, 'Surname is a required field'),

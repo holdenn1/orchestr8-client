@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikValues } from 'formik';
 import styles from './styles.module.scss';
 import {
   EmailAndPassword,
@@ -37,7 +37,7 @@ function SignUpForm(props) {
     return <Component {...formikProps} />;
   };
 
-  const handleSubmit = (values: InitialValuesSignUpForm, resetForm: any) => {
+  const handleSubmit = (values: FormikValues, resetForm: any) => {
     setStep(step + 1);
     if (step === 1) {
       resetForm();
@@ -53,14 +53,14 @@ function SignUpForm(props) {
   return (
     <Formik
       initialValues={initialValues}
-      //validationSchema={currentValidateSchema}
+      validationSchema={currentValidateSchema}
+      onSubmit={(values,{resetForm}) => handleSubmit(values, resetForm)}
     >
-      {({ values, resetForm }) => (
+      {(props) => (
         <Form className={styles.signUpForm}>
           <Progress activeStep={step + 1} />
           {renderSteps(props)}
           <FormNavigation
-            handleSubmit={() => handleSubmit(values, resetForm)}
             handlePrev={handlePrev}
             step={step}
           />

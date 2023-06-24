@@ -23,7 +23,7 @@ function TextArea({ label, ...props }: TextAreaProps) {
       )}
       <textarea
         className={classNames(styles.textarea, {
-          [styles.inputError]: meta.touched && meta.error,
+          [styles.textareaError]: meta.touched && meta.error,
         })}
         {...field}
         {...props}

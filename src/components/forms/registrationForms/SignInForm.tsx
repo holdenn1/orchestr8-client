@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Formik } from 'formik';
+import { Form, Formik, FormikValues } from 'formik';
 import styles from './styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
 import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
@@ -11,13 +11,13 @@ type InitialValuesSignInForm = {
   password: string;
 };
 
-function SignInForm(props) {
+function SignInForm() {
   const initialValues: InitialValuesSignInForm = {
     email: '',
     password: '',
   };
 
-  const handleSubmit = (values: InitialValuesSignInForm, resetForm: any) => {
+  const handleSubmit = (values: FormikValues, resetForm: any) => {
     console.log(values);
     resetForm();
   };
@@ -25,9 +25,10 @@ function SignInForm(props) {
   return (
     <Formik
       initialValues={initialValues}
-      //validationSchema={signInValidateSchema}
+      validationSchema={signInValidateSchema}
+      onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
     >
-      {({ values, resetForm }) => (
+      {(props) => (
         <Form className={styles.signInForm}>
           <SignUpFormInputsWrapper>
             <TextInput name='email' type='email' placeholder='Your email' label='Email' />
@@ -38,7 +39,7 @@ function SignInForm(props) {
               label='Password'
             />
           </SignUpFormInputsWrapper>
-          <FormNavigation handleSubmit={() => handleSubmit(values, resetForm)} />
+          <FormNavigation />
         </Form>
       )}
     </Formik>

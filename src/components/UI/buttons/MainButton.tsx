@@ -1,13 +1,13 @@
 import React from 'react';
 import './styles.scss';
 
-type MainFormButtonProps = {
+type MainButtonProps = {
   type: string;
   title: string;
   onClick?: () => void;
 };
 
-function MainFormButton({ type, title, ...props }: MainFormButtonProps) {
+function MainButton({ type, title, ...props }: MainButtonProps) {
   return (
     <button type='button' className={`btn-type-${type}`} {...props}>
       {title}
@@ -15,4 +15,4 @@ function MainFormButton({ type, title, ...props }: MainFormButtonProps) {
   );
 }
 
-export default MainFormButton;
+export default MainButton;
