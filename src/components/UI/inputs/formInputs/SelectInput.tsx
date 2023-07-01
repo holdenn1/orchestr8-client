@@ -8,6 +8,7 @@ function SelectInput({ label, ...props }: InputProps) {
   const [field, meta] = useField(props);
   return (
     <div className={styles.wrapper}>
+  
       <div className={styles.labelWrapper}>
         <label className={styles.label} htmlFor={props.name}>
           {label}

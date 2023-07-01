@@ -8,6 +8,7 @@ import {
 import signUpValidateSchema from '@/utils/validate/signUpValidateSchema';
 import Progress from 'components/forms/registrationForms/Progress';
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
+import { profileRequest, registrationUserRequest } from '@/api/requests';
 
 type InitialValuesSignUpForm = {
   firstName: string;
@@ -37,12 +38,16 @@ function SignUpForm(props) {
     return <Component {...formikProps} />;
   };
 
-  const handleSubmit = (values: FormikValues, resetForm: any) => {
+  const handleSubmit = async (values: FormikValues, resetForm: any) => {
     setStep(step + 1);
     if (step === 1) {
-      resetForm();
+
       setStep(0);
-      console.log(values);
+      const {data} = await registrationUserRequest(values);
+      localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('refreshToken', data.refreshToken)
+      setTimeout(() =>  profileRequest(), 10000)
+      resetForm();
     }
   };
 
@@ -54,16 +59,13 @@ function SignUpForm(props) {
     <Formik
       initialValues={initialValues}
       validationSchema={currentValidateSchema}
-      onSubmit={(values,{resetForm}) => handleSubmit(values, resetForm)}
+      onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
     >
       {(props) => (
         <Form className={styles.signUpForm}>
           <Progress activeStep={step + 1} />
           {renderSteps(props)}
-          <FormNavigation
-            handlePrev={handlePrev}
-            step={step}
-          />
+          <FormNavigation handlePrev={handlePrev} step={step} />
         </Form>
       )}
     </Formik>
