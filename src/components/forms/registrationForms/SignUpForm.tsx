@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Formik, FormikValues } from 'formik';
+import { Form, Formik, FormikProps, FormikValues, useFormikContext } from 'formik';
 import styles from './styles.module.scss';
 import {
   EmailAndPassword,
@@ -8,16 +8,9 @@ import {
 import signUpValidateSchema from '@/utils/validate/signUpValidateSchema';
 import Progress from 'components/forms/registrationForms/Progress';
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
-import { profileRequest, registrationUserRequest } from '@/api/requests';
-
-type InitialValuesSignUpForm = {
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+import { registrationUserRequest } from '@/api/requests';
+import { notify } from 'components/Toast';
+import { InitialValuesSignUpForm } from 'components/forms/types';
 
 function SignUpForm(props) {
   const [step, setStep] = useState(0);
@@ -39,20 +32,37 @@ function SignUpForm(props) {
   };
 
   const handleSubmit = async (values: FormikValues, resetForm: any) => {
-    setStep(step + 1);
-    if (step === 1) {
-
-      setStep(0);
-      const {data} = await registrationUserRequest(values);
-      localStorage.setItem('accessToken', data.accessToken)
-      localStorage.setItem('refreshToken', data.refreshToken)
-      setTimeout(() =>  profileRequest(), 10000)
-      resetForm();
+    if (step === stepComponents.length - 1) {
+      try {
+        const { data } = await registrationUserRequest(values);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+        setStep(0);
+        resetForm();
+      } catch (e) {
+        notify('Check field', 'error');
+        console.log(e);
+      }
     }
   };
 
   const handlePrev = () => {
     setStep(step - 1);
+  };
+
+  const handleNext = (props: FormikProps<any>) => {
+    props.validateForm().then((errors) => {
+      if (Object.keys(errors).length === 0) {
+        if (step < stepComponents.length - 1) {
+          setStep(step + 1);
+        }
+      } else {
+        Object.keys(errors).forEach((fieldName) => {
+          props.setFieldError(fieldName, errors[fieldName] as string);
+          props.setFieldTouched(fieldName, true);
+        });
+      }
+    });
   };
 
   return (
@@ -65,7 +75,11 @@ function SignUpForm(props) {
         <Form className={styles.signUpForm}>
           <Progress activeStep={step + 1} />
           {renderSteps(props)}
-          <FormNavigation handlePrev={handlePrev} step={step} />
+          <FormNavigation
+            handlePrev={handlePrev}
+            handleNext={() => handleNext(props)}
+            step={step}
+          />
         </Form>
       )}
     </Formik>

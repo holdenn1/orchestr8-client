@@ -3,13 +3,9 @@ import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import MainButton from 'ui/buttons/MainButton';
 import SubmitButton from 'ui/buttons/SubmitButton';
+import { FormNavigationProps } from 'components/forms/types';
 
-type FormNavigation = {
-  handlePrev?: () => void;
-  step?: number;
-};
-
-function FormNavigation({ handlePrev, step }: FormNavigation) {
+function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
   const { href } = location;
 
   const isRegistration = href.includes('sign-up');
@@ -29,7 +25,7 @@ function FormNavigation({ handlePrev, step }: FormNavigation) {
         <>
           {step > 0 && <MainButton type='prev' title='Previous' onClick={handlePrev} />}
           {step === 0 ? (
-            <SubmitButton>Next</SubmitButton>
+            <MainButton type='next' title='Next' onClick={handleNext} />
           ) : (
             <SubmitButton>Submit</SubmitButton>
           )}

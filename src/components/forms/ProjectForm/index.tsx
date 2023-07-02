@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
 import { Formik, Form, FormikValues } from 'formik';
-import { ModalProps } from 'ui/ModalWindow';
 import projectFormValidationSchema from '@/utils/validate/projectFormValidationSchema';
 import styles from 'components/forms/ProjectForm/styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
@@ -8,13 +7,7 @@ import TextArea from 'ui/inputs/formInputs/TextArea';
 import SubmitButton from 'ui/buttons/SubmitButton';
 import MainButton from 'ui/buttons/MainButton';
 import classNames from 'classnames';
-
-type ProjectFormProps = Omit<ModalProps, 'children'>;
-
-export type InitialValuesProjectForm = {
-  titleProject: string;
-  descriptionProject: string;
-};
+import { InitialValuesProjectForm, ProjectFormProps } from 'components/forms/types';
 
 function ProjectForm({ modalVisible, setModalVisible }: ProjectFormProps) {
   const [users, setUsers] = useState<string[]>([]);
