@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { Formik, Form, FormikValues } from 'formik';
 import projectFormValidationSchema from '@/utils/validate/projectFormValidationSchema';
 import styles from 'components/forms/ProjectForm/styles.module.scss';
@@ -7,13 +7,17 @@ import TextArea from 'ui/inputs/formInputs/TextArea';
 import SubmitButton from 'ui/buttons/SubmitButton';
 import MainButton from 'ui/buttons/MainButton';
 import classNames from 'classnames';
-import { InitialValuesProjectForm, ProjectFormProps } from 'components/forms/types';
+import { InitialValuesProjectForm } from 'components/forms/types';
+import { setModal } from '@/store/slices/mainSlice';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 
-function ProjectForm({ modalVisible, setModalVisible }: ProjectFormProps) {
+function ProjectForm() {
   const [users, setUsers] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [userEmailError, setUserEmailError] = useState(false);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const { modalVisible } = useAppSelector((state) => state.main);
+  const dispatch = useAppDispatch();
 
   const initialValues: InitialValuesProjectForm = {
     titleProject: '',
@@ -22,7 +26,7 @@ function ProjectForm({ modalVisible, setModalVisible }: ProjectFormProps) {
 
   function handleSubmit(values: FormikValues, resetForm: any) {
     console.log({ ...values, usersOnProject: users });
-    setModalVisible(!modalVisible);
+    dispatch(setModal(!modalVisible)) 
     setInputValue('');
     setUserEmailError(false);
     resetForm();

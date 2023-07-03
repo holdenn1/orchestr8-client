@@ -1,22 +1,23 @@
-import { Dispatch, SetStateAction } from 'react';
+import { ReactNode } from 'react';
 import styles from './styles.module.scss';
-import { Children } from '@/types';
 import classNames from 'classnames';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { setModal } from '@/store/slices/mainSlice';
 
-export type ModalProps = {
-  children: Children;
-  modalVisible: boolean;
-  setModalVisible: Dispatch<SetStateAction<boolean>>;
+type ModalProps = {
+  children: ReactNode;
 };
 
-function ModalWindow({ children, modalVisible, setModalVisible }: ModalProps) {
+function ModalWindow({ children }: ModalProps) {
+  const { modalVisible } = useAppSelector((state) => state.main);
+  const dispatch = useAppDispatch();
   return (
     <div
       className={classNames(styles.wrapper, {
         [styles.modalVisible]: modalVisible,
         [styles.hideModal]: !modalVisible,
       })}
-      onClick={() => setModalVisible(!modalVisible)}
+      onClick={() => dispatch(setModal(!modalVisible))}
     >
       <div onClick={(e) => e.stopPropagation()} className={styles.modal}>
         {children}

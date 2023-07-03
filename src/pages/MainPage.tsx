@@ -1,18 +1,30 @@
-import React, { useState } from 'react';
 import Greeting from 'components/Greeting';
 import MainWrapper from 'ui/wrappers/MainWrapper';
 import ModalWindow from 'ui/ModalWindow';
 import ProjectForm from 'components/forms/ProjectForm';
+import { useAuth } from '@/hooks/useAuth';
+import RegisterProposal from '@/components/RegisterProposal';
 
 function MainPage() {
-  const [modalVisible, setModalVisible] = useState(false);
+  const { isAuth } = useAuth();
 
   return (
     <MainWrapper>
-      <Greeting modalVisible={modalVisible} setModalVisible={setModalVisible} />
-      <ModalWindow modalVisible={modalVisible} setModalVisible={setModalVisible}>
-        <ProjectForm modalVisible={modalVisible} setModalVisible={setModalVisible} />
-      </ModalWindow>
+      {isAuth ? (
+        <>
+          <Greeting />
+          <ModalWindow>
+            <ProjectForm />
+          </ModalWindow>
+        </>
+      ) : (
+        <>
+          <Greeting />
+          <ModalWindow>
+            <RegisterProposal />
+          </ModalWindow>
+        </>
+      )}
     </MainWrapper>
   );
 }

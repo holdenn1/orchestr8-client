@@ -1,11 +1,12 @@
-import React from 'react';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import styles from './styles.module.scss';
-import { ModalProps } from 'ui/ModalWindow';
 import classNames from 'classnames';
+import { setModal } from '@/store/slices/mainSlice';
 
-type GreetingProps = Omit<ModalProps, 'children'>;
-
-function Greeting({ modalVisible, setModalVisible }: GreetingProps) {
+function Greeting() {
+  const { modalVisible } = useAppSelector((state) => state.main);
+  const dispatch = useAppDispatch();
+  
   return (
     <div
       className={classNames(styles.wrapper, { [styles.visibleGreeting]: modalVisible })}
@@ -15,7 +16,7 @@ function Greeting({ modalVisible, setModalVisible }: GreetingProps) {
         <p className={styles.description}>Your project management assistant</p>
         <button
           type='button'
-          onClick={() => setModalVisible(!modalVisible)}
+          onClick={() => dispatch(setModal(!modalVisible))}
           className={styles.greetingBtn}
         >
           Start planning

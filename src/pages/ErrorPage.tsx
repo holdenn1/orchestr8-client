@@ -1,4 +1,3 @@
-import React from 'react';
 import MainWrapper from 'ui/wrappers/MainWrapper';
 import AppError from 'components/errors/AppError';
 

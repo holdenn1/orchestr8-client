@@ -1,7 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import './styles.scss';
 
-function Progress ({ activeStep }: number) {
+type activeStepProps = {
+  activeStep: number;
+};
+
+function Progress({ activeStep }: activeStepProps) {
   const progressBarRef = useRef<HTMLDivElement | null>(null);
   const stepsListRef = useRef<HTMLUListElement | null>(null);
 

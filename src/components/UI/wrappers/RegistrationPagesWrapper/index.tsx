@@ -1,6 +1,5 @@
-import React from 'react';
+import { Children } from '../types';
 import styles from './styles.module.scss';
-import { Children } from '@/types';
 
 function RegistrationPagesWrapper({ children }: Children) {
   return <main className={styles.wrapper}>{children}</main>;

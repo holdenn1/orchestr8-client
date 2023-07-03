@@ -1,5 +1,4 @@
-import React from 'react';
-import { Children } from '@/types';
+import { Children } from '../types';
 import styles from './styles.module.scss';
 
 function SignUpFormInputsWrapper({ children }: Children) {

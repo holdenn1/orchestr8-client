@@ -1,4 +1,3 @@
-import React from 'react';
 import RegistrationPagesWrapper from 'ui/wrappers/RegistrationPagesWrapper';
 import SignUpForm from 'components/forms/registrationForms/SignUpForm';
 

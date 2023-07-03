@@ -1,14 +1,8 @@
-import React from 'react';
 import { useField } from 'formik';
 import styles from './styles.module.scss';
 import classNames from 'classnames';
+import { TextAreaProps } from './types';
 
-type TextAreaProps = {
-  name: string;
-  label?: string;
-  placeholder?: string;
-  [key: string]: any;
-};
 
 function TextArea({ label, ...props }: TextAreaProps) {
   const [field, meta] = useField(props);

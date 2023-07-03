@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import MainButton from 'ui/buttons/MainButton';
@@ -23,7 +22,7 @@ function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
       )}
       {isRegistration ? (
         <>
-          {step > 0 && <MainButton type='prev' title='Previous' onClick={handlePrev} />}
+          {step! > 0 && <MainButton type='prev' title='Previous' onClick={handlePrev} />}
           {step === 0 ? (
             <MainButton type='next' title='Next' onClick={handleNext} />
           ) : (

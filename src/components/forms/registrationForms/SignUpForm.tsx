@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Form, Formik, FormikProps, FormikValues, useFormikContext } from 'formik';
+import { useState } from 'react';
+import { Form, Formik, FormikProps } from 'formik';
 import styles from './styles.module.scss';
 import {
   EmailAndPassword,
@@ -8,14 +8,17 @@ import {
 import signUpValidateSchema from '@/utils/validate/signUpValidateSchema';
 import Progress from 'components/forms/registrationForms/Progress';
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
-import { registrationUserRequest } from '@/api/requests';
-import { notify } from 'components/Toast';
 import { InitialValuesSignUpForm } from 'components/forms/types';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { registrationUser } from '@/store/actions/registrationUser';
+import { useNavigate } from 'react-router-dom';
 
-function SignUpForm(props) {
+function SignUpForm() {
   const [step, setStep] = useState(0);
   const stepComponents = [FullNameAndPhone, EmailAndPassword];
   const currentValidateSchema = signUpValidateSchema[step];
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const initialValues: InitialValuesSignUpForm = {
     firstName: '',
@@ -31,18 +34,10 @@ function SignUpForm(props) {
     return <Component {...formikProps} />;
   };
 
-  const handleSubmit = async (values: FormikValues, resetForm: any) => {
+  const handleSubmit = async (values: InitialValuesSignUpForm, resetForm: any) => {
     if (step === stepComponents.length - 1) {
-      try {
-        const { data } = await registrationUserRequest(values);
-        localStorage.setItem('accessToken', data.accessToken);
-        localStorage.setItem('refreshToken', data.refreshToken);
-        setStep(0);
-        resetForm();
-      } catch (e) {
-        notify('Check field', 'error');
-        console.log(e);
-      }
+      const { confirmPassword, ...registrationValues } = values;
+      dispatch(registrationUser({ registrationValues, setStep, resetForm, navigate }));
     }
   };
 

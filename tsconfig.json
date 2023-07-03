@@ -25,7 +25,9 @@
       "@/*": ["./src/*"],
       "components/*": ["./src/components/*"],
       "ui/*": ["./src/components/UI/*"],
-      "icons/*": ["./src/assets/icons/*"]
+      "icons/*": ["./src/assets/icons/*"],
+      "slices/*": ["./src/store/actions/*"],
+      "actions/*": ["./src/store/actions/*"]
     },
     "allowSyntheticDefaultImports": true
   },

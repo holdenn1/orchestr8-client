@@ -8,8 +8,8 @@
   box-sizing: border-box;
   position: fixed;
   .accountIcon {
-    display: block;
-    margin-left: auto;
-    cursor: pointer;
+    position: fixed;
+    top: 5px;
+    right: 10px;
   }
 }

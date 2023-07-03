@@ -1,31 +1,24 @@
-import React from 'react';
-import { Form, Formik, FormikValues } from 'formik';
+import { Form, Formik } from 'formik';
 import styles from './styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
 import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
 import signInValidateSchema from '@/utils/validate/signInValidateSchema';
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
-import { loginUserRequest } from '@/api/requests';
-import { notify } from 'components/Toast';
 import { InitialValuesSignInForm } from 'components/forms/types';
-
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { loginUser } from '@/store/actions/loginUser';
+import { useNavigate } from 'react-router-dom';
 
 function SignInForm() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const initialValues: InitialValuesSignInForm = {
     email: '',
     password: '',
   };
 
-  const handleSubmit = async (values: FormikValues, resetForm: any) => {
-    try {
-      const { data } = await loginUserRequest(values);
-      localStorage.setItem('accessToken', data.accessToken);
-      localStorage.setItem('refreshToken', data.refreshToken);
-      resetForm();
-    } catch (e) {
-      notify('Check field', 'error');
-      console.log(e);
-    }
+  const handleSubmit = async (loginValues: InitialValuesSignInForm, resetForm: any) => {
+    dispatch(loginUser({ loginValues, navigate, resetForm }));
   };
 
   return (
@@ -34,7 +27,7 @@ function SignInForm() {
       validationSchema={signInValidateSchema}
       onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
     >
-      {(props) => (
+      {() => (
         <Form className={styles.signInForm}>
           <SignUpFormInputsWrapper>
             <TextInput name='email' type='email' placeholder='Your email' label='Email' />

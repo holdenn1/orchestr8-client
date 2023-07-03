@@ -1,5 +1,3 @@
-import { ModalProps } from 'ui/ModalWindow';
-
 export type InitialValuesSignUpForm = {
   firstName: string;
   lastName: string;
@@ -9,18 +7,13 @@ export type InitialValuesSignUpForm = {
   confirmPassword: string;
 };
 
-export type InitialValuesSignInForm = {
-  email: string;
-  password: string;
-};
+export type InitialValuesSignInForm = Pick<InitialValuesSignUpForm, 'email' | 'password'>;
 
 export type FormNavigationProps = {
   handleNext?: () => void;
   handlePrev?: () => void;
   step?: number;
 };
-
-export type ProjectFormProps = Omit<ModalProps, 'children'>;
 
 export type InitialValuesProjectForm = {
   titleProject: string;
