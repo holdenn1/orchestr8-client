@@ -8,14 +8,14 @@
   border-top: none;
   border-left: none;
   border-right: none;
-  border-bottom: 1px solid #4780ce;
+  border-bottom: 1px solid rgb(110, 110, 110);
   outline: none;
   transition-duration: 0.3s;
   &:focus {
     border-top: none;
     border-left: none;
     border-right: none;
-    border-bottom: 1.5px solid #36619a;
-    box-shadow: 0 20px 20px -8px rgb(85, 109, 215);
+    border-bottom: 1.5px solid rgb(80, 80, 80);
+    box-shadow: 0 20px 20px -8px rgb(136, 136, 136);
   }
 }

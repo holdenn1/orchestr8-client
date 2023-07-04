@@ -4,7 +4,7 @@
 
 .wrapper {
   width: 100%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 60px);
   @include contentCenterFlex;
   text-align: center;
   .contentWrapper {
@@ -17,14 +17,14 @@
     .description {
       font-size: 1.5rem;
     }
-    .greetingBtn {
-      @include mainButton($primary-background-color, #232393);
+    .greetingLink {
+      display: block;
+      @include mainButton(#1842b8, #1b1baa);
+      @include contentCenterFlex;
+      margin: 20px auto; 
       max-width: 240px;
       width: 100%;
     }
   }
 }
 
-.visibleGreeting{
-  display: none;
-}

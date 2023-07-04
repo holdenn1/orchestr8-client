@@ -1,12 +1,7 @@
 import SignInForm from 'components/forms/registrationForms/SignInForm';
-import RegistrationPagesWrapper from 'ui/wrappers/RegistrationPagesWrapper';
 
 function SignInPage() {
-  return (
-    <RegistrationPagesWrapper>
-      <SignInForm />
-    </RegistrationPagesWrapper>
-  );
+  return <SignInForm />;
 }
 
 export default SignInPage;

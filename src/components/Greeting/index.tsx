@@ -1,26 +1,21 @@
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
-import classNames from 'classnames';
-import { setModal } from '@/store/slices/mainSlice';
 
 function Greeting() {
-  const { modalVisible } = useAppSelector((state) => state.main);
-  const dispatch = useAppDispatch();
-  
+
   return (
     <div
-      className={classNames(styles.wrapper, { [styles.visibleGreeting]: modalVisible })}
+      className={styles.wrapper}
     >
       <div className={styles.contentWrapper}>
         <h3 className={styles.title}>Welcome to Orchestr8! </h3>
         <p className={styles.description}>Your project management assistant</p>
-        <button
-          type='button'
-          onClick={() => dispatch(setModal(!modalVisible))}
-          className={styles.greetingBtn}
+        <Link
+        to='sign-up'
+          className={styles.greetingLink}
         >
           Start planning
-        </button>
+        </Link>
       </div>
     </div>
   );

@@ -5,13 +5,10 @@ html,
 body {
   line-height: 1;
   height: 100%;
-
 }
 
 #root {
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 

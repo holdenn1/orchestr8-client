@@ -6,8 +6,8 @@ import signInValidateSchema from '@/utils/validate/signInValidateSchema';
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
 import { InitialValuesSignInForm } from 'components/forms/types';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { loginUser } from '@/store/actions/loginUser';
 import { useNavigate } from 'react-router-dom';
+import { loginUser } from '@/store/actions/loginUser';
 
 function SignInForm() {
   const dispatch = useAppDispatch();
@@ -22,26 +22,33 @@ function SignInForm() {
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={signInValidateSchema}
-      onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
-    >
-      {() => (
-        <Form className={styles.signInForm}>
-          <SignUpFormInputsWrapper>
-            <TextInput name='email' type='email' placeholder='Your email' label='Email' />
-            <TextInput
-              name='password'
-              type='password'
-              placeholder='Your password'
-              label='Password'
-            />
-          </SignUpFormInputsWrapper>
-          <FormNavigation />
-        </Form>
-      )}
-    </Formik>
+    <div className={styles.formWrapper}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={signInValidateSchema}
+        onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
+      >
+        {() => (
+          <Form className={styles.signInForm}>
+            <SignUpFormInputsWrapper>
+              <TextInput
+                name='email'
+                type='email'
+                placeholder='Your email'
+                label='Email'
+              />
+              <TextInput
+                name='password'
+                type='password'
+                placeholder='Your password'
+                label='Password'
+              />
+            </SignUpFormInputsWrapper>
+            <FormNavigation />
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 }
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import TextInput from 'ui/inputs/formInputs/TextInput';
 import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
 

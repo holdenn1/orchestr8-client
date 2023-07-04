@@ -61,6 +61,7 @@ function SignUpForm() {
   };
 
   return (
+    <div className={styles.formWrapper}>
     <Formik
       initialValues={initialValues}
       validationSchema={currentValidateSchema}
@@ -78,6 +79,8 @@ function SignUpForm() {
         </Form>
       )}
     </Formik>
+    </div>
+
   );
 }
 
