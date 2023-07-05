@@ -1,6 +1,7 @@
-import MainPage from '@/pages/MainPage';
-import SignUpPage from '@/pages/SignUpPage';
-import SignInPage from '@/pages/SignInPage';
-import ErrorPage from '@/pages/ErrorPage';
+import MainPage from './MainPage';
+import SignUpPage from './SignUpPage';
+import SignInPage from './SignInPage';
+import ErrorPage from './ErrorPage';
+import ProfilePage from './ProfilePage';
 
-export { MainPage, SignUpPage, SignInPage, ErrorPage };
+export { MainPage, SignUpPage, SignInPage, ErrorPage, ProfilePage };

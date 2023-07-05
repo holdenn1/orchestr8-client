@@ -1,0 +1,14 @@
+@mixin projectStatusLine($bg) {
+  padding-left: 10px;
+  &::before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 24px;
+    border-radius: 12px;
+    background-color: $bg;
+    position: absolute;
+    top: 2px;
+    left: 0px;
+  }
+}

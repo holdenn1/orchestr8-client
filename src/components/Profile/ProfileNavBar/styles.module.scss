@@ -1,0 +1,24 @@
+@import 'src/styles/mixins/profileIconWrapper.scss';
+
+.wrapper {
+  grid-area: profileNav;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  .contactsIconWrapper {
+    @include profleIconWrapper;
+    .contactsIcon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .calendarIconWrapper {
+    @include profleIconWrapper;
+
+    .calendarIcon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

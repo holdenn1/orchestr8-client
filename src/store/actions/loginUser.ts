@@ -13,7 +13,7 @@ export const loginUser = createAsyncThunk<void, LoginUserActionProps>(
       dispatch(setUser({ userId, email, roles }));
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      navigate('/');
+      navigate('/profile');
       resetForm();
     } catch (e) {
       notify('Check field', 'error');

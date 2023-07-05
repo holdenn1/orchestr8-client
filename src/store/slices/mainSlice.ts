@@ -3,7 +3,13 @@ import { InitialStateMainSlice } from './types/mainSliseTypes';
 
 const initialState: InitialStateMainSlice = {
   modalVisible: false,
+  selectedOption: {
+    sort: 'Choose an option',
+    category: 'Choose an option',
+  },
 };
+
+type SelectValues = 'sort' | 'category';
 
 const mainSlice = createSlice({
   name: 'main',
@@ -12,8 +18,14 @@ const mainSlice = createSlice({
     setModal(state, action: PayloadAction<boolean>) {
       state.modalVisible = action.payload;
     },
+    sortProjectsBy(state, action: PayloadAction<string>) {
+      state.selectedOption.sort = action.payload;
+    },
+    sortProjectsByCategory(state, action: PayloadAction<string>) {
+      state.selectedOption.category = action.payload;
+    },
   },
 });
 
-export const { setModal } = mainSlice.actions;
+export const { setModal, sortProjectsBy, sortProjectsByCategory } = mainSlice.actions;
 export default mainSlice.reducer;

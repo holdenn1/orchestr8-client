@@ -51,3 +51,60 @@
     font-size: 16px;
   }
 }
+
+.selectWrapper {
+  position: relative;
+  z-index: 1000;
+  .selectOption {
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+    cursor: pointer;
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid rgb(0, 0, 0);
+      position: absolute;
+      transform: rotate(180deg);
+      top: 6px;
+      right: -16px;
+    }
+  }
+  .optionActive {
+    position: relative;
+
+    &::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 5px solid rgb(0, 0, 0);
+      position: absolute;
+      transform: rotate(0deg);
+      top: 6px;
+      right: -16px;
+    }
+  }
+  .optionList {
+    position: absolute;
+    top: 24px;
+    left: 0;
+    width: 140px;
+    background: white;
+
+    .optionItem {
+      padding: 8px 12px;
+      box-sizing: border-box;
+      border-bottom: 1px solid rgb(214, 214, 214);
+      cursor: pointer;
+      &:hover {
+        color: white;
+        background: rgb(155, 154, 154);
+      }
+    }
+  }
+}

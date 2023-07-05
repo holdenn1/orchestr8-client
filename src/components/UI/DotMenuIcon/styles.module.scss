@@ -1,0 +1,12 @@
+.dotsMenu {
+  display: flex;
+  justify-content: space-between;
+  width: 20px;
+  height: 6px;
+  .dot {
+    width: 6px;
+    height: 6px;
+    background-color: black;
+    border-radius: 100%;
+  }
+}
