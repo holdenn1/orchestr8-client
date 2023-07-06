@@ -3,54 +3,57 @@
 @import 'src/styles/mixins/textInput';
 @import 'src/styles/mixins/mainButton';
 @import 'src/styles/mixins/columnCenterFlex';
+@import 'src/styles/mixins/scrollbar.scss';
 
 .wrapper {
-  width: 50vw;
-  height: 50vh;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
   @include scrollbar(6px, $primary-background-color);
-  @media screen and (max-width: 768px) {
-    width: 80vw;
-  }
-}
-.addUserInputWrapper {
-  width: 100%;
-  .labelWrapper {
+  .addUserInputWrapper {
     width: 100%;
-    text-align: left;
-    .label {
-      font-size: 1.25rem;
-      font-weight: $font-weight-title;
-      @media screen and (max-width: 425px){
-        font-size: 1.125rem;
+    .labelWrapper {
+      width: 100%;
+      text-align: left;
+      .label {
+        font-size: 1.25rem;
+        font-weight: $font-weight-title;
+        @media screen and (max-width: 425px) {
+          font-size: 1.125rem;
+        }
       }
     }
-  }
-  .inputAndBtnWrapper {
-    display: grid;
-    grid-template-columns: 1fr 200px;
-    .inputWrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    .inputAndBtnWrapper {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      .inputWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @media screen and (max-width: 768px) {
+          width: 100%;
+        }
+      }
+      .input {
+        @include textInput;
+      }
+      .inputError {
+        border-bottom: 1px solid red;
+      }
       @media screen and (max-width: 768px) {
-        width: 100%;
+        @include columnCenterFlex;
       }
-    }
-    .input {
-      @include textInput;
-    }
-    .inputError {
-      border-bottom: 1px solid red;
-    }
-    @media screen and (max-width: 768px) {
-      @include columnCenterFlex;
     }
   }
 }
+
 .error {
   margin: 6px 0 0 0;
   text-align: center;
@@ -66,7 +69,7 @@
 
 .submitBtnWrapper {
   button {
-    width: 100%;
-    min-width: 190px;
+    width: 190px;
+    margin: 0 auto;
   }
 }

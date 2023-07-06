@@ -17,27 +17,29 @@ function Select({ selectedOption, options, handleOption }: SelectProps) {
     dispatch(handleOption(option));
     setIsOpen(!isOpen);
   }
+
   return (
-    <div className={styles.selectWrapper}>
+    <div className={styles.wrapper}>
       <div
         className={classNames(styles.selectOption, { [styles.optionActive]: isOpen })}
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedOption}
       </div>
-      {isOpen && (
-        <ul className={styles.optionList}>
-          {options.map((option, index) => (
-            <li
-              key={index}
-              className={styles.optionItem}
-              onClick={() => handleSelect(option)}
-            >
-              {option}
-            </li>
-          ))}
-        </ul>
-      )}
+
+      <ul
+        className={classNames(styles.optionList, { [styles.optionListActive]: isOpen })}
+      >
+        {options.map((option, index) => (
+          <li
+            key={index}
+            className={styles.optionItem}
+            onClick={() => handleSelect(option)}
+          >
+            {option}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

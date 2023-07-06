@@ -26,7 +26,7 @@ function ProjectForm() {
 
   function handleSubmit(values: FormikValues, resetForm: any) {
     console.log({ ...values, usersOnProject: users });
-    dispatch(setModal(!modalVisible)) 
+    dispatch(setModal(!modalVisible));
     setInputValue('');
     setUserEmailError(false);
     resetForm();
@@ -54,8 +54,8 @@ function ProjectForm() {
       onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
     >
       {() => (
-        <Form>
-          <div className={styles.wrapper}>
+        <div className={styles.wrapper}>
+          <Form>
             <div>
               <TextInput
                 name='titleProject'
@@ -99,8 +99,8 @@ function ProjectForm() {
                 <SubmitButton>Create a project</SubmitButton>
               </div>
             </div>
-          </div>
-        </Form>
+          </Form>
+        </div>
       )}
     </Formik>
   );

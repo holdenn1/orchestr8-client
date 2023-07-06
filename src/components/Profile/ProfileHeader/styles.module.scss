@@ -1,8 +1,9 @@
 @import 'src/styles/mixins/mainButton.scss';
 @import 'src/styles/mixins/contentCenterFlex.scss';
 @import 'src/styles/mixins/profileIconWrapper.scss';
+@import 'src/styles/mixins/contentCenterFlex.scss';
 
-.wrapper {
+.header {
   grid-area: header;
   display: grid;
   grid-template-columns: minmax(200px, 280px) 1fr minmax(100px, 300px);
@@ -10,8 +11,9 @@
   .logoIcon {
     margin: 0 20px;
   }
-  .addProjectBtn {
+  .addProjectLink {
     display: block;
+    @include contentCenterFlex;
     @include mainButton(#5293db, #3a76b8);
     width: 180px;
     border-radius: 20px;

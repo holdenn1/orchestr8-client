@@ -1,0 +1,31 @@
+.profile-info {
+  height: 160px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 30px 0 0;
+  border-bottom: 1px solid rgb(214, 214, 214);
+  &__greeting {
+    font-size: 20px;
+    margin: 0 0 0 10px;
+    div {
+      margin-bottom: 4px;
+    }
+  }
+  &__user-name {
+    font-weight: 500;
+  }
+  .profile-photo {
+    position: relative;
+    &__photo {
+      cursor: pointer;
+      border-radius: 100%;
+    }
+    &__menu-wrapper {
+      cursor: pointer;
+      position: absolute;
+      top: 45px;
+      right: -20px;
+      transform: rotate(90deg);
+    }
+  }
+}
