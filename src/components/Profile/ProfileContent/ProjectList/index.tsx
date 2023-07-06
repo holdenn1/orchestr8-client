@@ -3,30 +3,29 @@ import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import favoriteIcon from 'icons/icons8-star-24.png';
 import ProfileContentHeader from '../ProfileContentHeader';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
-function Project() {
+function ProjectList() {
+  const { projects } = useAppSelector((state) => state.project);
   return (
     <>
       <ProfileContentHeader />
       <div className={styles.projectsList}>
-        <Link to=''>
-          <div className={styles.projecetItem}>
-            <h3 className={styles.title}>Lorem,lorem lorem ipsum dolor.</h3>
-            <p className={styles.description}>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio pariatur
-              eius, doloremque, suscipit incidunt eos quibusdam enim ducimus officiis
-              nesciunt natus nihil obcaecati nostrum reprehenderit sunt fuga molestias
-              exercitationem! Voluptate?
-            </p>
-            <div className={styles.menu}>
-              <DotMenuIcon />
+        {projects.map((project) => (
+          <Link to={`/profile/projects/${project.projectId}`} key={project.projectId}>
+            <div className={styles.projecetItem}>
+              <h3 className={styles.title}>{project.title}</h3>
+              <p className={styles.description}>{project.description}</p>
+              <div className={styles.menu}>
+                <DotMenuIcon />
+              </div>
+              <img className={styles.favorite} src={favoriteIcon} alt='' />
             </div>
-            <img className={styles.favorite} src={favoriteIcon} alt='' />
-          </div>
-        </Link>
+          </Link>
+        ))}
       </div>
     </>
   );
 }
 
-export default Project;
+export default ProjectList;

@@ -1,8 +1,9 @@
 import App from '@/App';
 import { createHashRouter } from 'react-router-dom';
 import { ErrorPage, MainPage, ProfilePage, SignInPage, SignUpPage } from '@/pages';
-import Project from '@/components/Profile/ProfileContent/ProjectList';
+import ProjectList from '@/components/Profile/ProfileContent/ProjectList';
 import ProjectForm from '@/components/forms/ProjectForm';
+import Project from '@/components/Profile/ProfileContent/Project';
 
 export const router = createHashRouter([
   {
@@ -31,11 +32,15 @@ export const router = createHashRouter([
     children: [
       {
         path: 'projects',
+        element: <ProjectList />,
+      },
+      {
+        path: 'projects/:projectId',
         element: <Project />,
       },
       {
         path: 'projects-form',
-        element: <ProjectForm/>,
+        element: <ProjectForm />,
       },
     ],
   },

@@ -9,7 +9,7 @@ function UserInfo() {
           <p className='profile-info__greeting'>
             <span>Hello</span>
             <br />
-            <span className='profile-info__user-name'>Ihor Ivliev</span>
+            <span className='profile-info__user-name'>Lorem, ipsum.</span>
           </p>
         </div>
         <div className='profile-photo'>
