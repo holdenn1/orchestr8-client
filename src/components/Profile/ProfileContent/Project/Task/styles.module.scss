@@ -1,0 +1,23 @@
+@import 'src/styles/mixins/mainButton.scss';
+
+.wrapper{
+  .btnWrapper {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom:  1px solid rgb(107, 106, 106);
+    .allTasksBtn {
+      @include mainButton(rgb(19, 41, 168), rgb(12, 73, 131));
+      width: 220px;
+    }
+    .completedTasksBtn {
+      @include mainButton(rgb(189, 13, 22), rgb(122, 8, 8));
+      width: 220px;
+    }
+  }
+  .taskWrapper{
+   padding-bottom: 20px;
+  }
+}
+

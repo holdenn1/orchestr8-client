@@ -1,4 +1,6 @@
 @import 'src/styles/mixins/contentCenterFlex.scss';
+@import 'src/styles/mixins/mainButton.scss';
+@import 'src/styles/mixins/scrollbar.scss';
 
 .wrapper {
   width: 100%;
@@ -6,6 +8,7 @@
   @include contentCenterFlex;
   padding: 18px 10px 0;
   box-sizing: border-box;
+
   .content {
     width: 96%;
     height: 100%;
@@ -13,6 +16,8 @@
     padding: 20px;
     box-sizing: border-box;
     border-radius: 24px 0 0 0;
+    overflow-y: auto;
+    @include scrollbar(6px, black);
     .title {
       display: block;
       margin: 20px 0;
@@ -28,7 +33,31 @@
       font-weight: 500;
       margin-bottom: 20px;
     }
+    .btnWrapper {
+      display: flex;
+      justify-content: space-evenly;
+      .allTasksBtn {
+        @include mainButton(rgb(0, 124, 128), rgb(0, 87, 128));
+        width: 220px;
+      }
+      .completedTasksBtn {
+        @include mainButton(rgb(28, 79, 173), rgb(28, 69, 180));
+        width: 220px;
+      }
+    }
     .tasksList {
+      .taskItem {
+        background-color: rgb(228, 228, 228);
+        padding: 14px;
+        cursor: pointer;
+        border-radius: 12px;
+        margin-bottom: 6px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: black;
+      }
+
       .taskCheckbox {
         margin-right: 10px;
       }

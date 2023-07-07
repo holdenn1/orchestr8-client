@@ -7,6 +7,7 @@ import { useAppSelector } from '@/hooks/reduxHooks';
 
 function ProjectList() {
   const { projects } = useAppSelector((state) => state.project);
+  
   return (
     <>
       <ProfileContentHeader />

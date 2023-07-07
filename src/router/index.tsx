@@ -4,6 +4,7 @@ import { ErrorPage, MainPage, ProfilePage, SignInPage, SignUpPage } from '@/page
 import ProjectList from '@/components/Profile/ProfileContent/ProjectList';
 import ProjectForm from '@/components/forms/ProjectForm';
 import Project from '@/components/Profile/ProfileContent/Project';
+import Task from '@/components/Profile/ProfileContent/Project/Task';
 
 export const router = createHashRouter([
   {
@@ -35,12 +36,18 @@ export const router = createHashRouter([
         element: <ProjectList />,
       },
       {
-        path: 'projects/:projectId',
-        element: <Project />,
-      },
-      {
         path: 'projects-form',
         element: <ProjectForm />,
+      },
+      {
+        path: 'projects/:projectId',
+        element: <Project />,
+        children: [
+          {
+            path: 'task/:taskId',
+            element: <Task />,
+          }
+        ]
       },
     ],
   },

@@ -13,10 +13,15 @@ const initialState: InitialStateProjectSlice = {
       title: 'lorem we24',
       description: 'ld;asl lkwkelwpq, ;we; p,we',
       tasks: [
-        { taskId: 1, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
+        {
+          taskId: 1,
+          text: 'slkdfl,;lwe,f e;fslkdfl,;lwe,f e;fwl, ;ewfslkdfl,;lwe,f e;fwl, ;ewfwl, ;ewf',
+          completed: false,
+        },
         { taskId: 2, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
         { taskId: 3, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
       ],
+      completedTask: [],
     },
   ],
   currentProject: {
@@ -24,6 +29,7 @@ const initialState: InitialStateProjectSlice = {
     title: '',
     description: '',
     tasks: [],
+    completedTask: [],
   },
 };
 
@@ -37,24 +43,29 @@ const projectSlice = createSlice({
   initialState,
   reducers: {
     toggleComplete(state, action: PayloadAction<ToggleCompletePAyload>) {
-      if (action.payload.projectId) {
-        const project = state.projects.find(
-          (project) => project.projectId === action.payload.projectId,
-        );
-        if (project) {
-          project.tasks.forEach((project) => {
-            if (project.taskId === action.payload.taskId) {
-              project.completed = !project.completed;
+      state.projects.forEach((pr) => {
+        if (pr.projectId === action.payload.projectId) {
+          pr.tasks.forEach((task) => {
+            if (task.taskId === action.payload.taskId) {
+              task.completed = !task.completed;
             }
           });
+          pr.completedTask = pr.tasks.filter((task) => task.completed);
         }
-      }
+      });
     },
     setcurrentProject(state, action: PayloadAction<Project>) {
       state.currentProject = action.payload;
     },
+    removeTask(state, action: PayloadAction<ToggleCompletePAyload>) {
+      state.projects.forEach((pr) => {
+        if (pr.projectId === action.payload.projectId) {
+          pr.tasks = pr.tasks.filter((task) => task.taskId !== action.payload.taskId);
+        }
+      });
+    },
   },
 });
 
-export const { toggleComplete, setcurrentProject } = projectSlice.actions;
+export const { toggleComplete, setcurrentProject, removeTask } = projectSlice.actions;
 export default projectSlice.reducer;
