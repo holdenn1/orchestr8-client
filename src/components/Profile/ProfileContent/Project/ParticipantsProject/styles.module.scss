@@ -1,0 +1,37 @@
+@import 'src/styles/mixins/mainButton.scss';
+
+.participantsProjectWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 270px));
+  grid-auto-rows: minmax(120px, 200px);
+  justify-items: center;
+  justify-content: center;
+
+  .participantsProjectItem {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid rgb(136, 136, 136);
+    border-radius: 12px;
+    .participantsName {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .participantsEmail {
+      text-align: left;
+      font-weight: 600;
+      margin-bottom: 40px;
+    }
+    .btnConteiner {
+      display: flex;
+      justify-content: space-between;
+      .messageBtn {
+        @include mainButton(#5293db, #2a66aa);
+      }
+      .deleteBtn {
+        @include mainButton(rgb(189, 13, 22), rgb(170, 12, 19));
+      }
+    }
+  }
+}

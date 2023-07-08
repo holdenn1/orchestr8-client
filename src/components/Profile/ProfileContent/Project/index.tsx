@@ -13,6 +13,7 @@ function Project() {
   const { projectId, taskId } = useParams();
   const navigate = useNavigate();
   const isAllTasks = location.href.includes('all-tasks');
+  const isParticipants = location.href.includes('participants-project');
 
   useEffect(() => {
     if (projectId) {
@@ -51,7 +52,7 @@ function Project() {
           })}
         >
           <ul className={styles.projectMenuList}>
-            <Link to={`/profile/projects/${taskId}/all-tasks`}>
+            <Link to={`/profile/projects/${projectId}/all-tasks`}>
               <li
                 className={classNames(
                   styles.projectMenuItem,
@@ -61,7 +62,7 @@ function Project() {
                 All tasks
               </li>
             </Link>
-            <Link to={`/profile/projects/${taskId}/completed-tasks`}>
+            <Link to={`/profile/projects/${projectId}/completed-tasks`}>
               <li
                 className={classNames(
                   styles.projectMenuItem,
@@ -71,11 +72,16 @@ function Project() {
                 Completed tasks
               </li>
             </Link>
-            <li
-              className={classNames(styles.projectMenuItem, styles.participantsMenuItem)}
-            >
-              Show participants - ({currentProject?.projectParticipants.length})
-            </li>
+            <Link to={`/profile/projects/${projectId}/participants-project`}>
+              <li
+                className={classNames(
+                  styles.projectMenuItem,
+                  styles.participantsMenuItem,
+                )}
+              >
+                Show participants - ({currentProject?.projectParticipants.length})
+              </li>
+            </Link>
             <li
               onClick={() => deleteProject()}
               className={classNames(styles.projectMenuItem, styles.removeMenuItem)}
@@ -92,9 +98,11 @@ function Project() {
           </>
         ) : (
           <>
-            <h4 className={styles.taskTitle}>
-              Task list ({isAllTasks ? 'All tasks' : 'Completed tasks'})
-            </h4>
+            {!isParticipants && (
+              <h4 className={styles.taskTitle}>
+                Task list ({isAllTasks ? 'All tasks' : 'Completed tasks'})
+              </h4>
+            )}
             <Outlet />
           </>
         )}

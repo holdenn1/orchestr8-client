@@ -1,3 +1,15 @@
+export type InitialStateProjectSlice = {
+  projects: Project[];
+  currentProject: null | Project;
+};
+
+export type Participant = {
+  participantId: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+};
+
 export type ProjectTask = {
   taskId: number;
   text: string;
@@ -9,6 +21,6 @@ export type Project = {
   title: string;
   description: string;
   tasks: ProjectTask[];
-  completedTask: ProjectTask[]
-  projectParticipants: string[]
+  completedTask: ProjectTask[];
+  projectParticipants: Participant[];
 };

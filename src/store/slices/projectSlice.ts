@@ -1,10 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Project } from './types/projectSliceTypes';
-
-type InitialStateProjectSlice = {
-  projects: Project[];
-  currentProject: null | Project;
-};
+import { InitialStateProjectSlice, Project } from './types/projectSliceTypes';
 
 const initialState: InitialStateProjectSlice = {
   projects: [
@@ -22,7 +17,14 @@ const initialState: InitialStateProjectSlice = {
         { taskId: 3, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
       ],
       completedTask: [],
-      projectParticipants: [],
+      projectParticipants: [
+        {
+          participantId: 0,
+          email: 'qwe@lsd.com',
+          firstName: 'Test',
+          lastName: 'Testovich',
+        },
+      ],
     },
   ],
   currentProject: {
@@ -38,6 +40,11 @@ const initialState: InitialStateProjectSlice = {
 type ToggleCompletePAyload = {
   projectId: number;
   taskId: number;
+};
+
+type DeleteParticipantsPayload = {
+  projectId: number;
+  participantId: number;
 };
 
 const projectSlice = createSlice({
@@ -70,9 +77,27 @@ const projectSlice = createSlice({
       state.projects = state.projects.filter((proj) => proj.projectId !== action.payload);
       state.currentProject = null;
     },
+    deleteParticipants(state, action: PayloadAction<DeleteParticipantsPayload>) {
+      state.projects.forEach((pr) => {
+        if (pr.projectId === action.payload.projectId) {
+          pr.projectParticipants = pr.projectParticipants.filter(
+            (participants) => participants.participantId !== action.payload.participantId,
+          );
+        }
+      });
+      state.currentProject!.projectParticipants =
+        state.currentProject?.projectParticipants.filter(
+          (participants) => participants.participantId !== action.payload.participantId,
+        )!;
+    },
   },
 });
 
-export const { toggleComplete, setCurrentProject, removeTask, removeProject } =
-  projectSlice.actions;
+export const {
+  toggleComplete,
+  setCurrentProject,
+  removeTask,
+  removeProject,
+  deleteParticipants,
+} = projectSlice.actions;
 export default projectSlice.reducer;

@@ -7,6 +7,7 @@ import Project from '@/components/Profile/ProfileContent/Project';
 import Task from '@/components/Profile/ProfileContent/Project/Task';
 import AllTasks from '@/components/Profile/ProfileContent/Project/AllTask';
 import CompletedTasks from '@/components/Profile/ProfileContent/Project/CompletedTasks';
+import ParticipantsProject from '@/components/Profile/ProfileContent/Project/ParticipantsProject';
 
 export const router = createHashRouter([
   {
@@ -56,7 +57,11 @@ export const router = createHashRouter([
           {
             path: 'completed-tasks',
             element: <CompletedTasks/>,
-          }
+          },
+          {
+            path: 'participants-project',
+            element: <ParticipantsProject/>,
+          },
         ]
       },
     ],
