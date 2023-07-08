@@ -10,4 +10,5 @@ export type Project = {
   description: string;
   tasks: ProjectTask[];
   completedTask: ProjectTask[]
+  projectParticipants: string[]
 };

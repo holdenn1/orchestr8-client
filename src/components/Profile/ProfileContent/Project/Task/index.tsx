@@ -16,8 +16,11 @@ function Task() {
     if (projectId) {
       const projId = +projectId;
       dispatch(toggleComplete({ projectId: projId, taskId }));
-      navigate(`/profile/projects/${projectId}`);
-      notify('The task was been completed', 'success');
+      navigate(`/profile/projects/${projectId}/all-tasks`);
+      const message = isTaskComplete()
+        ? 'The task returned to work'
+        : 'The task was been completed';
+      notify(message, 'success');
     }
   }
 
@@ -27,23 +30,32 @@ function Task() {
       const task = +taskId;
       dispatch(removeTask({ taskId: task, projectId: proj }));
       setIsRemoveTask(true);
-      navigate(`/profile/projects/${projectId}`);
+      navigate(`/profile/projects/${projectId}/all-tasks`);
       notify('The task has been deleted', 'success');
     }
+  }
+
+  function isTaskComplete() {
+    const complete = currentProject?.tasks.some((task) => {
+      if (task.taskId === +taskId!) {
+        return task.completed;
+      }
+    });
+    return complete;
   }
   return (
     <div className={styles.wrapper}>
       {!isRemoveTask && (
         <div className={styles.btnWrapper}>
           <button onClick={() => setChecked(+taskId!)} className={styles.allTasksBtn}>
-            Сompleted
+            {isTaskComplete() ? 'Return to work' : 'Сompleted'}
           </button>
           <button onClick={deleteTask} className={styles.completedTasksBtn}>
             Remove
           </button>
         </div>
       )}
-      {currentProject.tasks.map((task) => {
+      {currentProject?.tasks.map((task) => {
         if (task.taskId === +taskId!) {
           return (
             <div className={styles.taskWrapper} key={task.taskId}>

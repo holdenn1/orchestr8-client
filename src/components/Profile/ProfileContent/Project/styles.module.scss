@@ -18,6 +18,54 @@
     border-radius: 24px 0 0 0;
     overflow-y: auto;
     @include scrollbar(6px, black);
+    position: relative;
+    .dotMenuWrapper {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      transform: rotate(90deg);
+      cursor: pointer;
+    }
+    .projectMenu {
+      background-color: rgb(228, 228, 228);
+      max-width: 220px;
+      position: absolute;
+      top: 22px;
+      right: 54px;
+      border-radius: 12px 0 0 0px;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition-delay: 0s, 1s;
+      transition-property: opacity, visible;
+      transition: 0.5s;
+      .projectMenuList {
+        color: black;
+        .projectMenuItem {
+          padding: 8px 10px;
+          cursor: pointer;
+        }
+        .participantsMenuItem {
+          &:hover {
+            background-color: rgb(13, 124, 189);
+            color: white;
+          }
+        }
+        .removeMenuItem {
+          &:hover {
+            background-color: rgb(189, 13, 22);
+            color: white;
+          }
+        }
+      }
+    }
+    .projectMenuActive {
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0s, 1s;
+      transition-property: opacity, visible;
+      transition-duration: 0.5s 0s;
+    }
     .title {
       display: block;
       margin: 20px 0;
@@ -30,22 +78,15 @@
     }
     .taskTitle {
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 600;
       margin-bottom: 20px;
     }
-    .btnWrapper {
-      display: flex;
-      justify-content: space-evenly;
-      .allTasksBtn {
-        @include mainButton(rgb(0, 124, 128), rgb(0, 87, 128));
-        width: 220px;
-      }
-      .completedTasksBtn {
-        @include mainButton(rgb(28, 79, 173), rgb(28, 69, 180));
-        width: 220px;
-      }
+    .noCompletedTask {
+      font-size: 34px;
+      text-align: center;
     }
     .tasksList {
+      color: black;
       .taskItem {
         background-color: rgb(228, 228, 228);
         padding: 14px;
@@ -55,9 +96,11 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        color: black;
+        &:hover {
+          background-color: rgb(93, 134, 160);
+          color: white;
+        }
       }
-
       .taskCheckbox {
         margin-right: 10px;
       }

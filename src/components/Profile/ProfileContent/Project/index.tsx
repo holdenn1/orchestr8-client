@@ -1,85 +1,101 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import styles from './styles.module.scss';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { setcurrentProject } from '@/store/slices/projectSlice';
+import { removeProject, setCurrentProject } from '@/store/slices/projectSlice';
+import DotMenuIcon from '@/components/UI/DotMenuIcon';
+import classNames from 'classnames';
 
 function Project() {
   const { projects, currentProject } = useAppSelector((state) => state.project);
-  const [allTasks, setAllTasks] = useState(true);
-  const [completedTasks, setCompletedTasks] = useState(false);
+  const [isMenu, setIsMenu] = useState(false);
   const dispatch = useAppDispatch();
-  const { projectId } = useParams();
-
-  const { taskId } = useParams();
+  const { projectId, taskId } = useParams();
+  const navigate = useNavigate();
+  const isAllTasks = location.href.includes('all-tasks');
 
   useEffect(() => {
     if (projectId) {
       const project = projects.find((proj) => proj.projectId === +projectId);
       if (project) {
-        dispatch(setcurrentProject(project));
+        dispatch(setCurrentProject(project));
       }
     }
   }, [dispatch, projectId, projects]);
 
-  function showAllTask() {
-    setAllTasks(true);
-    setCompletedTasks(false);
+  function deleteProject() {
+    dispatch(removeProject(+projectId!));
+    navigate('/profile/projects');
   }
 
-  function showCompletedTasks() {
-    setCompletedTasks(true);
-    setAllTasks(false);
-  }
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onClick={() => {
+        setIsMenu(false);
+      }}
+    >
       <div className={styles.content}>
-        <h3 className={styles.title}>{currentProject.title}</h3>
-        <p className={styles.description}>{currentProject.description}</p>
+        <div
+          className={styles.dotMenuWrapper}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMenu(!isMenu);
+          }}
+        >
+          <DotMenuIcon />
+        </div>
+        <div
+          className={classNames(styles.projectMenu, {
+            [styles.projectMenuActive]: isMenu,
+          })}
+        >
+          <ul className={styles.projectMenuList}>
+            <Link to={`/profile/projects/${taskId}/all-tasks`}>
+              <li
+                className={classNames(
+                  styles.projectMenuItem,
+                  styles.participantsMenuItem,
+                )}
+              >
+                All tasks
+              </li>
+            </Link>
+            <Link to={`/profile/projects/${taskId}/completed-tasks`}>
+              <li
+                className={classNames(
+                  styles.projectMenuItem,
+                  styles.participantsMenuItem,
+                )}
+              >
+                Completed tasks
+              </li>
+            </Link>
+            <li
+              className={classNames(styles.projectMenuItem, styles.participantsMenuItem)}
+            >
+              Show participants - ({currentProject?.projectParticipants.length})
+            </li>
+            <li
+              onClick={() => deleteProject()}
+              className={classNames(styles.projectMenuItem, styles.removeMenuItem)}
+            >
+              Remove project
+            </li>
+          </ul>
+        </div>
+        <h3 className={styles.title}>{currentProject?.title}</h3>
+        <p className={styles.description}>{currentProject?.description}</p>
         {taskId ? (
           <>
             <Outlet />
           </>
         ) : (
           <>
-            <div className={styles.btnWrapper}>
-              <button onClick={showAllTask} className={styles.allTasksBtn}>
-                All Tasks
-              </button>
-              <button onClick={showCompletedTasks} className={styles.completedTasksBtn}>
-                Completed tasks
-              </button>
-            </div>
-            <h4 className={styles.taskTitle}>Task list</h4>
-            <ul className={styles.tasksList}>
-              {currentProject.tasks.map(({ taskId, text, completed }) => {
-                if (allTasks) {
-                  return (
-                    <Link
-                      key={taskId}
-                      to={`/profile/projects/${currentProject.projectId}/task/${taskId}`}
-                    >
-                      <li className={styles.taskItem}>
-                        <span>{text}</span>
-                      </li>
-                    </Link>
-                  );
-                } else if (completedTasks) {
-                  if (completed) {
-                    return (
-                      <Link
-                        key={taskId}
-                        to={`/profile/projects/${currentProject.projectId}/task/${taskId}`}
-                      >
-                        <li key={taskId} className={styles.taskItem}>
-                          <span>{text}</span>
-                        </li>
-                      </Link>
-                    );
-                  }
-                }
-              })}
-            </ul>
+            <h4 className={styles.taskTitle}>
+              Task list ({isAllTasks ? 'All tasks' : 'Completed tasks'})
+            </h4>
+            <Outlet />
           </>
         )}
       </div>

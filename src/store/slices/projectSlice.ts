@@ -3,7 +3,7 @@ import { Project } from './types/projectSliceTypes';
 
 type InitialStateProjectSlice = {
   projects: Project[];
-  currentProject: Project;
+  currentProject: null | Project;
 };
 
 const initialState: InitialStateProjectSlice = {
@@ -22,6 +22,7 @@ const initialState: InitialStateProjectSlice = {
         { taskId: 3, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
       ],
       completedTask: [],
+      projectParticipants: [],
     },
   ],
   currentProject: {
@@ -30,6 +31,7 @@ const initialState: InitialStateProjectSlice = {
     description: '',
     tasks: [],
     completedTask: [],
+    projectParticipants: [],
   },
 };
 
@@ -54,7 +56,7 @@ const projectSlice = createSlice({
         }
       });
     },
-    setcurrentProject(state, action: PayloadAction<Project>) {
+    setCurrentProject(state, action: PayloadAction<Project>) {
       state.currentProject = action.payload;
     },
     removeTask(state, action: PayloadAction<ToggleCompletePAyload>) {
@@ -64,8 +66,13 @@ const projectSlice = createSlice({
         }
       });
     },
+    removeProject(state, action: PayloadAction<number>) {
+      state.projects = state.projects.filter((proj) => proj.projectId !== action.payload);
+      state.currentProject = null;
+    },
   },
 });
 
-export const { toggleComplete, setcurrentProject, removeTask } = projectSlice.actions;
+export const { toggleComplete, setCurrentProject, removeTask, removeProject } =
+  projectSlice.actions;
 export default projectSlice.reducer;

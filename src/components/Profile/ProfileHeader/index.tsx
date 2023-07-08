@@ -4,16 +4,11 @@ import bellIcon from 'icons/icons8-bell-24.png';
 
 import { Link } from 'react-router-dom';
 function ProfileHeader() {
-
   return (
     <header className={styles.header}>
       <img className={styles.logoIcon} src={logoIcon} alt='logo' />
       <div>
-        <Link
-        to='projects-form'
-         
-          className={styles.addProjectLink}
-        >
+        <Link to='projects-form' className={styles.addProjectLink}>
           Start a new project
         </Link>
       </div>
