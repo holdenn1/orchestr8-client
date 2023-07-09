@@ -1,9 +1,9 @@
 import styles from './styles.module.scss';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
-import favoriteIcon from 'icons/icons8-star-24.png';
 import ProfileContentHeader from '../ProfileContentHeader';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '@/hooks/reduxHooks';
+import EmptyProjectList from '@/components/errors/EmptyProjectList';
 
 function ProjectList() {
   const { projects } = useAppSelector((state) => state.project);
@@ -11,9 +11,9 @@ function ProjectList() {
   return (
     <>
       <ProfileContentHeader />
-      <div className={styles.projectsList}>
-        {projects.length ? (
-          projects.map((project) => (
+      {projects.length ? (
+        <div className={styles.projectsList}>
+          {projects.map((project) => (
             <Link
               to={`/profile/projects/${project.projectId}/all-tasks`}
               key={project.projectId}
@@ -24,16 +24,13 @@ function ProjectList() {
                 <div className={styles.menu}>
                   <DotMenuIcon />
                 </div>
-                <img className={styles.favorite} src={favoriteIcon} alt='' />
               </div>
             </Link>
-          ))
-        ) : (
-          <p className={styles.emptyProjectsErro}>
-            It's still empty here, add new projects!
-          </p>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <EmptyProjectList />
+      )}
     </>
   );
 }

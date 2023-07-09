@@ -1,0 +1,8 @@
+.AddPaticipantToProject {
+  margin-bottom: 40px;
+  .contentFormWrapper {
+    display: grid;
+    grid-template-columns: minmax(200px, 1fr)  minmax(120px, 160px);
+    
+  }
+}

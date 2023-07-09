@@ -5,11 +5,10 @@ import styles from 'components/forms/ProjectForm/styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
 import TextArea from 'ui/inputs/formInputs/TextArea';
 import SubmitButton from 'ui/buttons/SubmitButton';
-import MainButton from 'ui/buttons/MainButton';
-import classNames from 'classnames';
 import { InitialValuesProjectForm } from 'components/forms/types';
 import { setModal } from '@/store/slices/mainSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import PaticipantToProjectInput from '@/components/UI/inputs/PaticipantToProjectInput';
 
 function ProjectForm() {
   const [users, setUsers] = useState<string[]>([]);
@@ -68,33 +67,12 @@ function ProjectForm() {
                 label='Project description'
                 placeholder='Project description'
               />
-              <div className={styles.addUserInputWrapper}>
-                <div className={styles.labelWrapper}>
-                  <label className={styles.label}>Add users to project</label>
-                </div>
-                <div className={styles.inputAndBtnWrapper}>
-                  <div className={styles.inputWrapper}>
-                    <input
-                      type='email'
-                      value={inputValue}
-                      className={classNames(styles.input, {
-                        [styles.inputError]: userEmailError,
-                      })}
-                      onChange={(e) => handleInput(e)}
-                    />
-                    {userEmailError && (
-                      <p className={styles.error}>Invalid email address</p>
-                    )}
-                  </div>
-                  <div className={styles.addUserBtnWrapper}>
-                    <MainButton
-                      type='button'
-                      title='Add User'
-                      onClick={() => handleUser(inputValue)}
-                    />
-                  </div>
-                </div>
-              </div>
+              <PaticipantToProjectInput
+                handleUser={handleUser}
+                handleInput={handleInput}
+                inputValue={inputValue}
+                userEmailError={userEmailError}
+              />
               <div className={styles.submitBtnWrapper}>
                 <SubmitButton>Create a project</SubmitButton>
               </div>
