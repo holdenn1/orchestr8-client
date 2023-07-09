@@ -1,0 +1,32 @@
+.statusProjectMenuWrapper {
+  background-color: rgb(228, 228, 228, 0.9);
+  max-width: 220px;
+  position: absolute;
+  bottom:  40px;
+  right: 18px;
+  border-radius: 12px 0 0 0px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0s, 1s;
+  transition-property: opacity, visible;
+  transition: 0.5s;
+  .statusProjectMenuList {
+    color: black;
+    .statusProjectMenuItem {
+      padding: 8px 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(13, 124, 189);
+        color: white;
+      }
+    }
+  }
+}
+.statusProjectMenuWrapperActive {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s, 1s;
+  transition-property: opacity, visible;
+  transition-duration: 0.5s 0s;
+}

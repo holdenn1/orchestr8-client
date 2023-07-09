@@ -4,11 +4,10 @@ import styles from './../styles.module.scss';
 
 type TaskItemProps = {
   taskId: number;
-  completed?: boolean;
   text: string;
 };
 
-function TaskItem({ taskId, completed, text }: TaskItemProps) {
+function TaskItem({ taskId, text }: TaskItemProps) {
   const { currentProject } = useAppSelector((state) => state.project);
   return (
     <div>

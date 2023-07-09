@@ -4,4 +4,8 @@ export type InitialStateMainSlice = {
     sort: string;
     category: string;
   };
+  projectMenu:{
+    complete: boolean
+    suspend:boolean
+  }
 };

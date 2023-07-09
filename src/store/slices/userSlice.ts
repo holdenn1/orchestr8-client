@@ -4,6 +4,9 @@ import { InitialStateAccountSlice, User } from './types/userSliceTypes';
 const initialState: InitialStateAccountSlice = {
   user: {
     userId: 0,
+    firstName: '',
+    lastName: '',
+    phone: '',
     email: '',
     roles: [],
   },
@@ -17,7 +20,7 @@ const accountSlice = createSlice({
       state.user = action.payload;
     },
     removeUser(state) {
-      state.user = { userId: 0, email: '', roles: [] };
+      state.user = null;
     },
   },
 });

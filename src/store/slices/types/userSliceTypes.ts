@@ -5,11 +5,13 @@ export enum UserRoles {
 
 export type User = {
   userId: number;
+  firstName: string;
+  lastName: string;
+  phone: string;
   email: string;
   roles: UserRoles[];
 };
 
 export type InitialStateAccountSlice = {
-  user: User;
+  user: User | null;
 };
-
