@@ -52,6 +52,16 @@ function Project() {
           })}
         >
           <ul className={styles.projectMenuList}>
+            <Link to={`/profile/projects/${projectId}/add-task`}>
+              <li
+                className={classNames(
+                  styles.projectMenuItem,
+                  styles.participantsMenuItem,
+                )}
+              >
+                Add task
+              </li>
+            </Link>
             <Link to={`/profile/projects/${projectId}/all-tasks`}>
               <li
                 className={classNames(

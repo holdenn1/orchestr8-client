@@ -17,7 +17,6 @@ const initialState: InitialStateProjectSlice = {
         { taskId: 2, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
         { taskId: 3, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
       ],
-      completedTask: [],
       projectParticipants: [
         {
           participantId: 0,
@@ -35,7 +34,6 @@ const initialState: InitialStateProjectSlice = {
     title: '',
     description: '',
     tasks: [],
-    completedTask: [],
     projectParticipants: [],
   },
   completedProjects: [],
@@ -54,7 +52,6 @@ const initialState: InitialStateProjectSlice = {
         { taskId: 2, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
         { taskId: 3, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
       ],
-      completedTask: [],
       projectParticipants: [
         {
           participantId: 0,
@@ -91,7 +88,6 @@ const projectSlice = createSlice({
               task.completed = !task.completed;
             }
           });
-          pr.completedTask = pr.tasks.filter((task) => task.completed);
         }
       });
     },
@@ -175,7 +171,7 @@ const projectSlice = createSlice({
       const isSuspendedProjects = state.suspendedProjects.some(
         (pr) => pr.projectId === action.payload.projectId,
       );
-      
+
       if (!isSuspendedProjects) {
         state.suspendedProjects.push(action.payload);
       } else {
