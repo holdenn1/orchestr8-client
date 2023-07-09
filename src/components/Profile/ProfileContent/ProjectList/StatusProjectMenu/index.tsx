@@ -31,20 +31,21 @@ function StatusProjectMenu({ isMenu, project, setIsMenu }: StatusProjectMenuProp
   }
 
   return (
-    <div
-      className={classNames(styles.statusProjectMenuWrapper, {
-        [styles.statusProjectMenuWrapperActive]: isMenu,
-      })}
-    >
-      <ul className={styles.statusProjectMenuList}>
-        <li onClick={(e) => handleComplete(e)} className={styles.statusProjectMenuItem}>
-          {!complete ? 'Complete' : 'In progress'}
-        </li>
-
-        <li onClick={(e) => handleSuspend(e)} className={styles.statusProjectMenuItem}>
-          {!suspend ? 'Suspend' : 'Resume'}
-        </li>
-      </ul>
+    <div className={styles.projectMenuWrapper}>
+      <div
+        className={classNames(styles.projectMenu, {
+          [styles.projectMenuActive]: isMenu,
+        })}
+      >
+        <ul className={styles.projectMenuList}>
+          <li onClick={(e) => handleComplete(e)} className={styles.projectMenuItem}>
+            {!complete ? 'Complete' : 'In progress'}
+          </li>
+          <li onClick={(e) => handleSuspend(e)} className={styles.projectMenuItem}>
+            {!suspend ? 'Suspend' : 'Resume'}
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

@@ -1,31 +1,38 @@
-.profile-info {
+@import 'src/styles/mixins/menu.scss';
+
+.profileInfo {
   height: 160px;
   display: flex;
   justify-content: space-between;
   margin: 0 30px 0 0;
   border-bottom: 1px solid rgb(214, 214, 214);
-  &__greeting {
+  .greeting {
     font-size: 20px;
     margin: 0 0 0 10px;
-    div {
-      margin-bottom: 4px;
+    .user-name {
+      font-weight: 500;
     }
   }
-  &__user-name {
-    font-weight: 500;
-  }
-  .profile-photo {
+
+  .profilePhotoWrapper {
     position: relative;
-    &__photo {
+    .photo {
       cursor: pointer;
       border-radius: 100%;
     }
-    &__menu-wrapper {
+    .dotMenuWrapper {
       cursor: pointer;
       position: absolute;
       top: 45px;
       right: -20px;
       transform: rotate(90deg);
+    }
+    .projectMenuWrapper {
+      position: absolute;
+      top: 36px;
+      right: 0px;
+      @include menu;
+      width: 160px;
     }
   }
 }

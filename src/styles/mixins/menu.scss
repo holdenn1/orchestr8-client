@@ -1,0 +1,30 @@
+@mixin menu {
+  .projectMenu {
+    background-color: rgb(228, 228, 228, 0.9);
+    max-width: 220px;
+    border-radius: 12px 0 0 0px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0s, 1s;
+    transition-property: opacity, visible;
+    transition: 0.5s;
+    .projectMenuList {
+      color: black;
+      .projectMenuItem {
+        padding: 8px 10px;
+        cursor: pointer;
+        &:hover {
+          background-color: rgb(13, 124, 189);
+          color: white;
+        }
+      }
+    }
+  }
+  .projectMenuActive {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s, 1s;
+    transition-property: opacity, visible;
+  }
+}

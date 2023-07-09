@@ -1,5 +1,4 @@
 import styles from './styles.module.scss';
-
 import { Outlet } from 'react-router-dom';
 
 function ProfileContent() {

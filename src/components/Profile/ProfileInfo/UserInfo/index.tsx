@@ -1,24 +1,53 @@
+import { useState } from 'react';
+import styles from './styles.module.scss';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import profileIcon from 'icons/icons8-male-user-100.png';
-import './styles.scss'
+import classNames from 'classnames';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { logoutUser } from '@/store/actions/logoutUser';
+import { useNavigate } from 'react-router-dom';
 
 function UserInfo() {
+  const [isMenu, setIsMenu] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   return (
-    <div className='profile-info'>
-        <div>
-          <p className='profile-info__greeting'>
-            <span>Hello</span>
-            <br />
-            <span className='profile-info__user-name'>Lorem, ipsum.</span>
-          </p>
+    <div onClick={() => setIsMenu(false)} className={styles.profileInfo}>
+      <div>
+        <p className={styles.greeting}>
+          <span>Hello</span>
+          <br />
+          <span className={styles.userName}>Lorem, ipsum.</span>
+        </p>
+      </div>
+      <div className={styles.profilePhotoWrapper}>
+        <img className={styles.photo} src={profileIcon} alt='' />
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMenu(!isMenu);
+          }}
+          className={styles.dotMenuWrapper}
+        >
+          <DotMenuIcon />
         </div>
-        <div className='profile-photo'>
-          <img className='profile-photo__photo' src={profileIcon} alt='' />
-          <div className='profile-photo__menu-wrapper'>
-            <DotMenuIcon />
+        <div className={styles.projectMenuWrapper}>
+          <div
+            className={classNames(styles.projectMenu, {
+              [styles.projectMenuActive]: isMenu,
+            })}
+          >
+            <ul className={styles.projectMenuList}>
+              <li className={styles.projectMenuItem}>Delete avatar</li>
+              <li onClick={() => dispatch(logoutUser({ navigate }))} className={styles.projectMenuItem}>
+                Logout
+              </li>
+            </ul>
           </div>
         </div>
       </div>
+    </div>
   );
 }
 
