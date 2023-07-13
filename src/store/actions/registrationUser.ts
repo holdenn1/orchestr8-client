@@ -8,14 +8,13 @@ export const registrationUser = createAsyncThunk<void, RegistrationUserActionPro
   'user/registrationUser',
   async ({ registrationValues, setStep, resetForm, navigate }, { dispatch }) => {
     try {
-      const { data }: AuthUserResponse = await registrationUserRequest(
-        registrationValues,
-      );
-      const { userId, email, roles, accessToken, refreshToken } = data;
-      dispatch(setUser({ userId, email, roles }));
+      const { data }: AuthUserResponse = await registrationUserRequest(registrationValues);
+      const { user, accessToken, refreshToken } = data;
+
+      dispatch(setUser(user));
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      navigate('/profile');
+      navigate('/profile/projects');
       setStep(0);
       resetForm();
     } catch (e) {

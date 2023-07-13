@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import styles from './styles.module.scss';
 import squaredProjectsViewIcon from 'icons/icons8-squared-menu-50.png';
 import rowProjectsViewIcon from 'icons/icons8-menu-50.png';
@@ -6,7 +6,6 @@ import { sortProjectsByCategory, sortProjectsBy } from '@/store/slices/mainSlice
 import classNames from 'classnames';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import Select from '@/components/UI/inputs/Select';
-
 
 function ProfileContentHeader() {
   const [viewProjects, setViewProjects] = useState(false);
@@ -35,11 +34,7 @@ function ProfileContentHeader() {
         </div>
         <div className={styles.categories}>
           <p>Category</p>
-          <Select
-            selectedOption={category}
-            options={options2}
-            handleOption={sortProjectsByCategory}
-          />
+          <Select selectedOption={category} options={options2} handleOption={sortProjectsByCategory} />
         </div>
       </div>
     </header>

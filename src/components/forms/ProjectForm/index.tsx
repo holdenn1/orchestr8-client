@@ -53,7 +53,7 @@ function ProjectForm() {
       onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
     >
       {() => (
-        <div className={styles.wrapper}>
+        <div className={styles.projectFormwrapper}>
           <Form>
             <div>
               <TextInput

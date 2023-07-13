@@ -9,11 +9,11 @@ export const loginUser = createAsyncThunk<void, LoginUserActionProps>(
   async ({ loginValues, navigate, resetForm }, { dispatch }) => {
     try {
       const { data }: AuthUserResponse = await loginUserRequest(loginValues);
-      const { userId, email, roles, accessToken, refreshToken } = data;
-      dispatch(setUser({ userId, email, roles }));
+      const { user, accessToken, refreshToken } = data;
+      dispatch(setUser(user));
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      navigate('/profile');
+      navigate('/profile/projects');
       resetForm();
     } catch (e) {
       notify('Check field', 'error');

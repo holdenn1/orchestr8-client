@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 function Profile() {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.profilewrapper}>
       <ToastContainer />
       <ProfileHeader />
       <ProfileNavBar />

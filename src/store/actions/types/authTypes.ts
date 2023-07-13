@@ -1,8 +1,5 @@
-import {
-  InitialValuesSignInForm,
-  InitialValuesSignUpForm,
-} from '@/components/forms/types';
-import { UserRoles } from '@/store/slices/types/userSliceTypes';
+import { InitialValuesSignInForm, InitialValuesSignUpForm } from '@/components/forms/types';
+import { User, UserRoles } from '@/store/slices/types/userSliceTypes';
 import { Dispatch, SetStateAction } from 'react';
 import { NavigateFunction } from 'react-router-dom';
 
@@ -20,14 +17,12 @@ export type AuthUserResponse = {
     roles: UserRoles[];
     accessToken: string;
     refreshToken: string;
+    user: User;
   };
 };
 
-export type LoginUserActionProps = Omit<
-  RegistrationUserActionProps,
-  'setStep' | 'registrationValues'
-> & {
+export type LoginUserActionProps = Omit<RegistrationUserActionProps, 'setStep' | 'registrationValues'> & {
   loginValues: InitialValuesSignInForm;
 };
 
-export type LogoutUserActionProps = Pick<RegistrationUserActionProps, 'navigate'>
+export type LogoutUserActionProps = Pick<RegistrationUserActionProps, 'navigate'>;

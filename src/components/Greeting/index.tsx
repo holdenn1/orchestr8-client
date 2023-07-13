@@ -5,7 +5,7 @@ function Greeting() {
 
   return (
     <div
-      className={styles.wrapper}
+      className={styles.greetingwrapper}
     >
       <div className={styles.contentWrapper}>
         <h3 className={styles.title}>Welcome to Orchestr8! </h3>

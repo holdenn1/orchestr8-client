@@ -13,7 +13,7 @@ function ModalWindow({ children }: ModalProps) {
   const dispatch = useAppDispatch();
   return (
     <div
-      className={classNames(styles.wrapper, {
+      className={classNames(styles.modalWindowwrapper, {
         [styles.modalVisible]: modalVisible,
         [styles.hideModal]: !modalVisible,
       })}

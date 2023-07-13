@@ -2,67 +2,10 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InitialStateProjectSlice, Project } from './types/projectSliceTypes';
 
 const initialState: InitialStateProjectSlice = {
-  projects: [
-    {
-      projectId: 1,
-      status: 'In Progress',
-      title: 'lorem we24',
-      description: 'ld;asl lkwkelwpq, ;we; p,we',
-      tasks: [
-        {
-          taskId: 1,
-          text: 'slkdfl,;lwe,f e;fslkdfl,;lwe,f e;fwl, ;ewfslkdfl,;lwe,f e;fwl, ;ewfwl, ;ewf',
-          completed: false,
-        },
-        { taskId: 2, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
-        { taskId: 3, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
-      ],
-      projectParticipants: [
-        {
-          participantId: 0,
-          email: 'qwe@lsd.com',
-          firstName: 'Test',
-          lastName: 'Testovich',
-          phone: '',
-        },
-      ],
-    },
-  ],
-  currentProject: {
-    projectId: 0,
-    status: 'In Progress',
-    title: '',
-    description: '',
-    tasks: [],
-    projectParticipants: [],
-  },
+  projects: [],
+  currentProject: null,
   completedProjects: [],
-  inProgresProjects: [
-    {
-      projectId: 1,
-      status: 'In Progress',
-      title: 'lorem we24',
-      description: 'ld;asl lkwkelwpq, ;we; p,we',
-      tasks: [
-        {
-          taskId: 1,
-          text: 'slkdfl,;lwe,f e;fslkdfl,;lwe,f e;fwl, ;ewfslkdfl,;lwe,f e;fwl, ;ewfwl, ;ewf',
-          completed: false,
-        },
-        { taskId: 2, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
-        { taskId: 3, text: 'slkdfl,;lwe,f e;fwl, ;ewf', completed: false },
-      ],
-      projectParticipants: [
-        {
-          participantId: 0,
-          email: 'qwe@lsd.com',
-          firstName: 'Test',
-          lastName: 'Testovich',
-          phone: '',
-        },
-      ],
-    },
-  ],
+  inProgresProjects: [],
   suspendedProjects: [],
 };
 

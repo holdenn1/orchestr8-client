@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 function ProfileContent() {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.profileContentwrapper}>
       <Outlet />
     </div>
   );

@@ -10,7 +10,7 @@ function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
   const isRegistration = href.includes('sign-up');
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.formNavigationwrapper}>
       {isRegistration ? (
         <p className={styles.isAccount}>
           Already have an account? <Link to='/sign-in'>Sign In</Link>

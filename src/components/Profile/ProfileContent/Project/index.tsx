@@ -31,7 +31,7 @@ function Project() {
 
   return (
     <div
-      className={styles.wrapper}
+      className={styles.projectwrapper}
       onClick={() => {
         setIsMenu(false);
       }}

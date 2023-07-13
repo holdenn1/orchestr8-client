@@ -44,7 +44,7 @@ function Task() {
     return complete;
   }
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.taskwrapper}>
       {!isRemoveTask && (
         <div className={styles.btnWrapper}>
           <button onClick={() => setChecked(+taskId!)} className={styles.allTasksBtn}>

@@ -3,12 +3,13 @@ import styles from './styles.module.scss';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import profileIcon from 'icons/icons8-male-user-100.png';
 import classNames from 'classnames';
-import { useAppDispatch } from '@/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { logoutUser } from '@/store/actions/logoutUser';
 import { useNavigate } from 'react-router-dom';
 
 function UserInfo() {
   const [isMenu, setIsMenu] = useState<boolean>(false);
+  const {user} = useAppSelector(state => state.account)
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -18,7 +19,7 @@ function UserInfo() {
         <p className={styles.greeting}>
           <span>Hello</span>
           <br />
-          <span className={styles.userName}>Lorem, ipsum.</span>
+          <span className={styles.userName}>{user?.firstName} {user?.lastName}</span>
         </p>
       </div>
       <div className={styles.profilePhotoWrapper}>

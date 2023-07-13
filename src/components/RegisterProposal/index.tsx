@@ -7,7 +7,7 @@ function RegisterProposal() {
   const { modalVisible } = useAppSelector((state) => state.main);
   const dispatch = useAppDispatch();
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.registerProposalwrapper}>
       <h3 className={styles.title}>First you need to register</h3>
       <Link
         to='sign-up'

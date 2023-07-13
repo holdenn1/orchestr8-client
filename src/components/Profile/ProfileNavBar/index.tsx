@@ -9,7 +9,7 @@ function ProfileNavBar() {
   const { projectId, taskId } = useParams();
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.profileNavBarwrapper}>
       <Link className={styles.contactsIconWrapper} to='projects'>
         <div>
           <img className={styles.contactsIcon} src={contactsIcon} alt='contacts-icon' />
