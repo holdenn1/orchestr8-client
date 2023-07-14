@@ -4,7 +4,7 @@
 
 .greetingwrapper {
   width: 100%;
-  height: calc(100vh - 60px);
+  height: 100vh;
   @include contentCenterFlex;
   text-align: center;
   .contentWrapper {
@@ -19,12 +19,11 @@
     }
     .greetingLink {
       display: block;
-      @include mainButton(#1842b8, #1b1baa);
+      @include mainButton(#7384ad, #5a5a94);
       @include contentCenterFlex;
-      margin: 20px auto; 
+      margin: 20px auto;
       max-width: 240px;
       width: 100%;
     }
   }
 }
-

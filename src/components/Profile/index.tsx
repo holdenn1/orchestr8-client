@@ -3,7 +3,6 @@ import ProfileHeader from './ProfileHeader';
 import ProfileInfo from './ProfileInfo';
 import ProfileNavBar from './ProfileNavBar';
 import { ToastContainer } from 'react-toastify';
-
 import styles from './styles.module.scss';
 
 function Profile() {

@@ -1,8 +1,8 @@
 import Greeting from 'components/Greeting';
-
+import styles from './styles.module.scss';
 function MainPage() {
   return (
-    <main >
+    <main className={styles.mainPageWrapper}>
       <Greeting />
     </main>
   );

@@ -4,7 +4,7 @@
   position: relative;
   .progress-bar {
     position: absolute;
-    background: #3041d0;
+    background: #2a75ca;
     height: 5px;
     width: 0%;
     max-width: 98%;
@@ -12,6 +12,7 @@
     left: 1%;
     transform: translateY(-50%);
     transition-duration: 0.5s;
+    z-index: 2;
   }
   .progress-num {
     height: 100%;
@@ -27,7 +28,7 @@
       transform: translate(-50%, -50%);
       height: 5px;
       width: 90%;
-      z-index: -1;
+      z-index: 1;
     }
     .step {
       border: 3px solid lightgray;
@@ -37,15 +38,15 @@
       background-color: #fff;
       @include contentCenterFlex;
       position: relative;
-      z-index: 1;
+      z-index: 3;
     }
     .active-step {
-      border-color: #3041d0;
-      background-color: #3041d0;
+      border-color: #2a75ca;
+      background-color: #2a75ca;
       transition-delay: 0.2s;
       transition-duration: 0.3s;
       color: #fff;
+      z-index: 3;
     }
   }
 }
-

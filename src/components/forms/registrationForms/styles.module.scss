@@ -2,10 +2,20 @@
 @import 'src/styles/mixins/columnCenterFlex';
 @import 'src/styles/mixins/contentCenterFlex';
 
-.signUpForm,.signInForm {
+.formWrapper {
+  width: 100%;
+  height: 100vh;
+  @include contentCenterFlex;
+  background-image: url('src/assets/images/wallpaperflare.com_wallpaper (1).jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.signUpForm,
+.signInForm {
   width: 720px;
   min-height: 420px;
-  box-shadow: 2px 2px 24px 0px rgb(136, 136, 136);
   border-radius: $primary-border-radius;
   margin: $primary-margin;
   padding: $primary-padding;
@@ -14,12 +24,10 @@
   grid-template-columns: 1fr;
   grid-template-rows: 80px auto minmax(80px, 1fr);
   overflow: hidden;
+  background-color: rgb(196, 195, 195);
+  opacity: 0.9;
 }
-.formWrapper{
-  width: 100%;
-  height: calc(100vh - 60px);
-  @include contentCenterFlex;
-}
+
 .signInForm {
   grid-template-rows: auto minmax(80px, 120px);
 }
