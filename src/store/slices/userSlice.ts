@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { InitialStateAccountSlice, User } from './types/userSliceTypes';
+import { InitialStateAccountSlice, Project, User } from './types/userSliceTypes';
 
 const initialState: InitialStateAccountSlice = {
   user: {
@@ -11,7 +11,7 @@ const initialState: InitialStateAccountSlice = {
     email: '',
     roles: [],
     ownedProjects: [],
-    memberProjects: []
+    memberProjects: [],
   },
 };
 
@@ -23,10 +23,13 @@ const accountSlice = createSlice({
       state.user = action.payload;
     },
     removeUser(state) {
-      state.user = null;
+      state.user = {} as User;
+    },
+    setOwnProject(state, action: PayloadAction<Project>) {
+      state.user.ownedProjects.push(action.payload)
     },
   },
 });
 
-export const { setUser, removeUser } = accountSlice.actions;
+export const { setUser, removeUser, setOwnProject } = accountSlice.actions;
 export default accountSlice.reducer;

@@ -1,5 +1,5 @@
 import { InitialValuesSignInForm, InitialValuesSignUpForm } from '@/components/forms/types';
-import { User } from '@/store/slices/types/userSliceTypes';
+import { Project, User } from '@/store/slices/types/userSliceTypes';
 import { Dispatch, SetStateAction } from 'react';
 import { NavigateFunction } from 'react-router-dom';
 
@@ -24,4 +24,8 @@ export type AuthUserResponse = {
   };
 };
 
+
+export type CreateProjectResponse = {
+  data: Project;
+};
 

@@ -1,7 +1,7 @@
 import { logoutUserRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { removeUser } from '../slices/userSlice';
-import { LogoutUserActionProps } from './types/authTypes';
+import { LogoutUserActionProps } from '../types/authTypes';
+import { removeUser } from '@/store/slices/userSlice';
 
 export const logoutUser = createAsyncThunk<void, LogoutUserActionProps>(
   'user/logoutUser',

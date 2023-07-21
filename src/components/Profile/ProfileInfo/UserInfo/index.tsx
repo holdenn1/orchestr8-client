@@ -4,8 +4,8 @@ import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import profileIcon from 'icons/icons8-male-user-100.png';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { logoutUser } from '@/store/actions/logoutUser';
 import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '@/store/actions/authActions/logoutUser';
 
 function UserInfo() {
   const [isMenu, setIsMenu] = useState<boolean>(false);

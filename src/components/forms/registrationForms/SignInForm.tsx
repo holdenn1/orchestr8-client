@@ -7,7 +7,7 @@ import FormNavigation from 'components/forms/registrationForms/FormNavigation';
 import { InitialValuesSignInForm } from 'components/forms/types';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from '@/store/actions/loginUser';
+import { loginUser } from '@/store/actions/authActions/loginUser';
 
 function SignInForm() {
   const dispatch = useAppDispatch();

@@ -19,7 +19,7 @@ export type Member = {
   roles: UserRoles[];
 };
 
-export type Owner = Member
+export type Owner = Member;
 
 export type ProjectTask = {
   id: number;
@@ -50,5 +50,5 @@ export type User = {
 };
 
 export type InitialStateAccountSlice = {
-  user: User | null;
+  user: User;
 };

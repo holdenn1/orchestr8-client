@@ -1,3 +1,4 @@
+import { Member } from '@/store/slices/types/userSliceTypes';
 import { Dispatch, SetStateAction, ChangeEvent } from 'react';
 
 export type SelectedMembersProps = {
@@ -16,4 +17,8 @@ export type RecomendationMembersProps = {
 export type MemberToProjectInputProps = {
   handleInput: (e: ChangeEvent<HTMLInputElement>) => void;
   inputValue: string;
+};
+
+export type FindedUsers = {
+  data: Member[];
 };

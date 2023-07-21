@@ -10,7 +10,7 @@ import Progress from 'components/forms/registrationForms/Progress';
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
 import { InitialValuesSignUpForm } from 'components/forms/types';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { registrationUser } from '@/store/actions/registrationUser';
+import { registrationUser } from '@/store/actions/authActions/registrationUser';
 import { useNavigate } from 'react-router-dom';
 
 function SignUpForm() {

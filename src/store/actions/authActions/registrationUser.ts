@@ -1,8 +1,8 @@
 import { registrationUserRequest } from '@/api/requests';
 import { notify } from '@/components/Toast';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setUser } from '../slices/userSlice';
-import { RegistrationUserActionProps, AuthUserResponse } from './types/authTypes';
+import { RegistrationUserActionProps, AuthUserResponse } from '../types/authTypes';
+import { setUser } from '@/store/slices/userSlice';
 
 export const registrationUser = createAsyncThunk<void, RegistrationUserActionProps>(
   'user/registrationUser',

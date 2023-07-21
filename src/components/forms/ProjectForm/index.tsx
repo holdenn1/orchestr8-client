@@ -11,6 +11,10 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import MemberToProjectInput from './MemberToProjectInput';
 import RecomendationMembers from './RecomendationMembers';
 import SelectedMembers from './SelectedMembers';
+import { searchUserByEmailRequest } from '@/api/requests';
+import { Member } from '@/store/slices/types/userSliceTypes';
+import { FindedUsers } from './types';
+import { createProject } from '@/store/actions/projectsActions/createProject';
 
 function ProjectForm() {
   const [recomendationMembersList, setRecomendationMembersList] = useState<any[]>([]);
@@ -21,61 +25,37 @@ function ProjectForm() {
   const [inputValue, setInputValue] = useState('');
   const dispatch = useAppDispatch();
 
-  const membersListt = [
-    {
-      id: 1,
-      email: 'ww@sd.com',
-    },
-    {
-      id: 2,
-      email: 'res@rs.com',
-    },
-    {
-      id: 3,
-      email: 'rres@rs.com',
-    },
-    {
-      id: 4,
-      email: 'reqws@rs.com',
-    },
-    {
-      id: 5,
-      email: 'resrs@rs.com',
-    },
-    {
-      id: 6,
-      email: 'res@rs.com',
-    },
-  ];
-
   const initialValues: InitialValuesProjectForm = {
     titleProject: '',
     descriptionProject: '',
   };
 
-  function handleSubmit(values: FormikValues, resetForm: any) {
-    const membersIds = selectedMembersList.map((member) => member.id);
-    console.log({ ...values, membersIds });
+  function handleSubmit({ titleProject, descriptionProject }: InitialValuesProjectForm, resetForm: any) {
+    const membersIds: number[] = selectedMembersList.map((member) => member.id);
+
+    dispatch(
+      createProject({
+        titleProject,
+        descriptionProject,
+        membersIds,
+      }),
+    );
     dispatch(setModal(!modalVisible));
     setSelectedMembersList([]);
     setInputValue('');
     resetForm();
   }
 
-  function handleInput(e: ChangeEvent<HTMLInputElement>) {
+  async function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value.toLowerCase();
     setInputValue(value);
     setSelectedMembersVisible(false);
     setRecomendationMemberVisible(true);
     if (value === '') {
-      console.log([]);
       setRecomendationMembersList([]);
     } else {
-      const matchingMembers = membersListt.filter((member) => {
-        return member.email.toLowerCase().includes(value);
-      });
-      setRecomendationMembersList(matchingMembers);
-      console.log(matchingMembers);
+      const { data }: FindedUsers = await searchUserByEmailRequest(value);
+      setRecomendationMembersList(data);
     }
   }
 

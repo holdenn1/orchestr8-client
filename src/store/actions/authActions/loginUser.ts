@@ -1,8 +1,8 @@
 import { loginUserRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AuthUserResponse, LoginUserActionProps } from './types/authTypes';
+import { AuthUserResponse, LoginUserActionProps } from '../types/authTypes';
 import { notify } from '@/components/Toast';
-import { setUser } from '../slices/userSlice';
+import { setUser } from '@/store/slices/userSlice';
 
 export const loginUser = createAsyncThunk<void, LoginUserActionProps>(
   'user/loginUser',
