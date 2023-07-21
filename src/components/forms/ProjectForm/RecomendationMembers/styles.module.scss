@@ -1,0 +1,23 @@
+@import 'src/styles/mixins/scrollbar.scss';
+
+.recomendationMembersWrapper {
+  width: 100%;
+  background-color: rgb(247, 243, 243, 0.9);
+  position: absolute;
+  z-index: 200;
+  top: 76px;
+  left: 0;
+  .recomendationMembersList {
+    max-height: 120px;
+    overflow-y: auto;
+    @include scrollbar(6px, black);
+    .recomendstionMemmersItem {
+      padding: 10px 8px;
+      font-weight: 500;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(107, 131, 163, 0.8);
+      }
+    }
+  }
+}

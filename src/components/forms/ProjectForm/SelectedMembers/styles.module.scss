@@ -1,0 +1,38 @@
+@import 'src/styles/mixins/scrollbar.scss';
+
+.selectedMembersWrapper {
+  width: 100%;
+  position: relative;
+
+  .seMembersBtn {
+    cursor: pointer;
+    font-weight: 500;
+    display: inline-block;
+    width: 100%;
+    font-size: 18px;
+    padding: 12px 0;
+  }
+  .selectesMembersList {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    z-index: 200;
+    background-color: rgb(247, 243, 243, 0.8);
+    max-height: 120px;
+    overflow-y: auto;
+    @include scrollbar(6px, black);
+    .selectesMembersItem {
+      padding: 10px 8px;
+      font-weight: 500;
+      cursor: pointer;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      &:hover {
+        background-color: rgba(127, 144, 165, 0.8);
+      }
+    }
+  }
+}

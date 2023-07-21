@@ -1,0 +1,24 @@
+@import 'src/styles/variables';
+@import 'src/styles/mixins/columnCenterFlex.scss';
+@import 'src/styles/mixins/textInput.scss';
+
+
+  .labelWrapper {
+    width: 100%;
+    text-align: left;
+    .label {
+      font-size: 1.25rem;
+      font-weight: $font-weight-title;
+      @media screen and (max-width: 425px) {
+        font-size: 1.125rem;
+      }
+    }
+  }
+  .inputWrapper {
+    @include columnCenterFlex;
+    position: relative;
+    .input {
+      @include textInput;
+    }
+  }
+

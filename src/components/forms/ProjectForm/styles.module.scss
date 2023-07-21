@@ -17,25 +17,17 @@
   overflow-y: auto;
   overflow-x: hidden;
   @include scrollbar(6px, $primary-background-color);
- 
-}
-
-.error {
-  margin: 6px 0 0 0;
-  text-align: center;
-  color: red;
-}
-
-.submitBtnWrapper,
-.addUserBtnWrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin: 10px 0;
-}
-
-.submitBtnWrapper {
-  button {
-    width: 190px;
-    margin: 0 auto;
+  .addUserInputWrapper {
+    width: 100%;
+    position: relative;
+  }
+  .submitBtnWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px 0;
+    button {
+      width: 190px;
+      margin: 0 auto;
+    }
   }
 }
