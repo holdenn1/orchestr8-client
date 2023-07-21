@@ -3,12 +3,15 @@ import { InitialStateAccountSlice, User } from './types/userSliceTypes';
 
 const initialState: InitialStateAccountSlice = {
   user: {
-    userId: 0,
+    id: null,
     firstName: '',
     lastName: '',
+    photo: null,
     phone: '',
     email: '',
     roles: [],
+    ownedProjects: [],
+    memberProjects: []
   },
 };
 

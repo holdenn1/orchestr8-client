@@ -17,7 +17,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   @include scrollbar(6px, $primary-background-color);
-  
+ 
 }
 
 .error {

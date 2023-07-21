@@ -2,12 +2,10 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import styles from './styles.module.scss';
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { removeProject, setCurrentProject } from '@/store/slices/projectSlice';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import classNames from 'classnames';
 
 function Project() {
-  const { projects, currentProject } = useAppSelector((state) => state.project);
   const [isMenu, setIsMenu] = useState(false);
   const dispatch = useAppDispatch();
   const { projectId, taskId } = useParams();
@@ -15,17 +13,9 @@ function Project() {
   const isAllTasks = location.href.includes('all-tasks');
   const isParticipants = location.href.includes('participants-project');
 
-  useEffect(() => {
-    if (projectId) {
-      const project = projects.find((proj) => proj.projectId === +projectId);
-      if (project) {
-        dispatch(setCurrentProject(project));
-      }
-    }
-  }, [dispatch, projectId, projects]);
+  useEffect(() => {}, [projectId]);
 
   function deleteProject() {
-    dispatch(removeProject(+projectId!));
     navigate('/profile/projects');
   }
 
@@ -53,43 +43,19 @@ function Project() {
         >
           <ul className={styles.projectMenuList}>
             <Link to={`/profile/projects/${projectId}/add-task`}>
-              <li
-                className={classNames(
-                  styles.projectMenuItem,
-                  styles.participantsMenuItem,
-                )}
-              >
-                Add task
-              </li>
+              <li className={classNames(styles.projectMenuItem, styles.participantsMenuItem)}>Add task</li>
             </Link>
             <Link to={`/profile/projects/${projectId}/all-tasks`}>
-              <li
-                className={classNames(
-                  styles.projectMenuItem,
-                  styles.participantsMenuItem,
-                )}
-              >
-                All tasks
-              </li>
+              <li className={classNames(styles.projectMenuItem, styles.participantsMenuItem)}>All tasks</li>
             </Link>
             <Link to={`/profile/projects/${projectId}/completed-tasks`}>
-              <li
-                className={classNames(
-                  styles.projectMenuItem,
-                  styles.participantsMenuItem,
-                )}
-              >
+              <li className={classNames(styles.projectMenuItem, styles.participantsMenuItem)}>
                 Completed tasks
               </li>
             </Link>
             <Link to={`/profile/projects/${projectId}/participants-project`}>
-              <li
-                className={classNames(
-                  styles.projectMenuItem,
-                  styles.participantsMenuItem,
-                )}
-              >
-                Show participants - ({currentProject?.projectParticipants.length})
+              <li className={classNames(styles.projectMenuItem, styles.participantsMenuItem)}>
+                Show participants -
               </li>
             </Link>
             <li
@@ -100,8 +66,8 @@ function Project() {
             </li>
           </ul>
         </div>
-        <h3 className={styles.title}>{currentProject?.title}</h3>
-        <p className={styles.description}>{currentProject?.description}</p>
+        <h3 className={styles.title}></h3>
+        <p className={styles.description}></p>
         {taskId ? (
           <>
             <Outlet />
@@ -109,9 +75,7 @@ function Project() {
         ) : (
           <>
             {!isParticipants && (
-              <h4 className={styles.taskTitle}>
-                Task list ({isAllTasks ? 'All tasks' : 'Completed tasks'})
-              </h4>
+              <h4 className={styles.taskTitle}>Task list ({isAllTasks ? 'All tasks' : 'Completed tasks'})</h4>
             )}
             <Outlet />
           </>

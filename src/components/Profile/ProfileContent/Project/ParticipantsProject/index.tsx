@@ -1,16 +1,14 @@
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { deleteParticipants } from '@/store/slices/projectSlice';
 import AddPaticipantToProject from './AddPaticipantToProject';
 
 function ParticipantsProject() {
-  const { currentProject } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   return (
     <>
       <AddPaticipantToProject />
       <div className={styles.participantsProjectWrapper}>
-        {currentProject?.projectParticipants.map(
+     {/*    {currentProject?.projectParticipants.map(
           ({ participantId, email, firstName, lastName }) => (
             <div key={participantId} className={styles.participantsProjectItem}>
               <h4 className={styles.participantsName}>
@@ -38,7 +36,7 @@ function ParticipantsProject() {
               </div>
             </div>
           ),
-        )}
+        )} */}
       </div>
     </>
   );

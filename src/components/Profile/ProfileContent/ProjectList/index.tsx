@@ -3,18 +3,16 @@ import styles from './styles.module.scss';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import ProfileContentHeader from '../ProfileContentHeader';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '@/hooks/reduxHooks';
 import EmptyProjectList from '@/components/errors/EmptyProjectList';
 import StatusProjectMenu from './StatusProjectMenu';
 
 function ProjectList() {
-  const { projects } = useAppSelector((state) => state.project);
   const [isMenu, setIsMenu] = useState<boolean>(false);
 
   return (
     <>
       <ProfileContentHeader />
-      {projects.length ? (
+   {/*    {projects.length ? (
         <div className={styles.projectsList}>
           {projects.map((project) => (
             <Link
@@ -40,7 +38,7 @@ function ProjectList() {
         </div>
       ) : (
         <EmptyProjectList />
-      )}
+      )} */}
     </>
   );
 }

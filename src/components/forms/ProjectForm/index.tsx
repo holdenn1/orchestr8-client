@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import PaticipantToProjectInput from '@/components/UI/inputs/PaticipantToProjectInput';
 
 function ProjectForm() {
-  const [users, setUsers] = useState<string[]>([]);
+  const [paticipant, setPaticipant] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [userEmailError, setUserEmailError] = useState(false);
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -24,7 +24,7 @@ function ProjectForm() {
   };
 
   function handleSubmit(values: FormikValues, resetForm: any) {
-    console.log({ ...values, usersOnProject: users });
+    console.log({ ...values, usersOnProject: paticipant });
     dispatch(setModal(!modalVisible));
     setInputValue('');
     setUserEmailError(false);
@@ -38,7 +38,7 @@ function ProjectForm() {
 
   function handleUser(value: string) {
     if (emailRegex.test(value)) {
-      setUsers([...users, value]);
+      setPaticipant([...paticipant, value]);
       setInputValue('');
       setUserEmailError(false);
     } else {
@@ -56,12 +56,7 @@ function ProjectForm() {
         <div className={styles.projectFormwrapper}>
           <Form>
             <div>
-              <TextInput
-                name='titleProject'
-                type='text'
-                label='Project name'
-                placeholder='Project name'
-              />
+              <TextInput name='titleProject' type='text' label='Project name' placeholder='Project name' />
               <TextArea
                 name='descriptionProject'
                 label='Project description'
@@ -73,6 +68,7 @@ function ProjectForm() {
                 inputValue={inputValue}
                 userEmailError={userEmailError}
               />
+           
               <div className={styles.submitBtnWrapper}>
                 <SubmitButton>Create a project</SubmitButton>
               </div>

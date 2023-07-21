@@ -11,9 +11,8 @@
   .logoIcon {
     margin: 0 20px;
   }
-  .addProjectLink {
+  .addProjectBtn {
     display: block;
-    @include contentCenterFlex;
     @include mainButton(#5293db, #3a76b8);
     width: 180px;
     border-radius: 20px;

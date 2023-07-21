@@ -7,7 +7,6 @@ const instance = axios.create({
   baseURL: BASE_URL,
 } as CreateAxiosDefaults);
 
-
 instance.interceptors.request.use(
   async (config) => {
     const accessToken = localStorage.getItem('accessToken');
