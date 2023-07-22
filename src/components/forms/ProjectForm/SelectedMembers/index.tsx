@@ -1,6 +1,7 @@
 import styles from './styles.module.scss';
 import removeIcon from 'icons/icons8-remove-30.png';
 import { SelectedMembersProps } from '../types';
+import classNames from 'classnames';
 
 function SelectedMembers({
   selectedMembersList,
@@ -10,16 +11,13 @@ function SelectedMembers({
 }: SelectedMembersProps) {
   return (
     <div className={styles.selectedMembersWrapper}>
-      {selectedMembersList.length ? (
-        <label
-          onClick={() => setSelectedMembersVisible(!selectedMembersVisible)}
-          className={styles.seMembersBtn}
-        >
-          See members
-        </label>
-      ) : (
-        ''
-      )}
+      <label
+        onClick={() => setSelectedMembersVisible(!selectedMembersVisible)}
+        className={classNames(styles.seMembersBtn, {[styles.seMembersBtnActive]: selectedMembersList.length}) }
+      >
+        See members
+      </label>
+
       {selectedMembersVisible && (
         <ul className={styles.selectesMembersList}>
           {selectedMembersList.map(({ id, email }) => (

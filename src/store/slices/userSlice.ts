@@ -25,11 +25,14 @@ const accountSlice = createSlice({
     removeUser(state) {
       state.user = {} as User;
     },
-    setOwnProject(state, action: PayloadAction<Project>) {
-      state.user.ownedProjects.push(action.payload)
+    addOwnProject(state, action: PayloadAction<Project>) {
+      state.user.ownedProjects.push(action.payload);
+    },
+    setOwnProjects(state, action: PayloadAction<Project[]>) {
+      state.user.ownedProjects = action.payload;
     },
   },
 });
 
-export const { setUser, removeUser, setOwnProject } = accountSlice.actions;
+export const { setUser, removeUser, addOwnProject,setOwnProjects } = accountSlice.actions;
 export default accountSlice.reducer;

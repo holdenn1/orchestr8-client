@@ -22,5 +22,7 @@ export const logoutUserRequest = (accessToken: string) =>
 
 export const createProjectRequest = (data: CreateProjectData) => instance.post('/project/create', data);
 
-export const searchUserByEmailRequest = (email: string) =>
+export const searchUsersByEmailRequest = (email: string) =>
   instance.get(`/project/members?searchText=${email}`);
+
+export const getOwnProjectsRequest = () => instance.get('/project/owned-projects');

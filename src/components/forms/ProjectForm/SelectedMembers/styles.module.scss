@@ -10,7 +10,12 @@
     display: inline-block;
     width: 100%;
     font-size: 18px;
-    padding: 12px 0;
+    padding: 10px 0 0px;
+    visibility: hidden;
+  }
+
+  .seMembersBtnActive {
+    visibility: visible;
   }
   .selectesMembersList {
     position: absolute;

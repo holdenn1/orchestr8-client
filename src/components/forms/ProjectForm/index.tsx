@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from 'react';
-import { Formik, Form, FormikValues } from 'formik';
+import { ChangeEvent, useRef, useState } from 'react';
+import { Formik, Form } from 'formik';
 import projectFormValidationSchema from '@/utils/validate/projectFormValidationSchema';
 import styles from './styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
@@ -11,18 +11,19 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import MemberToProjectInput from './MemberToProjectInput';
 import RecomendationMembers from './RecomendationMembers';
 import SelectedMembers from './SelectedMembers';
-import { searchUserByEmailRequest } from '@/api/requests';
-import { Member } from '@/store/slices/types/userSliceTypes';
-import { FindedUsers } from './types';
 import { createProject } from '@/store/actions/projectsActions/createProject';
+import { Member } from '@/store/slices/types/userSliceTypes';
+import { notify } from '@/components/Toast';
+import { searchUsersByEmail } from '@/store/actions/projectsActions/searchUsersByEmail';
 
 function ProjectForm() {
-  const [recomendationMembersList, setRecomendationMembersList] = useState<any[]>([]);
-  const [selectedMembersList, setSelectedMembersList] = useState<any[]>([]);
+  const [recomendationMembersList, setRecomendationMembersList] = useState<Member[]>([]);
+  const [selectedMembersList, setSelectedMembersList] = useState<Member[]>([]);
   const [recomendationMemberVisible, setRecomendationMemberVisible] = useState<boolean>(false);
   const [selectedMembersVisible, setSelectedMembersVisible] = useState<boolean>(false);
   const { modalVisible } = useAppSelector((state) => state.main);
   const [inputValue, setInputValue] = useState('');
+  const debounceTimeoutRef = useRef<number | null>(null);
   const dispatch = useAppDispatch();
 
   const initialValues: InitialValuesProjectForm = {
@@ -51,24 +52,23 @@ function ProjectForm() {
     setInputValue(value);
     setSelectedMembersVisible(false);
     setRecomendationMemberVisible(true);
-    if (value === '') {
-      setRecomendationMembersList([]);
-    } else {
-      const { data }: FindedUsers = await searchUserByEmailRequest(value);
-      setRecomendationMembersList(data);
-    }
+    dispatch(searchUsersByEmail({ value, debounceTimeoutRef, setRecomendationMembersList }));
   }
 
   function handleUser(memberId: number) {
-    setInputValue('');
-
     const selectedMembers = recomendationMembersList.find((member) => member.id === memberId);
-    setSelectedMembersList([...selectedMembersList, selectedMembers]);
-
-    const recomendationMembers = recomendationMembersList.filter((member) => {
-      return member.id !== memberId;
-    });
-    setRecomendationMembersList(recomendationMembers);
+    const isMember = selectedMembersList.some((member) => member.id === selectedMembers?.id);
+    if (selectedMembers && !isMember) {
+      setInputValue('');
+      setSelectedMembersList([...selectedMembersList, selectedMembers]);
+      const recomendationMembers = recomendationMembersList.filter((member) => {
+        return member.id !== memberId;
+      });
+      setRecomendationMembersList(recomendationMembers);
+      notify('Member added', 'success');
+    } else {
+      notify('Member has already been added', 'warning');
+    }
   }
 
   function removeMemberFromSelected(memberId: number) {
