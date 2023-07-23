@@ -28,47 +28,48 @@ export const router = createHashRouter([
         path: 'sign-in',
         element: <SignInPage />,
       },
-    ],
-  },
-  {
-    path: 'profile',
-    element: <ProfilePage />,
-    errorElement: <ErrorPage />,
-    children: [
       {
-        path: 'projects',
-        element: <ProjectList />,
-      },
-      {
-        path: 'projects-form',
-        element: <ProjectForm />,
-      },
-      {
-        path: 'projects/:projectId',
-        element: <Project />,
+        path: 'profile',
+        element: <ProfilePage />,
+        errorElement: <ErrorPage />,
         children: [
           {
-            path: 'task/:taskId',
-            element: <Task />,
+            path: 'projects',
+            element: <ProjectList />,
           },
           {
-            path: 'all-tasks',
-            element: <AllTasks />,
+            path: 'projects-form',
+            element: <ProjectForm />,
           },
           {
-            path: 'add-task',
-            element: <AddTask />,
-          },
-          {
-            path: 'completed-tasks',
-            element: <CompletedTasks />,
-          },
-          {
-            path: 'participants-project',
-            element: <ParticipantsProject />,
+            path: 'projects/:projectId',
+            element: <Project />,
+            children: [
+              {
+                path: 'task/:taskId',
+                element: <Task />,
+              },
+              {
+                path: 'all-tasks',
+                element: <AllTasks />,
+              },
+              {
+                path: 'add-task',
+                element: <AddTask />,
+              },
+              {
+                path: 'completed-tasks',
+                element: <CompletedTasks />,
+              },
+              {
+                path: 'participants-project',
+                element: <ParticipantsProject />,
+              },
+            ],
           },
         ],
       },
     ],
   },
+  
 ]);

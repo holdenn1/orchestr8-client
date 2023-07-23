@@ -27,17 +27,17 @@ function ProjectForm() {
   const dispatch = useAppDispatch();
 
   const initialValues: InitialValuesProjectForm = {
-    titleProject: '',
-    descriptionProject: '',
+    title: '',
+    description: '',
   };
 
-  function handleSubmit({ titleProject, descriptionProject }: InitialValuesProjectForm, resetForm: any) {
+  function handleSubmit({ title, description }: InitialValuesProjectForm, resetForm: any) {
     const membersIds: number[] = selectedMembersList.map((member) => member.id);
 
     dispatch(
       createProject({
-        titleProject,
-        descriptionProject,
+        title,
+        description,
         membersIds,
       }),
     );
@@ -92,12 +92,8 @@ function ProjectForm() {
         >
           <Form onClick={(e) => e.stopPropagation()}>
             <div>
-              <TextInput name='titleProject' type='text' label='Project name' placeholder='Project name' />
-              <TextArea
-                name='descriptionProject'
-                label='Project description'
-                placeholder='Project description'
-              />
+              <TextInput name='title' type='text' label='Project name' placeholder='Project name' />
+              <TextArea name='description' label='Project description' placeholder='Project description' />
               <div className={styles.addUserInputWrapper}>
                 <MemberToProjectInput handleInput={handleInput} inputValue={inputValue} />
                 <RecomendationMembers

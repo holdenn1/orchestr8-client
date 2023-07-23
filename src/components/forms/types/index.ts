@@ -16,6 +16,6 @@ export type FormNavigationProps = {
 };
 
 export type InitialValuesProjectForm = {
-  titleProject: string;
-  descriptionProject: string;
+  title: string;
+  description: string;
 };

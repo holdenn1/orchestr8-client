@@ -23,15 +23,15 @@ export type Owner = Member;
 
 export type ProjectTask = {
   id: number;
-  taskText: string;
+  task: string;
   completed: boolean;
 };
 
 export type Project = {
   id: number;
   status: StatusProject[];
-  titleProject: string;
-  descriptionProject: string;
+  title: string;
+  description: string;
   tasks: ProjectTask[];
   members: Member[];
   owner: Owner;

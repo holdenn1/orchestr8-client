@@ -13,17 +13,20 @@ type SearchUsersByEmailProps = {
 export const searchUsersByEmail = createAsyncThunk<void, SearchUsersByEmailProps>(
   'user/searchUsersByEmail',
   async ({ value, debounceTimeoutRef, setRecomendationMembersList }) => {
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-
-    debounceTimeoutRef.current = setTimeout(async () => {
-      if (value.trim() !== '') {
-        const { data }: FindedUsers = await searchUsersByEmailRequest(value);
-        setRecomendationMembersList(data);
-      } else {
-        setRecomendationMembersList([]);
+    try {
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
       }
-    }, 500);
+      debounceTimeoutRef.current = setTimeout(async () => {
+        if (value.trim() !== '') {
+          const { data }: FindedUsers = await searchUsersByEmailRequest(value);
+          setRecomendationMembersList(data);
+        } else {
+          setRecomendationMembersList([]);
+        }
+      }, 500);
+    } catch (e) {
+      console.error(e);
+    }
   },
 );

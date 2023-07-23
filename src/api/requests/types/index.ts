@@ -5,7 +5,7 @@ export type RegistrationUserData = Omit<InitialValuesSignUpForm, 'confirmPasswor
 export type LoginUserData = InitialValuesSignInForm;
 
 export type CreateProjectData = {
-  titleProject: string;
-  descriptionProject: string;
+  title: string;
+  description: string;
   membersIds: number[];
 };

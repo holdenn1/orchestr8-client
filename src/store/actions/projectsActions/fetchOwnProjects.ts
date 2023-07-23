@@ -4,6 +4,10 @@ import { GetOwnProjectResponse } from '../types/projectTypes';
 import { setOwnProjects } from '@/store/slices/userSlice';
 
 export const fetchOwnProjects = createAsyncThunk('user/fetchOwnProjects', async (_, { dispatch }) => {
-  const { data }: GetOwnProjectResponse = await getOwnProjectsRequest();
-  dispatch(setOwnProjects(data));
+  try {
+    const { data }: GetOwnProjectResponse = await getOwnProjectsRequest();
+    dispatch(setOwnProjects(data));
+  } catch (e) {
+    console.error(e);
+  }
 });

@@ -20,14 +20,14 @@ function ProjectList() {
   return (
     <>
       <ProfileContentHeader />
-      {ownedProjects.length ? (
+      {ownedProjects ? (
         <div className={styles.projectsListWrapper}>
           <div className={styles.projectsList}>
             {ownedProjects.map((project) => (
               <Link to={`/profile/projects/${project.id}/all-tasks`} key={project.id}>
                 <div className={styles.projecetItem}>
-                  <h3 className={styles.title}>{project.titleProject}</h3>
-                  <p className={styles.description}>{project.descriptionProject}</p>
+                  <h3 className={styles.title}>{project.title}</h3>
+                  <p className={styles.description}>{project.description}</p>
                   <div
                     className={styles.menu}
                     onClick={(e) => {

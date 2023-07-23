@@ -7,7 +7,11 @@ import { CreateProjectResponse } from '../types/projectTypes.ts';
 export const createProject = createAsyncThunk<void, CreateProjectData>(
   'user/createProject',
   async (dataProject, { dispatch }) => {
-    const { data }: CreateProjectResponse = await createProjectRequest(dataProject);
-    dispatch(addOwnProject({ ...data }));
+    try {
+      const { data }: CreateProjectResponse = await createProjectRequest(dataProject);
+      dispatch(addOwnProject({ ...data }));
+    } catch (e) {
+      console.error(e);
+    }
   },
 );

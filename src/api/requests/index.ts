@@ -18,6 +18,11 @@ export const logoutUserRequest = (accessToken: string) =>
     headers: { authorization: `Bearer ${accessToken}` },
   });
 
+export const refreshTokensLogin = (refreshToken: string) =>
+  instance.get('auth/refresh-login', {
+    headers: { authorization: `Bearer ${refreshToken}` },
+  } as AxiosRequestConfig);
+
 /* projets' requests */
 
 export const createProjectRequest = (data: CreateProjectData) => instance.post('/project/create', data);

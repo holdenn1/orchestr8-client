@@ -23,3 +23,17 @@ export type AuthUserResponse = {
     user: User;
   };
 };
+
+export type CheckAuthProps = {
+  navigate: NavigateFunction;
+};
+
+export type RefreshTokensLoginResponse = {
+  data: {
+    user: User;
+    tokens: {
+      refreshToken: string;
+      accessToken: string;
+    };
+  };
+};
