@@ -1,14 +1,14 @@
 import App from '@/App';
 import { createHashRouter } from 'react-router-dom';
 import { ErrorPage, MainPage, ProfilePage, SignInPage, SignUpPage } from '@/pages';
-import ProjectList from '@/components/Profile/ProfileContent/ProjectList';
+import ProjectList from '@/components/Project/ProjectList';
 import ProjectForm from '@/components/forms/ProjectForm';
-import Project from '@/components/Profile/ProfileContent/Project';
-import Task from '@/components/Profile/ProfileContent/Project/Task';
-import AllTasks from '@/components/Profile/ProfileContent/Project/AllTask';
-import CompletedTasks from '@/components/Profile/ProfileContent/Project/CompletedTasks';
-import ParticipantsProject from '@/components/Profile/ProfileContent/Project/ParticipantsProject';
-import AddTask from '@/components/Profile/ProfileContent/Project/AddTask';
+import Project from '@/components/Project';
+import Task from '@/components/Project/tasks/Task';
+import AddTask from '@/components/Project/tasks/AddTask';
+import CompletedTasks from '@/components/Project/tasks/CompletedTasks';
+import ParticipantsProject from '@/components/Project/Members';
+import AllTasks from '@/components/Project/tasks/AllTask';
 
 export const router = createHashRouter([
   {

@@ -3,11 +3,11 @@ import TaskItem from '../TaskItem';
 import styles from './../styles.module.scss';
 
 function CompletedTasks() {
-  const { currentProject } = useAppSelector((state) => state.project);
-  const isCompleteTask = currentProject?.tasks.filter((task) => task.completed);
+  // const { currentProject } = useAppSelector((state) => state.project);
+  // const isCompleteTask = currentProject?.tasks.filter((task) => task.completed);
   return (
     <>
-      {isCompleteTask?.length ? (
+      {/* {isCompleteTask?.length ? (
         <ul className={styles.tasksList}>
           {currentProject?.tasks.map(({ taskId, text, completed }) => {
             if (completed) {
@@ -17,7 +17,7 @@ function CompletedTasks() {
         </ul>
       ) : (
         <p className={styles.noCompletedTask}>You have no completed tasks yet</p>
-      )}
+      )} */}
     </>
   );
 }

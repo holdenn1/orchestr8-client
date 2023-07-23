@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import TextInput from '@/components/UI/inputs/formInputs/TextInput';
 import SubmitButton from '@/components/UI/buttons/SubmitButton';
 
-function AddPaticipantToProject() {
+function AddMemberToProject() {
   
   function handleSubmit(values: { paticipantEmail: string }, resetForm: any) {
     console.log(values);
@@ -32,4 +32,4 @@ function AddPaticipantToProject() {
   );
 }
 
-export default AddPaticipantToProject;
+export default AddMemberToProject;

@@ -27,12 +27,6 @@
       right: -20px;
       transform: rotate(90deg);
     }
-    .projectMenuWrapper {
-      position: absolute;
-      top: 36px;
-      right: 0px;
-      @include menu;
-      width: 160px;
-    }
+
   }
 }

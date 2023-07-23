@@ -1,0 +1,7 @@
+.userMenuWrapper {
+  position: absolute;
+  top: 36px;
+  right: 0px;
+  width: 160px;
+  @include menu;
+}

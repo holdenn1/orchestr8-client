@@ -5,13 +5,13 @@ import { MouseEvent, Dispatch } from 'react';
 import { setComplete, setSuspend } from '@/store/slices/mainSlice';
 import { Project } from '@/store/slices/types/userSliceTypes';
 
-type StatusProjectMenuProps = {
+type ProjectMenuProps = {
   setIsMenu: Dispatch<React.SetStateAction<boolean>>;
   isMenu: boolean;
   project: Project;
 };
 
-function StatusProjectMenu({ isMenu, setIsMenu, project }: StatusProjectMenuProps) {
+function ProjectMenu({ isMenu, setIsMenu, project }: ProjectMenuProps) {
   const { complete, suspend } = useAppSelector((state) => state.main.projectMenu);
   const dispatch = useAppDispatch();
 
@@ -49,4 +49,4 @@ function StatusProjectMenu({ isMenu, setIsMenu, project }: StatusProjectMenuProp
   );
 }
 
-export default StatusProjectMenu;
+export default ProjectMenu;

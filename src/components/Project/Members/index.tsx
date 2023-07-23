@@ -1,12 +1,12 @@
+import AddMemberToProject from './AddMemberToProject';
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import AddPaticipantToProject from './AddPaticipantToProject';
 
 function ParticipantsProject() {
   const dispatch = useAppDispatch();
   return (
     <>
-      <AddPaticipantToProject />
+      <AddMemberToProject />
       <div className={styles.participantsProjectWrapper}>
      {/*    {currentProject?.projectParticipants.map(
           ({ participantId, email, firstName, lastName }) => (
