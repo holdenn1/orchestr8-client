@@ -1,14 +1,7 @@
-import { Dispatch, MutableRefObject, SetStateAction } from 'react';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Member } from '@/store/slices/types/userSliceTypes';
 import { FindedUsers } from '@/components/forms/ProjectForm/types';
 import { searchUsersByEmailRequest } from '@/api/requests';
-
-type SearchUsersByEmailProps = {
-  debounceTimeoutRef: MutableRefObject<number | null>;
-  value: string;
-  setRecomendationMembersList: Dispatch<SetStateAction<Member[]>>;
-};
+import { SearchUsersByEmailProps } from '../types/projectTypes';
 
 export const searchUsersByEmail = createAsyncThunk<void, SearchUsersByEmailProps>(
   'user/searchUsersByEmail',

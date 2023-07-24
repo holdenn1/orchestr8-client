@@ -14,10 +14,12 @@
   .addProjectBtn {
     display: block;
     @include mainButton(#5293db, #3a76b8);
+    @include contentCenterFlex;
     width: 180px;
     border-radius: 20px;
     margin: 0 20px 0 auto;
   }
+
   .bellIconWrapper {
     margin: 0 20px 0 auto;
     @include profleIconWrapper;

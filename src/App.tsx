@@ -10,11 +10,11 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem('refreshToken')) {
+      console.log(1);
       dispatch(checkAuth({ navigate }));
     } else {
       dispatch(logoutUser({ navigate }));
     }
-    console.log(1);
     
   }, []);
   return (

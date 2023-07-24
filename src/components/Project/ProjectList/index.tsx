@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './styles.module.scss';
 import EmptyProjectList from '@/components/errors/EmptyProjectList';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
@@ -7,7 +7,7 @@ import ProjectItem from './ProjectItem';
 import ProfileContentHeader from '@/components/headers/ProfileContentHeader';
 
 function ProjectList() {
-  const { ownedProjects } = useAppSelector((state) => state.account.user);
+  const { allProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -17,10 +17,10 @@ function ProjectList() {
   return (
     <>
       <ProfileContentHeader />
-      {ownedProjects ? (
+      {allProjects ? (
         <div className={styles.projectsListWrapper}>
           <div className={styles.projectsList}>
-            {ownedProjects.map((project) => (
+            {allProjects.map((project) => (
               <ProjectItem project={project} key={project.id} />
             ))}
           </div>

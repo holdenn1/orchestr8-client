@@ -1,33 +1,58 @@
+import { useEffect, useState } from 'react';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import './styles.scss';
 
 function ProjectsInfo() {
+  const [projects, setProjects] = useState({
+    Completed: 0,
+    'In Progress': 0,
+    Suspend: 0,
+  });
+  const { allProjects } = useAppSelector((state) => state.project);
+  
   const profiles = [
     {
       id: 1,
       title: 'Total projects',
       style: 'totalProjects',
-      countProjects: [0],
+      countProjects: allProjects?.length,
     },
     {
       id: 2,
       title: 'Completed',
       style: 'completed',
-      countProjects: [0],
+      countProjects: projects.Completed,
     },
     {
       id: 3,
       title: 'In progress',
       style: 'inProgres',
-      countProjects: [0],
+      countProjects: projects['In Progress'],
     },
     {
       id: 4,
       title: 'Suspended',
       style: 'suspended',
-      countProjects: [0],
+      countProjects: projects.Suspend,
     },
   ];
+
+  useEffect(() => {
+    const projectCountByStatus = allProjects.reduce((acc: any, item) => {
+      const { status } = item;
+
+      if (acc[status]) {
+        acc[status] += 1;
+      } else {
+        acc[status] = 1;
+      }
+
+      return acc;
+    }, {});
+
+    setProjects(projectCountByStatus);
+  }, [allProjects]);
+
   return (
     <div className='profile-projects'>
       {profiles.map((project) => (

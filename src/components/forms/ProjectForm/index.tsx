@@ -12,9 +12,10 @@ import MemberToProjectInput from './MemberToProjectInput';
 import RecomendationMembers from './RecomendationMembers';
 import SelectedMembers from './SelectedMembers';
 import { createProject } from '@/store/actions/projectsActions/createProject';
-import { Member } from '@/store/slices/types/userSliceTypes';
 import { notify } from '@/components/Toast';
 import { searchUsersByEmail } from '@/store/actions/projectsActions/searchUsersByEmail';
+import { Member } from '@/store/slices/types/projectSliceTypes';
+import { useNavigate } from 'react-router-dom';
 
 function ProjectForm() {
   const [recomendationMembersList, setRecomendationMembersList] = useState<Member[]>([]);
@@ -25,6 +26,7 @@ function ProjectForm() {
   const [inputValue, setInputValue] = useState('');
   const debounceTimeoutRef = useRef<number | null>(null);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const initialValues: InitialValuesProjectForm = {
     title: '',
@@ -39,6 +41,7 @@ function ProjectForm() {
         title,
         description,
         membersIds,
+        navigate,
       }),
     );
     dispatch(setModal(!modalVisible));

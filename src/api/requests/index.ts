@@ -30,4 +30,4 @@ export const createProjectRequest = (data: CreateProjectData) => instance.post('
 export const searchUsersByEmailRequest = (email: string) =>
   instance.get(`/project/members?searchText=${email}`);
 
-export const getOwnProjectsRequest = () => instance.get('/project/owned-projects');
+export const getOwnProjectsRequest = () => instance.get('/project/own-projects');

@@ -1,15 +1,13 @@
 import { createProjectRequest } from '@/api/requests';
-import { CreateProjectData } from '@/api/requests/types';
-import { addOwnProject } from '@/store/slices/userSlice';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CreateProjectResponse } from '../types/projectTypes.ts';
+import { CreateProjectProps } from '../types/projectTypes';
 
-export const createProject = createAsyncThunk<void, CreateProjectData>(
+export const createProject = createAsyncThunk<void, CreateProjectProps>(
   'user/createProject',
-  async (dataProject, { dispatch }) => {
+  async ({ title, description, membersIds, navigate }) => {
     try {
-      const { data }: CreateProjectResponse = await createProjectRequest(dataProject);
-      dispatch(addOwnProject({ ...data }));
+      await createProjectRequest({ title, description, membersIds });
+      navigate('/profile/projects');
     } catch (e) {
       console.error(e);
     }
