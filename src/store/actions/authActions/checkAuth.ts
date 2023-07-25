@@ -18,7 +18,7 @@ export const checkAuth = createAsyncThunk<void, CheckAuthProps>(
       localStorage.setItem('refreshToken', tokens.refreshToken);
       dispatch(setUser(user));
     } catch (e) {
-      navigate('/');
+      navigate('/profile/projects');
       console.error(e);
     }
   },

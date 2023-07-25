@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { FindedUsers } from '@/components/forms/ProjectForm/types';
 import { searchUsersByEmailRequest } from '@/api/requests';
-import { SearchUsersByEmailProps } from '../types/projectTypes';
+import { SearchUsersByEmailActionProps } from '../types/projectTypes';
 
-export const searchUsersByEmail = createAsyncThunk<void, SearchUsersByEmailProps>(
+export const searchUsersByEmail = createAsyncThunk<void, SearchUsersByEmailActionProps>(
   'user/searchUsersByEmail',
   async ({ value, debounceTimeoutRef, setRecomendationMembersList }) => {
     try {

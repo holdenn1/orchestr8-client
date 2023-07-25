@@ -1,7 +1,7 @@
 @import 'src/styles/mixins/scrollbar.scss';
 
 .projectsListWrapper {
-  height: calc(100vh - 230px);
+  height: calc(100vh - 200px);
   .projectsList {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 270px));
@@ -13,6 +13,5 @@
     height: 100%;
     overflow: auto;
     @include scrollbar(6px, black);
-    
   }
 }

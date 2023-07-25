@@ -9,7 +9,7 @@ function ProjectsInfo() {
     Suspend: 0,
   });
   const { allProjects } = useAppSelector((state) => state.project);
-  
+
   const profiles = [
     {
       id: 1,
@@ -21,19 +21,19 @@ function ProjectsInfo() {
       id: 2,
       title: 'Completed',
       style: 'completed',
-      countProjects: projects.Completed,
+      countProjects: projects.Completed ?? 0,
     },
     {
       id: 3,
       title: 'In progress',
       style: 'inProgres',
-      countProjects: projects['In Progress'],
+      countProjects: projects['In Progress'] ?? 0,
     },
     {
       id: 4,
       title: 'Suspended',
       style: 'suspended',
-      countProjects: projects.Suspend,
+      countProjects: projects.Suspend ?? 0,
     },
   ];
 

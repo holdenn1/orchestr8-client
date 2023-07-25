@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
-import { Project } from '@/store/slices/types/userSliceTypes';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import StatusProjectMenu from '@/components/menus/ProjectMenu';
+import { Project } from '@/store/slices/types/projectSliceTypes';
 
 type ProjectItemProps = {
   project: Project;

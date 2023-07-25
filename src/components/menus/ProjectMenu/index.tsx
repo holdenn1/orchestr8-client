@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import styles from './styles.module.scss';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { MouseEvent, Dispatch } from 'react';
-import { setComplete, setSuspend } from '@/store/slices/mainSlice';
-import { Project } from '@/store/slices/types/userSliceTypes';
+import { Project, StatusProject } from '@/store/slices/types/projectSliceTypes';
+import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
 
 type ProjectMenuProps = {
   setIsMenu: Dispatch<React.SetStateAction<boolean>>;
@@ -12,22 +12,27 @@ type ProjectMenuProps = {
 };
 
 function ProjectMenu({ isMenu, setIsMenu, project }: ProjectMenuProps) {
-  const { complete, suspend } = useAppSelector((state) => state.main.projectMenu);
   const dispatch = useAppDispatch();
 
-  function handleComplete(e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) {
+  const handleComplete = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
-
-    dispatch(setComplete());
+    if (project.status !== StatusProject.COMPLETED) {
+      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.COMPLETED } }));
+    } else {
+      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.IN_PROGRESS } }));
+    }
     setIsMenu(false);
-  }
+  };
 
-  function handleSuspend(e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) {
+  const handleSuspend = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
-
-    dispatch(setSuspend());
+    if (project.status !== StatusProject.SUSPEND) {
+      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.SUSPEND } }));
+    } else {
+      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.IN_PROGRESS } }));
+    }
     setIsMenu(false);
-  }
+  };
 
   return (
     <div className={styles.projectMenuWrapper}>
@@ -38,10 +43,10 @@ function ProjectMenu({ isMenu, setIsMenu, project }: ProjectMenuProps) {
       >
         <ul className={styles.projectMenuList}>
           <li onClick={(e) => handleComplete(e)} className={styles.projectMenuItem}>
-            {!complete ? 'Complete' : 'In progress'}
+            {project.status !== StatusProject.COMPLETED ? 'Complete' : 'In progress'}
           </li>
           <li onClick={(e) => handleSuspend(e)} className={styles.projectMenuItem}>
-            {!suspend ? 'Suspend' : 'Resume'}
+            {project.status !== StatusProject.SUSPEND ? 'Suspend' : 'Resume'}
           </li>
         </ul>
       </div>

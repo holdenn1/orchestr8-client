@@ -4,6 +4,7 @@ import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import classNames from 'classnames';
+import { removeOwnProjectsRequest } from '@/api/requests';
 
 function Project() {
   const [isMenu, setIsMenu] = useState(false);
@@ -15,9 +16,12 @@ function Project() {
 
   useEffect(() => {}, [projectId]);
 
-  function deleteProject() {
-    navigate('/profile/projects');
-  }
+  const deleteProject = async () => {
+    if (projectId) {
+      await removeOwnProjectsRequest(projectId);
+      navigate('/profile/projects');
+    }
+  };
 
   return (
     <div

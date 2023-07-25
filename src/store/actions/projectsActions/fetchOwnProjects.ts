@@ -6,6 +6,7 @@ import { setAllProjects } from '@/store/slices/projectSlice';
 export const fetchOwnProjects = createAsyncThunk('user/fetchOwnProjects', async (_, { dispatch }) => {
   try {
     const { data }: GetOwnProjectResponse = await getOwnProjectsRequest();
+    
     dispatch(setAllProjects(data));
   } catch (e) {
     console.error(e);

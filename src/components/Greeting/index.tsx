@@ -11,7 +11,7 @@ function Greeting() {
         <h3 className={styles.title}>Welcome to Orchestr8! </h3>
         <p className={styles.description}>Your project management assistant</p>
         <Link
-        to='sign-up'
+        to='sign-in'
           className={styles.greetingLink}
         >
           Start planning

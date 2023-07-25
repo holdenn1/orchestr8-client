@@ -1,6 +1,6 @@
 import instance from '@/api';
 import { AxiosRequestConfig } from 'axios';
-import { CreateProjectData, LoginUserData, RegistrationUserData } from './types';
+import { CreateProjectData, LoginUserData, RegistrationUserData, UpdateProjectData } from './types';
 
 /* user's requsets */
 export const registrationUserRequest = (data: RegistrationUserData) =>
@@ -31,3 +31,8 @@ export const searchUsersByEmailRequest = (email: string) =>
   instance.get(`/project/members?searchText=${email}`);
 
 export const getOwnProjectsRequest = () => instance.get('/project/own-projects');
+
+export const updateOwnProjectsRequest = (projectId: string, updateProjectData: UpdateProjectData) =>
+  instance.patch(`/project/${projectId}`, updateProjectData);
+
+export const removeOwnProjectsRequest = (projectId: string) => instance.delete(`/project/${projectId}`);
