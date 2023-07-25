@@ -13,7 +13,7 @@ function ProjectItem({ project }: ProjectItemProps) {
   const [isMenu, setIsMenu] = useState(false);
 
   return (
-    <Link to={`/profile/projects/${project.id}/all-tasks`} key={project.id}>
+    <Link to={`/profile/project/${project.id}/all-tasks`} key={project.id}>
       <div className={styles.projecetItem}>
         <h3 className={styles.title}>{project.title}</h3>
         <p className={styles.description}>{project.description}</p>

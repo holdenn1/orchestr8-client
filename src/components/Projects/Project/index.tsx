@@ -1,4 +1,3 @@
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import styles from './styles.module.scss';
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -8,7 +7,6 @@ import { removeOwnProjectsRequest } from '@/api/requests';
 
 function Project() {
   const [isMenu, setIsMenu] = useState(false);
-  const dispatch = useAppDispatch();
   const { projectId, taskId } = useParams();
   const navigate = useNavigate();
   const isAllTasks = location.href.includes('all-tasks');

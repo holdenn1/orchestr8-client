@@ -1,5 +1,3 @@
-import { useAppSelector } from '@/hooks/reduxHooks';
-import { Link } from 'react-router-dom';
 import styles from './../styles.module.scss';
 
 type TaskItemProps = {
@@ -14,9 +12,9 @@ function TaskItem({ taskId, text }: TaskItemProps) {
         key={taskId}
         to={`/profile/projects/${currentProject?.projectId}/task/${taskId}`}
       > */}
-        <li className={styles.taskItem}>
-          <span>{text}</span>
-        </li>
+      <li className={styles.taskItem}>
+        <span>{text}</span>
+      </li>
       {/* </Link> */}
     </div>
   );

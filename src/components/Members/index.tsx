@@ -2,7 +2,7 @@ import AddMemberToProject from './AddMemberToProject';
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 
-function ParticipantsProject() {
+function Members() {
   const dispatch = useAppDispatch();
   return (
     <>
@@ -42,4 +42,4 @@ function ParticipantsProject() {
   );
 }
 
-export default ParticipantsProject;
+export default Members;

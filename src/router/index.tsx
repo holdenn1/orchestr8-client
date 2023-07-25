@@ -1,14 +1,19 @@
 import App from '@/App';
 import { createHashRouter } from 'react-router-dom';
 import { ErrorPage, MainPage, ProfilePage, SignInPage, SignUpPage } from '@/pages';
-import ProjectList from '@/components/Project/ProjectList';
 import ProjectForm from '@/components/forms/ProjectForm';
-import Project from '@/components/Project';
-import Task from '@/components/Project/tasks/Task';
-import AddTask from '@/components/Project/tasks/AddTask';
-import CompletedTasks from '@/components/Project/tasks/CompletedTasks';
-import ParticipantsProject from '@/components/Project/Members';
-import AllTasks from '@/components/Project/tasks/AllTask';
+import Task from '@/components/tasks/Task';
+import AllTasks from '@/components/tasks/AllTask';
+import AddTask from '@/components/tasks/AddTask';
+import CompletedTasks from '@/components/tasks/CompletedTasks';
+import Members from '@/components/Members';
+import {
+  AllProjects,
+  CompletedProjects,
+  InProgressProjects,
+  Project,
+  SuspendProjects,
+} from '@/components/Projects';
 
 export const router = createHashRouter([
   {
@@ -34,15 +39,27 @@ export const router = createHashRouter([
         errorElement: <ErrorPage />,
         children: [
           {
-            path: 'projects',
-            element: <ProjectList />,
+            path: 'all-projects',
+            element: <AllProjects />,
+          },
+          {
+            path: 'completed',
+            element: <CompletedProjects />,
+          },
+          {
+            path: 'in-progress',
+            element: <InProgressProjects />,
+          },
+          {
+            path: 'suspend',
+            element: <SuspendProjects />,
           },
           {
             path: 'projects-form',
             element: <ProjectForm />,
           },
           {
-            path: 'projects/:projectId',
+            path: 'project/:projectId',
             element: <Project />,
             children: [
               {
@@ -63,7 +80,7 @@ export const router = createHashRouter([
               },
               {
                 path: 'participants-project',
-                element: <ParticipantsProject />,
+                element: <Members />,
               },
             ],
           },
@@ -71,5 +88,4 @@ export const router = createHashRouter([
       },
     ],
   },
-  
 ]);

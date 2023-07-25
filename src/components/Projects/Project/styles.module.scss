@@ -86,25 +86,6 @@
       text-align: center;
       margin-top: 100px;
     }
-    .tasksList {
-      color: black;
-      .taskItem {
-        background-color: rgb(228, 228, 228);
-        padding: 14px;
-        cursor: pointer;
-        border-radius: 12px;
-        margin-bottom: 6px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        &:hover {
-          background-color: rgb(93, 134, 160);
-          color: white;
-        }
-      }
-      .taskCheckbox {
-        margin-right: 10px;
-      }
-    }
+   
   }
 }

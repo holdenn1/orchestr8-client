@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import Select from '@/components/UI/inputs/Select';
 
-function ProfileContentHeader() {
+function ProjectListHeader() {
   const [viewProjects, setViewProjects] = useState(false);
   const { sort, category } = useAppSelector((store) => store.main.selectedOption);
 
@@ -41,4 +41,4 @@ function ProfileContentHeader() {
   );
 }
 
-export default ProfileContentHeader;
+export default ProjectListHeader;

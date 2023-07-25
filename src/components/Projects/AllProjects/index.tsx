@@ -3,10 +3,9 @@ import styles from './styles.module.scss';
 import EmptyProjectList from '@/components/errors/EmptyProjectList';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchOwnProjects } from '@/store/actions/projectsActions/fetchOwnProjects';
-import ProjectItem from './ProjectItem';
-import ProfileContentHeader from '@/components/headers/ProfileContentHeader';
+import ProjectItem from '../ProjectItem';
 
-function ProjectList() {
+function AllProjects() {
   const { allProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
 
@@ -16,7 +15,6 @@ function ProjectList() {
 
   return (
     <>
-      <ProfileContentHeader />
       {allProjects ? (
         <div className={styles.projectsListWrapper}>
           <div className={styles.projectsList}>
@@ -32,4 +30,4 @@ function ProjectList() {
   );
 }
 
-export default ProjectList;
+export default AllProjects;
