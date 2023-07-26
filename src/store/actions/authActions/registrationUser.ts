@@ -8,15 +8,18 @@ export const registrationUser = createAsyncThunk<void, RegistrationUserActionPro
   'user/registrationUser',
   async ({ registrationValues, setStep, resetForm, navigate }, { dispatch }) => {
     try {
-      const { data }: AuthUserResponse = await registrationUserRequest(registrationValues);
-      const { user, accessToken, refreshToken } = data;
+      const {
+        data: { user, accessToken, refreshToken },
+      }: AuthUserResponse = await registrationUserRequest(registrationValues);
 
-      dispatch(setUser(user));
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
-      navigate('/profile/all-projects');
-      setStep(0);
-      resetForm();
+      if (user) {
+        dispatch(setUser(user));
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        navigate('/profile/projects/all-projects');
+        setStep(0);
+        resetForm();
+      }
     } catch (e) {
       notify('Check field', 'error');
       console.log(e);

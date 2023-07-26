@@ -1,17 +1,16 @@
 import { UserRoles } from './userSliceTypes';
 
 export type InitialStateProjectSlice = {
-  inProgressProjects: Project[],
-  completedProjects: Project[],
-  suspendProjects: Project[]
   allProjects:Project[]
+  projectCount: ProjectCountPayload
 }
 
 export enum StatusProject {
-  COMPLETED = 'Completed',
-  IN_PROGRESS = 'In Progress',
-  SUSPEND = 'Suspend',
-  RESUME = 'Resume',
+  COMPLETED = 'completed',
+  IN_PROGRESS = 'in-progress',
+  SUSPEND = 'suspend',
+  RESUME = 'resume',
+  ALL = 'all-projects',
 }
 
 export type Member = {
@@ -42,3 +41,11 @@ export type Project = {
   members: Member[];
   owner: Owner;
 };
+
+export type ProjectCountPayload = {
+  totalCount: string;
+  completed: string;
+  'in-progress': string;
+  suspend: string;
+};
+

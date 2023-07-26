@@ -4,18 +4,22 @@ import EmptyProjectList from '@/components/errors/EmptyProjectList';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchOwnProjects } from '@/store/actions/projectsActions/fetchOwnProjects';
 import ProjectItem from '../ProjectItem';
+import { useParams } from 'react-router-dom';
 
-function AllProjects() {
+function ProjectList() {
   const { allProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
+  const { status } = useParams();
 
   useEffect(() => {
-    dispatch(fetchOwnProjects());
-  }, []);
+    if (status) {
+      dispatch(fetchOwnProjects({ status }));
+    }
+  }, [status]);
 
   return (
     <>
-      {allProjects ? (
+      {allProjects.length ? (
         <div className={styles.projectsListWrapper}>
           <div className={styles.projectsList}>
             {allProjects.map((project) => (
@@ -30,4 +34,4 @@ function AllProjects() {
   );
 }
 
-export default AllProjects;
+export default ProjectList;

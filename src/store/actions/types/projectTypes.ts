@@ -1,5 +1,5 @@
 import { MutableRefObject, Dispatch, SetStateAction } from 'react';
-import { Member, Project } from '@/store/slices/types/projectSliceTypes';
+import { Member, Project, ProjectCountPayload } from '@/store/slices/types/projectSliceTypes';
 import { NavigateFunction } from 'react-router-dom';
 import { UpdateProjectData } from '@/api/requests/types';
 
@@ -17,8 +17,8 @@ export type CreateProjectActionProps = {
   title: string;
   description: string;
   membersIds: number[];
-  navigate: NavigateFunction
-}
+  navigate: NavigateFunction;
+};
 
 export type UpdateProjectActionProps = {
   project: Project;
@@ -27,4 +27,8 @@ export type UpdateProjectActionProps = {
 
 export type UpdatedProjectRequest = {
   data: Project;
+};
+
+export type GetProjectsCountActionResponse = {
+  data: ProjectCountPayload[];
 };

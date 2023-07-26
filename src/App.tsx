@@ -14,7 +14,6 @@ function App() {
     } else {
       dispatch(logoutUser({ navigate }));
     }
-    
   }, []);
   return (
     <>

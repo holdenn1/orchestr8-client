@@ -1,14 +1,19 @@
 import { getOwnProjectsRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { setProjects } from '@/store/slices/projectSlice';
 import { GetOwnProjectResponse } from '../types/projectTypes';
-import { setAllProjects } from '@/store/slices/projectSlice';
 
-export const fetchOwnProjects = createAsyncThunk('user/fetchOwnProjects', async (_, { dispatch }) => {
-  try {
-    const { data }: GetOwnProjectResponse = await getOwnProjectsRequest();
-    
-    dispatch(setAllProjects(data));
-  } catch (e) {
-    console.error(e);
-  }
-});
+export const fetchOwnProjects = createAsyncThunk<void, { status: string }>(
+  'user/fetchOwnProjects',
+  async ({ status }, { dispatch }) => {
+    try {
+      const { data }: GetOwnProjectResponse = await getOwnProjectsRequest(status);
+
+      if (data) {
+        dispatch(setProjects(data));
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  },
+);

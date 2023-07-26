@@ -1,7 +1,4 @@
-import AllProjects from './AllProjects';
-import CompletedProjects from './CompletedProjects';
-import InProgressProjects from './InProgressProjects';
-import SuspendProjects from './SuspendProjects';
+import ProjectList from './ProjectList';
 import Project from './Project';
 
-export { AllProjects, CompletedProjects, InProgressProjects, SuspendProjects, Project };
+export { ProjectList, Project };

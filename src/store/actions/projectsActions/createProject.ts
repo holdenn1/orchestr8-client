@@ -6,8 +6,10 @@ export const createProject = createAsyncThunk<void, CreateProjectActionProps>(
   'user/createProject',
   async ({ title, description, membersIds, navigate }) => {
     try {
-      await createProjectRequest({ title, description, membersIds });
-      navigate('/profile/projects');
+      const { data } = await createProjectRequest({ title, description, membersIds });
+      if (data) {
+        navigate('/profile/projects/all-projects');
+      }
     } catch (e) {
       console.error(e);
     }
