@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import styles from './styles.module.scss';
-import EmptyProjectList from '@/components/errors/EmptyProjectList';
+import EmptyProjectList from '@/components/errors/listError/EmptyProjectList';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchOwnProjects } from '@/store/actions/projectsActions/fetchOwnProjects';
 import ProjectItem from '../ProjectItem';

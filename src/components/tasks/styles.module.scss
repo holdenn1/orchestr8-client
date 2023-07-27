@@ -1,3 +1,4 @@
+@import 'src/styles/mixins/contentCenterFlex.scss';
 .tasksList {
   color: black;
   .taskItem {
@@ -17,4 +18,8 @@
   .taskCheckbox {
     margin-right: 10px;
   }
+}
+.errorWrapper {
+  height: calc(100% - 170px);
+  @include contentCenterFlex;
 }

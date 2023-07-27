@@ -3,20 +3,17 @@ import styles from './../styles.module.scss';
 
 type TaskItemProps = {
   taskId: number;
-  text: string;
+  task: string;
 };
 
-function TaskItem({ taskId, text }: TaskItemProps) {
+function TaskItem({ taskId, task }: TaskItemProps) {
   return (
     <div>
-      <Link
-        key={taskId}
-        to={`/`}
-      > 
-      <li className={styles.taskItem}>
-        <span>{text}</span>
-      </li>
-       </Link> 
+      <Link key={taskId} to={`/`}>
+        <li className={styles.taskItem}>
+          <span>{task}</span>
+        </li>
+      </Link>
     </div>
   );
 }

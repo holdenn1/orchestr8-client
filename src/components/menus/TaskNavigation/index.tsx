@@ -12,7 +12,7 @@ function TaskNavigation({ deleteProject, isMenu }: TaskNavigationProps) {
   const menuList = [
     { id: 1, value: 'Add task', link: `/profile/project/${projectId}/add-task-form` },
     { id: 2, value: 'All tasks', link: `/profile/project/${projectId}/all-tasks` },
-    { id: 3, value: 'Completed tasks', link: `/profile/project/${projectId}/completed-tasks` },
+    { id: 3, value: 'Completed tasks', link: `/profile/project/${projectId}/completed` },
     { id: 4, value: 'Show participants - ', link: `/profile/project/${projectId}/participants-project` },
   ];
 

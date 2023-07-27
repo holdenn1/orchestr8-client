@@ -4,13 +4,25 @@ import { useEffect, useState } from 'react';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import { removeOwnProjectsRequest } from '@/api/requests';
 import TaskNavigation from '@/components/menus/TaskNavigation';
+import TaskList from '@/components/tasks/TaskList';
+import { Project as ProjectType } from '@/store/slices/types/projectSliceTypes';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
 function Project() {
   const [isMenu, setIsMenu] = useState(false);
+  const [currentProject, setCurrentProject] = useState<ProjectType>();
+  const { allProjects } = useAppSelector((state) => state.project);
   const { projectId, tasks } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {}, [projectId]);
+  useEffect(() => {
+    if (projectId) {
+      const project = allProjects.find((project) => project.id === Number(projectId));
+      if (project) {
+        setCurrentProject(project);
+      }
+    }
+  }, [projectId]);
 
   const deleteProject = async () => {
     if (projectId) {
@@ -37,11 +49,12 @@ function Project() {
           <DotMenuIcon />
         </div>
         <TaskNavigation deleteProject={deleteProject} isMenu={isMenu} />
-        <h3 className={styles.title}></h3>
-        <p className={styles.description}></p>
+        <h3 className={styles.title}>{currentProject?.title}</h3>
+        <p className={styles.description}>{currentProject?.description}</p>
         <h4 className={styles.taskTitle}>
           Task list ({tasks === 'all-tasks' ? 'All tasks' : 'Completed tasks'})
         </h4>
+        <TaskList />
       </div>
     </div>
   );
