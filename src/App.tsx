@@ -11,6 +11,7 @@ function App() {
   useEffect(() => {
     if (localStorage.getItem('refreshToken')) {
       dispatch(checkAuth({ navigate }));
+      
     } else {
       dispatch(logoutUser({ navigate }));
     }

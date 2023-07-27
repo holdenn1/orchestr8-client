@@ -10,7 +10,7 @@ function ProfileNavBar() {
 
   return (
     <div className={styles.profileNavBarwrapper}>
-      <Link className={styles.contactsIconWrapper} to='projects'>
+      <Link className={styles.contactsIconWrapper} to='/profile/projects/all-projects'>
         <div>
           <img className={styles.contactsIcon} src={contactsIcon} alt='contacts-icon' />
         </div>

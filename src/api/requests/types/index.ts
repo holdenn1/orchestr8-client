@@ -10,6 +10,10 @@ export type CreateProjectData = {
   membersIds: number[];
 };
 
+export type CreateTaskData = {
+  task: string;
+};
+
 export type UpdateProjectData = {
   status?: StatusProject;
   title?: string;

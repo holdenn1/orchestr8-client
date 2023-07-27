@@ -1,7 +1,14 @@
 import instance from '@/api';
 import { AxiosRequestConfig } from 'axios';
-import { CreateProjectData, LoginUserData, RegistrationUserData, UpdateProjectData } from './types';
+import {
+  CreateProjectData,
+  CreateTaskData,
+  LoginUserData,
+  RegistrationUserData,
+  UpdateProjectData,
+} from './types';
 import { StatusProject } from '@/store/slices/types/projectSliceTypes';
+import { StatusTask } from '@/store/slices/types/taskSliceTypes';
 
 /* user's requsets */
 export const registrationUserRequest = (data: RegistrationUserData) =>
@@ -40,3 +47,11 @@ export const updateOwnProjectsRequest = (projectId: string, updateProjectData: U
 export const removeOwnProjectsRequest = (projectId: string) => instance.delete(`/project/${projectId}`);
 
 export const getProjectCountsByStatusRequest = () => instance.get(`/project/project-count`);
+
+/* tasks' requests */
+
+export const createTaskRequest = (data: CreateTaskData, projectId: string) =>
+  instance.post(`/task/create/${projectId}`, data);
+
+export const getTaskRequest = (projectId: string, status: string = StatusTask.ALL) =>
+  instance.get(`/task/${projectId}/${status}`);

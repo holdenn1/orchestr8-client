@@ -1,0 +1,6 @@
+@import 'src/styles/mixins/contentCenterFlex.scss';
+.addTaskWrapper {
+  text-align: right;
+  height: 100%;
+  @include contentCenterFlex;
+}

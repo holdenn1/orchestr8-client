@@ -24,20 +24,11 @@ export type Member = {
 
 export type Owner = Member;
 
-export type ProjectTask = {
-  id: number;
-  task: string;
-  completed: boolean;
-  createAt: Date;
-  updateAt: Date;
-};
-
 export type Project = {
   id: number;
   status: StatusProject;
   title: string;
   description: string;
-  tasks: ProjectTask[];
   members: Member[];
   owner: Owner;
 };

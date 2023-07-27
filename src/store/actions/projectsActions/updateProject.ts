@@ -6,11 +6,15 @@ import { updateProject } from '@/store/slices/projectSlice';
 export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionProps>(
   'project/updateProject',
   async ({ updateData, project }, { dispatch }) => {
-    const { data }: UpdatedProjectRequest = await updateOwnProjectsRequest(String(project.id), {
-      ...updateData,
-    });
-    if (data) {
-      dispatch(updateProject(data));
+    try {
+      const { data }: UpdatedProjectRequest = await updateOwnProjectsRequest(String(project.id), {
+        ...updateData,
+      });
+      if (data) {
+        dispatch(updateProject(data));
+      }
+    } catch (e) {
+      console.error(e);
     }
   },
 );

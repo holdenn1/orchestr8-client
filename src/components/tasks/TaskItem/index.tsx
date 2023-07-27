@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './../styles.module.scss';
 
 type TaskItemProps = {
@@ -8,14 +9,14 @@ type TaskItemProps = {
 function TaskItem({ taskId, text }: TaskItemProps) {
   return (
     <div>
-      {/* <Link
+      <Link
         key={taskId}
-        to={`/profile/projects/${currentProject?.projectId}/task/${taskId}`}
-      > */}
+        to={`/`}
+      > 
       <li className={styles.taskItem}>
         <span>{text}</span>
       </li>
-      {/* </Link> */}
+       </Link> 
     </div>
   );
 }

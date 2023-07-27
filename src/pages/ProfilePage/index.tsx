@@ -3,7 +3,6 @@ import ProfileHeader from '@/components/headers/ProfileHeader';
 import ProfileNavBar from '@/components/sidebar/ProfileNavBar';
 import ProfileInfo from '@/components/sidebar/ProfileInfo';
 import { Outlet } from 'react-router-dom';
-import ProjectListHeader from '@/components/headers/ProjectListHeader';
 
 function ProfilePage() {
   return (
@@ -11,7 +10,6 @@ function ProfilePage() {
       <ProfileHeader />
       <ProfileNavBar />
       <div className={styles.profileContentwrapper}>
-        <ProjectListHeader />
         <Outlet />
       </div>
       <ProfileInfo />

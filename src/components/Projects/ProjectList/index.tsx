@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchOwnProjects } from '@/store/actions/projectsActions/fetchOwnProjects';
 import ProjectItem from '../ProjectItem';
 import { useParams } from 'react-router-dom';
+import ProjectListHeader from '@/components/headers/ProjectListHeader';
 
 function ProjectList() {
   const { allProjects } = useAppSelector((state) => state.project);
@@ -19,6 +20,7 @@ function ProjectList() {
 
   return (
     <>
+      <ProjectListHeader />
       {allProjects.length ? (
         <div className={styles.projectsListWrapper}>
           <div className={styles.projectsList}>
