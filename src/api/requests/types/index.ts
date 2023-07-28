@@ -20,3 +20,8 @@ export type UpdateProjectData = {
   description?: string;
   members?: number[];
 };
+
+export type UpdateTaskData = {
+  task?: string
+  completed?: boolean
+}

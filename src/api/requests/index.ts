@@ -6,11 +6,12 @@ import {
   LoginUserData,
   RegistrationUserData,
   UpdateProjectData,
+  UpdateTaskData,
 } from './types';
 import { StatusProject } from '@/store/slices/types/projectSliceTypes';
 import { StatusTask } from '@/store/slices/types/taskSliceTypes';
 
-/* user's requsets */
+/* user's requests */
 export const registrationUserRequest = (data: RegistrationUserData) =>
   instance.post('auth/registration', data);
 
@@ -31,7 +32,7 @@ export const refreshTokensLogin = (refreshToken: string) =>
     headers: { authorization: `Bearer ${refreshToken}` },
   } as AxiosRequestConfig);
 
-/* projets' requests */
+/* projects' requests */
 
 export const createProjectRequest = (data: CreateProjectData) => instance.post('/project/create', data);
 
@@ -55,3 +56,8 @@ export const createTaskRequest = (data: CreateTaskData, projectId: string) =>
 
 export const getTaskRequest = (projectId: string, status: string = StatusTask.ALL) =>
   instance.get(`/task/${projectId}/${status}`);
+
+export const updateTaskRequest = (taskId: string, updateTaskData: UpdateTaskData) =>
+  instance.patch(`/task/${taskId}`, updateTaskData);
+
+export const removeTaskRequest = (taskId: string) => instance.delete(`/task/${taskId}`);

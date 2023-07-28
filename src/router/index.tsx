@@ -5,7 +5,6 @@ import ProjectForm from '@/components/forms/ProjectForm';
 import Task from '@/components/tasks/Task';
 import Members from '@/components/Members';
 import { Project, ProjectList } from '@/components/Projects';
-import AddTaskForm from '@/components/forms/ProjectForm/AddTaskForm';
 
 export const router = createHashRouter([
   {
@@ -50,10 +49,6 @@ export const router = createHashRouter([
           {
             path: 'projects-form',
             element: <ProjectForm />,
-          },
-          {
-            path: 'project/:projectId/add-task-form',
-            element: <AddTaskForm />,
           },
         ],
       },

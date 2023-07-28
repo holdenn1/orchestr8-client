@@ -1,10 +1,9 @@
+import { UpdateTaskData } from '@/api/requests/types';
 import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
-import { NavigateFunction } from 'react-router-dom';
 
 export type CreateTaskActionProps = {
   task: string;
   projectId: string;
-  navigate: NavigateFunction;
 };
 
 export type FetchTasksActionProps = {
@@ -18,4 +17,13 @@ export type CreateTaskResponse = {
 
 export type FetchTasksResponse = {
   data: ProjectTask[];
+};
+
+export type UpdateTaskActionProps = {
+  taskId: string;
+  updateData: UpdateTaskData;
+};
+
+export type UpdatedTaskRequest = {
+  data: ProjectTask;
 };

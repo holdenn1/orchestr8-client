@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import EmptyProjectList from '@/components/errors/listError/EmptyProjectList';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchOwnProjects } from '@/store/actions/projectsActions/fetchOwnProjects';
-import ProjectItem from '../ProjectItem';
+import ProjectItem from './ProjectItem';
 import { useParams } from 'react-router-dom';
 import ProjectListHeader from '@/components/headers/ProjectListHeader';
 

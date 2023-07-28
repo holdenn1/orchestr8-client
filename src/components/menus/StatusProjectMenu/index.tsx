@@ -5,14 +5,15 @@ import { MouseEvent, Dispatch } from 'react';
 import { Project, StatusProject } from '@/store/slices/types/projectSliceTypes';
 import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
 
-type ProjectMenuProps = {
+type StatusProjectMenuProps = {
   setIsMenu: Dispatch<React.SetStateAction<boolean>>;
   isMenu: boolean;
   project: Project;
 };
 
-function ProjectMenu({ isMenu, setIsMenu, project }: ProjectMenuProps) {
+function StatusProjectMenu({ isMenu, setIsMenu, project }: StatusProjectMenuProps) {
   const dispatch = useAppDispatch();
+
 
   const handleComplete = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
@@ -54,4 +55,4 @@ function ProjectMenu({ isMenu, setIsMenu, project }: ProjectMenuProps) {
   );
 }
 
-export default ProjectMenu;
+export default StatusProjectMenu;

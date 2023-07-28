@@ -6,8 +6,7 @@ import TextInput from 'ui/inputs/formInputs/TextInput';
 import TextArea from 'ui/inputs/formInputs/TextArea';
 import SubmitButton from 'ui/buttons/SubmitButton';
 import { InitialValuesProjectForm } from 'components/forms/types';
-import { setModal } from '@/store/slices/mainSlice';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import MemberToProjectInput from './MemberToProjectInput';
 import RecomendationMembers from './RecomendationMembers';
 import SelectedMembers from './SelectedMembers';
@@ -22,7 +21,6 @@ function ProjectForm() {
   const [selectedMembersList, setSelectedMembersList] = useState<Member[]>([]);
   const [recomendationMemberVisible, setRecomendationMemberVisible] = useState<boolean>(false);
   const [selectedMembersVisible, setSelectedMembersVisible] = useState<boolean>(false);
-  const { modalVisible } = useAppSelector((state) => state.main);
   const [inputValue, setInputValue] = useState('');
   const debounceTimeoutRef = useRef<number | null>(null);
   const dispatch = useAppDispatch();
@@ -44,7 +42,6 @@ function ProjectForm() {
         navigate,
       }),
     );
-    dispatch(setModal(!modalVisible));
     setSelectedMembersList([]);
     setInputValue('');
     resetForm();
@@ -87,7 +84,7 @@ function ProjectForm() {
     >
       {() => (
         <div
-          className={styles.projectFormwrapper}
+          className={styles.projectFormWrapper}
           onClick={() => {
             setSelectedMembersVisible(false);
             setRecomendationMemberVisible(false);

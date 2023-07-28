@@ -4,16 +4,15 @@ import TextArea from '@/components/UI/inputs/formInputs/TextArea';
 import SubmitButton from '@/components/UI/buttons/SubmitButton';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { createTask } from '@/store/actions/tasksActions/createTask';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function AddTaskForm() {
   const dispatch = useAppDispatch();
   const { projectId } = useParams();
-  const navigate = useNavigate();
 
   function handleSubmit({ task }: { task: string }, resetForm: any) {
     if (projectId) {
-      dispatch(createTask({ task, projectId, navigate }));
+      dispatch(createTask({ task, projectId }));
       resetForm();
     }
   }

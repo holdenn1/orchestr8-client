@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
-import StatusProjectMenu from '@/components/menus/ProjectMenu';
+import StatusProjectMenu from '@/components/menus/StatusProjectMenu';
 import { Project } from '@/store/slices/types/projectSliceTypes';
 
 type ProjectItemProps = {
@@ -14,7 +14,7 @@ function ProjectItem({ project }: ProjectItemProps) {
 
   return (
     <Link to={`/profile/project/${project.id}/all-tasks`} key={project.id}>
-      <div className={styles.projecetItem}>
+      <div className={styles.projectItem}>
         <h3 className={styles.title}>{project.title}</h3>
         <p className={styles.description}>{project.description}</p>
         <div

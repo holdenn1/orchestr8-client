@@ -1,5 +1,5 @@
 export type InitialStateMainSlice = {
-  modalVisible: boolean;
+  isAddTaskForm: boolean;
   selectedOption: {
     sort: string;
     category: string;
