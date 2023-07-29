@@ -3,7 +3,6 @@ import { createHashRouter } from 'react-router-dom';
 import { ErrorPage, MainPage, ProfilePage, SignInPage, SignUpPage } from '@/pages';
 import ProjectForm from '@/components/forms/ProjectForm';
 import Task from '@/components/tasks/Task';
-import Members from '@/components/Members';
 import { Project, ProjectList } from '@/components/Projects';
 
 export const router = createHashRouter([
@@ -39,10 +38,6 @@ export const router = createHashRouter([
               {
                 path: 'task/:taskId',
                 element: <Task />,
-              },
-              {
-                path: 'participants-project',
-                element: <Members />,
               },
             ],
           },

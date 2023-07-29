@@ -8,7 +8,7 @@ import { updateTask } from '@/store/slices/taskSlice';
 export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionProps>(
   'project/updateProject',
   async (
-    { updateProjectData: { title, description, status }, updateTaskData, taskId, projectId },
+    { updateProjectData: { title, description, status, membersIds }, updateTaskData, taskId, projectId },
     { dispatch },
   ) => {
     try {
@@ -29,6 +29,16 @@ export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionPro
       if (description?.length) {
         const { data }: UpdatedProjectRequest = await updateOwnProjectsRequest(projectId, {
           description,
+        });
+        if (data) {
+          dispatch(updateProject(data));
+        }
+      }
+      if (membersIds?.length) {
+        console.log(membersIds);
+
+        const { data }: UpdatedProjectRequest = await updateOwnProjectsRequest(projectId, {
+          membersIds,
         });
         if (data) {
           dispatch(updateProject(data));

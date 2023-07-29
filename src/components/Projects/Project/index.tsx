@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import { removeOwnProjectsRequest } from '@/api/requests';
@@ -11,13 +11,14 @@ import AddTaskForm from '@/components/forms/ProjectForm/AddTaskForm';
 import editIcon from 'icons/icons8-edit-48.png';
 import Task from '@/components/tasks/Task';
 import { setShowEditTaskForm } from '@/store/slices/mainSlice';
+import Members from '@/components/Members';
 
 function Project() {
   const { isAddTaskForm, isEditTaskForm } = useAppSelector((state) => state.main);
   const [isMenu, setIsMenu] = useState(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
   const { allProjects } = useAppSelector((state) => state.project);
-  const { projectId, tasks, taskId } = useParams();
+  const { projectId, tasks: status, taskId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -65,17 +66,23 @@ function Project() {
         <TaskNavigation deleteProject={deleteProject} isMenu={isMenu} />
         <h3 className={styles.title}>{currentProject?.title}</h3>
         <p className={styles.description}>{currentProject?.description}</p>
-        {taskId ? (
-          <Task />
-        ) : (
+        {status !== 'participants-project' ? (
           <>
-            {!isAddTaskForm && (
-              <h4 className={styles.taskTitle}>
-                Task list ({tasks === 'all-tasks' ? 'All tasks' : 'Completed tasks'})
-              </h4>
+            {taskId ? (
+              <Task />
+            ) : (
+              <>
+                {!isAddTaskForm && (
+                  <h4 className={styles.taskTitle}>
+                    Task list ({status === 'all-tasks' ? 'All tasks' : 'Completed tasks'})
+                  </h4>
+                )}
+                {!isAddTaskForm ? <TaskList /> : <AddTaskForm />}
+              </>
             )}
-            {!isAddTaskForm ? <TaskList /> : <AddTaskForm />}
           </>
+        ) : (
+          <Members />
         )}
       </div>
     </div>

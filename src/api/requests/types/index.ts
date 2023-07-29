@@ -18,7 +18,7 @@ export type UpdateProjectData = {
   status?: StatusProject;
   title?: string;
   description?: string;
-  members?: number[];
+  membersIds?: number[];
 };
 
 export type UpdateTaskData = {

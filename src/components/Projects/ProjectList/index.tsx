@@ -6,11 +6,16 @@ import { fetchOwnProjects } from '@/store/actions/projectsActions/fetchOwnProjec
 import ProjectItem from './ProjectItem';
 import { useParams } from 'react-router-dom';
 import ProjectListHeader from '@/components/headers/ProjectListHeader';
+import { setIsAddTaskForm } from '@/store/slices/mainSlice';
 
 function ProjectList() {
   const { allProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { status } = useParams();
+
+  useEffect(() => {
+    dispatch(setIsAddTaskForm(false));
+  }, []);
 
   useEffect(() => {
     if (status) {
