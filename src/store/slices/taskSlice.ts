@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InitialStateTaskSlice, ProjectTask } from './types/taskSliceTypes';
+import { InitialStateTaskSlice, ProjectTask, TasksCountPayload } from './types/taskSliceTypes';
 
 const initialState: InitialStateTaskSlice = {
   tasks: [],
+  tasksCount: {} as TasksCountPayload,
 };
 
 const taskSlice = createSlice({
@@ -23,8 +24,11 @@ const taskSlice = createSlice({
         return task;
       });
     },
+    setTasksCount(state, action: PayloadAction<TasksCountPayload>) {
+      state.tasksCount = action.payload;
+    },
   },
 });
 
-export const { setTask, setTasks, updateTask } = taskSlice.actions;
+export const { setTask, setTasks, updateTask, setTasksCount } = taskSlice.actions;
 export default taskSlice.reducer;

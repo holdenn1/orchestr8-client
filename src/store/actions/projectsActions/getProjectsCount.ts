@@ -9,8 +9,8 @@ export const getProjectsCountAction = createAsyncThunk<void>(
     try {
       const { data }: GetProjectsCountActionResponse = await getProjectCountsByStatusRequest();
       if (data) {
-        data.forEach(({ 'in-progress': inProgres, completed, suspend, totalCount }) => {
-          dispatch(setProjectsCount({ 'in-progress': inProgres, completed, suspend, totalCount }));
+        data.forEach(({ 'in-progress': inProgress, completed, suspend, totalCount }) => {
+          dispatch(setProjectsCount({ 'in-progress': inProgress, completed, suspend, totalCount }));
         });
       }
     } catch (e) {

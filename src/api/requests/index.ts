@@ -61,3 +61,5 @@ export const updateTaskRequest = (taskId: string, updateTaskData: UpdateTaskData
   instance.patch(`/task/${taskId}`, updateTaskData);
 
 export const removeTaskRequest = (taskId: string) => instance.delete(`/task/${taskId}`);
+
+export const geTasksCountsByStatusRequest = (projectId: string) => instance.get(`task/tasks/count/${projectId}`);

@@ -13,11 +13,9 @@ function TaskNavigation({ deleteProject, isMenu }: TaskNavigationProps) {
   const { isAddTaskForm } = useAppSelector((state) => state.main);
   const dispatch = useAppDispatch();
   const { projectId } = useParams();
-  
+
   const menuList = [
-    { id: 1, value: 'All tasks', link: `/profile/project/${projectId}/all-tasks` },
-    { id: 2, value: 'Completed tasks', link: `/profile/project/${projectId}/completed` },
-    { id: 3, value: 'Show participants - ', link: `/profile/project/${projectId}/participants-project` },
+    { id: 1, value: 'Show participants - ', link: `/profile/project/${projectId}/participants-project` },
   ];
 
   return (

@@ -1,5 +1,5 @@
 import { UpdateTaskData } from '@/api/requests/types';
-import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
+import { ProjectTask, TasksCountPayload } from '@/store/slices/types/taskSliceTypes';
 
 export type CreateTaskActionProps = {
   task: string;
@@ -27,3 +27,7 @@ export type UpdateTaskActionProps = {
 export type UpdatedTaskRequest = {
   data: ProjectTask;
 };
+
+export type GeTasksCountActionResponse = {
+  data: TasksCountPayload[]
+}
