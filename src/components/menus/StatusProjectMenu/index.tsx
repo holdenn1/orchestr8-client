@@ -11,26 +11,26 @@ type StatusProjectMenuProps = {
   project: Project;
 };
 
-function StatusProjectMenu({ isMenu, setIsMenu, project }: StatusProjectMenuProps) {
+function StatusProjectMenu({ isMenu, setIsMenu, project: {id, status} }: StatusProjectMenuProps) {
   const dispatch = useAppDispatch();
 
 
   const handleComplete = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
-    if (project.status !== StatusProject.COMPLETED) {
-      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.COMPLETED } }));
+    if (status !== StatusProject.COMPLETED) {
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.COMPLETED } }));
     } else {
-      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.IN_PROGRESS } }));
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
     }
     setIsMenu(false);
   };
 
   const handleSuspend = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
-    if (project.status !== StatusProject.SUSPEND) {
-      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.SUSPEND } }));
+    if (status !== StatusProject.SUSPEND) {
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.SUSPEND } }));
     } else {
-      dispatch(updateProjectAction({ project, updateData: { status: StatusProject.IN_PROGRESS } }));
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
     }
     setIsMenu(false);
   };
@@ -44,10 +44,10 @@ function StatusProjectMenu({ isMenu, setIsMenu, project }: StatusProjectMenuProp
       >
         <ul className={styles.projectMenuList}>
           <li onClick={(e) => handleComplete(e)} className={styles.projectMenuItem}>
-            {project.status !== StatusProject.COMPLETED ? 'Complete' : 'In progress'}
+            {status !== StatusProject.COMPLETED ? 'Complete' : 'In progress'}
           </li>
           <li onClick={(e) => handleSuspend(e)} className={styles.projectMenuItem}>
-            {project.status !== StatusProject.SUSPEND ? 'Suspend' : 'Resume'}
+            {status !== StatusProject.SUSPEND ? 'Suspend' : 'Resume'}
           </li>
         </ul>
       </div>

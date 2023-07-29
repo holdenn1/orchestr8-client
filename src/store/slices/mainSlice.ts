@@ -7,6 +7,7 @@ const initialState: InitialStateMainSlice = {
     category: 'Choose an option',
   },
   isAddTaskForm: false,
+  isEditTaskForm: false,
 };
 
 const mainSlice = createSlice({
@@ -22,8 +23,12 @@ const mainSlice = createSlice({
     setIsAddTaskForm(state, action: PayloadAction<boolean>) {
       state.isAddTaskForm = action.payload;
     },
+    setShowEditTaskForm(state, action: PayloadAction<boolean>) {
+      state.isEditTaskForm = action.payload;
+    },
   },
 });
 
-export const { sortProjectsBy, sortProjectsByCategory, setIsAddTaskForm } = mainSlice.actions;
+export const { sortProjectsBy, sortProjectsByCategory, setIsAddTaskForm, setShowEditTaskForm } =
+  mainSlice.actions;
 export default mainSlice.reducer;

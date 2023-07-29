@@ -6,10 +6,13 @@ import { updateTaskAction } from '@/store/actions/tasksActions/updateTask';
 import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
 import { notify } from '@/components/Toast';
 import { removeTaskRequest } from '@/api/requests';
+import EditProjectAndTaskForm from '@/components/forms/ProjectForm/EditProjectAndTaskForm';
+import { setShowEditTaskForm } from '@/store/slices/mainSlice';
 
 function Task() {
   const [currentTask, setCurrentTask] = useState<ProjectTask>();
   const { tasks } = useAppSelector((state) => state.task);
+  const { isEditTaskForm } = useAppSelector((state) => state.main);
   const { projectId, taskId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -45,25 +48,35 @@ function Task() {
     }
   }, [taskId]);
 
+  useEffect(() => {
+    dispatch(setShowEditTaskForm(false));
+  }, []);
+
   return (
     <div className={styles.taskWrapper}>
-      <div className={styles.btnWrapper}>
-        <button className={styles.allTasksBtn} onClick={handleCompleteTask}>
-          {currentTask?.completed ? 'Return to work' : 'Completed'}
-        </button>
-        <button onClick={handleRemoveTask} className={styles.completedTasksBtn}>
-          Remove
-        </button>
-      </div>
-      {tasks?.map(({ id, task }) => {
-        if (id === +taskId!) {
-          return (
-            <div className={styles.taskWrapper} key={id}>
-              <span>{task}</span>
-            </div>
-          );
-        }
-      })}
+      {isEditTaskForm ? (
+        <EditProjectAndTaskForm />
+      ) : (
+        <>
+          <div className={styles.btnWrapper}>
+            <button className={styles.allTasksBtn} onClick={handleCompleteTask}>
+              {currentTask?.completed ? 'Return to work' : 'Completed'}
+            </button>
+            <button onClick={handleRemoveTask} className={styles.completedTasksBtn}>
+              Remove
+            </button>
+          </div>
+          {tasks?.map(({ id, task }) => {
+            if (id === +taskId!) {
+              return (
+                <div className={styles.taskWrapper} key={id}>
+                  <span>{task}</span>
+                </div>
+              );
+            }
+          })}
+        </>
+      )}
     </div>
   );
 }

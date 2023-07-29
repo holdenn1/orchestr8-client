@@ -45,7 +45,7 @@ function ProjectsSection() {
 
   return (
     <div className='profile-nav-wrapper'>
-      <h4 className='profile-nav-title'>Projects</h4>
+      <h4 className='profile-nav-title'>Own projects</h4>
       <div className='profile-list'>
         {profiles.map((project) => (
           <Link key={project.id} to={`/profile/projects/${project.link}`}>

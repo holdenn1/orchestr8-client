@@ -8,6 +8,19 @@
   @include contentCenterFlex;
   padding: 18px 10px 0;
   box-sizing: border-box;
+  position: relative;
+
+  .editIcon {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    opacity: 0.6;
+    transition: 0.3s;
+    &:hover{
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
 
   .content {
     width: 96%;
@@ -26,7 +39,7 @@
       transform: rotate(90deg);
       cursor: pointer;
     }
-    
+
     .title {
       display: block;
       margin: 20px 0;
@@ -47,6 +60,5 @@
       text-align: center;
       margin-top: 100px;
     }
-   
   }
 }

@@ -1,11 +1,14 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getTasksCountAction } from '@/store/actions/tasksActions/getTasksCount';
 import { setTasksCount } from '@/store/slices/taskSlice';
-import { useEffect } from 'react';
+import { Project } from '@/store/slices/types/projectSliceTypes';
+import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 function TasksSection() {
+  const [currentProject, setCurrentProject] = useState<Project>();
   const { tasks, tasksCount } = useAppSelector((state) => state.task);
+  const { allProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { projectId } = useParams();
 
@@ -36,9 +39,16 @@ function TasksSection() {
     }
   }, [tasks]);
 
+  useEffect(() => {
+    if (projectId) {
+      const project = allProjects.find((project) => project.id === +projectId);
+      if (project) setCurrentProject(project);
+    }
+  }, [tasks]);
+
   return (
     <div className='profile-nav-wrapper'>
-      <h4 className='profile-nav-title'>Tasks</h4>
+      <h4 className='profile-nav-title' title={currentProject?.title}>Tasks for the project {currentProject?.title}</h4>
       <div className='profile-list'>
         {tasksList.map((task) => (
           <Link key={task.id} to={`/profile/project/${projectId}/${task.link}`}>
