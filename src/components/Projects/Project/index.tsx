@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import { removeOwnProjectsRequest } from '@/api/requests';
@@ -10,11 +10,15 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import AddTaskForm from '@/components/forms/ProjectForm/AddTaskForm';
 import editIcon from 'icons/icons8-edit-48.png';
 import Task from '@/components/tasks/Task';
-import { setShowEditTaskForm } from '@/store/slices/mainSlice';
+import {
+  setRecomendationMemberVisible,
+  setSelectedMembersVisible,
+  setShowEditTaskForm,
+} from '@/store/slices/mainSlice';
 import Members from '@/components/Members';
 
 function Project() {
-  const { isAddTaskForm, isEditTaskForm } = useAppSelector((state) => state.main);
+  const { isAddTaskForm, isEditTaskForm, isShowMembers } = useAppSelector((state) => state.main);
   const [isMenu, setIsMenu] = useState(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
   const { allProjects } = useAppSelector((state) => state.project);
@@ -33,8 +37,10 @@ function Project() {
 
   const deleteProject = async () => {
     if (projectId) {
-      await removeOwnProjectsRequest(projectId);
-      navigate('/profile/projects/all-projects');
+      const project = await removeOwnProjectsRequest(projectId);
+      if (project) {
+        navigate('/profile/projects/all-projects');
+      }
     }
   };
 
@@ -45,7 +51,13 @@ function Project() {
         setIsMenu(false);
       }}
     >
-      <div className={styles.content}>
+      <div
+        onClick={() => {
+          dispatch(setSelectedMembersVisible(false));
+          dispatch(setRecomendationMemberVisible(false));
+        }}
+        className={styles.content}
+      >
         <div
           className={styles.dotMenuWrapper}
           onClick={(e) => {
@@ -66,7 +78,7 @@ function Project() {
         <TaskNavigation deleteProject={deleteProject} isMenu={isMenu} />
         <h3 className={styles.title}>{currentProject?.title}</h3>
         <p className={styles.description}>{currentProject?.description}</p>
-        {status !== 'participants-project' ? (
+        {!isShowMembers ? (
           <>
             {taskId ? (
               <Task />

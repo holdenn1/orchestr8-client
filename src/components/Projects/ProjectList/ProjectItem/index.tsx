@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import StatusProjectMenu from '@/components/menus/StatusProjectMenu';
 import { Project } from '@/store/slices/types/projectSliceTypes';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { setShowMembers } from '@/store/slices/mainSlice';
 
 type ProjectItemProps = {
   project: Project;
@@ -11,6 +13,11 @@ type ProjectItemProps = {
 
 function ProjectItem({ project }: ProjectItemProps) {
   const [isMenu, setIsMenu] = useState(false);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setShowMembers(false));
+  }, []);
 
   return (
     <Link to={`/profile/project/${project.id}/all-tasks`} key={project.id}>

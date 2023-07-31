@@ -22,7 +22,7 @@ export const registrationUser = createAsyncThunk<void, RegistrationUserActionPro
       }
     } catch (e) {
       notify('Check field', 'error');
-      console.log(e);
+      console.error(e);
     }
   },
 );

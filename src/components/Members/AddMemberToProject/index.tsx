@@ -10,8 +10,6 @@ import SubmitButton from '@/components/UI/buttons/SubmitButton';
 
 function AddMemberToProject() {
   const [selectedMembersList, setSelectedMembersList] = useState<Member[]>([]);
-  const [recomendationMemberVisible, setRecomendationMemberVisible] = useState<boolean>(false);
-  const [selectedMembersVisible, setSelectedMembersVisible] = useState<boolean>(false);
   const { allProjects } = useAppSelector((state) => state.project);
   const [currentProject, setCurrentProject] = useState<Project>();
   const [inputValue, setInputValue] = useState('');
@@ -19,10 +17,15 @@ function AddMemberToProject() {
   const dispatch = useAppDispatch();
 
   function handleSubmit(resetForm: any) {
-    if (currentProject && projectId) {
+    if (currentProject && projectId && selectedMembersList.length) {
       const newMembersIds: number[] = selectedMembersList.map((member) => member.id);
       const oldMembers: number[] = currentProject?.members.map((memberId) => memberId.id);
-      dispatch(updateProjectAction({projectId,updateProjectData:{membersIds: [...oldMembers, ...newMembersIds]}})  );
+      dispatch(
+        updateProjectAction({
+          projectId,
+          updateProjectData: { membersIds: [...oldMembers, ...newMembersIds] },
+        }),
+      );
       setSelectedMembersList([]);
       setInputValue('');
       resetForm();
@@ -34,23 +37,19 @@ function AddMemberToProject() {
       const project = allProjects.find((project) => project.id === +projectId);
       setCurrentProject(project);
     }
-  }, []);
+  }, [allProjects]);
 
   return (
     <div className={styles.AddPaticipantToProject}>
       <Formik initialValues={{}} onSubmit={(_, { resetForm }) => handleSubmit(resetForm)}>
         {() => (
-          <Form>
+          <Form onClick={(e) => e.stopPropagation()}>
             <div className={styles.contentFormWrapper}>
               <AddMember
                 inputValue={inputValue}
-                recomendationMemberVisible={recomendationMemberVisible}
                 selectedMembersList={selectedMembersList}
-                selectedMembersVisible={selectedMembersVisible}
                 setInputValue={setInputValue}
-                setRecomendationMemberVisible={setRecomendationMemberVisible}
                 setSelectedMembersList={setSelectedMembersList}
-                setSelectedMembersVisible={setSelectedMembersVisible}
               />
             </div>
             <SubmitButton>Add members</SubmitButton>

@@ -2,18 +2,22 @@ import styles from './styles.module.scss';
 import removeIcon from 'icons/icons8-remove-30.png';
 import { SelectedMembersProps } from '../types';
 import classNames from 'classnames';
+import { useAppDispatch } from '@/hooks/reduxHooks';
+import { setSelectedMembersVisible } from '@/store/slices/mainSlice';
 
 function SelectedMembers({
   selectedMembersList,
   selectedMembersVisible,
-  setSelectedMembersVisible,
   removeMemberFromSelected,
 }: SelectedMembersProps) {
+  const dispatch = useAppDispatch();
   return (
     <div className={styles.selectedMembersWrapper}>
       <label
-        onClick={() => setSelectedMembersVisible(!selectedMembersVisible)}
-        className={classNames(styles.seMembersBtn, {[styles.seMembersBtnActive]: selectedMembersList.length}) }
+        onClick={() => dispatch(setSelectedMembersVisible(!selectedMembersVisible))}
+        className={classNames(styles.seMembersBtn, {
+          [styles.seMembersBtnActive]: selectedMembersList.length,
+        })}
       >
         See members
       </label>

@@ -20,7 +20,7 @@ export const loginUser = createAsyncThunk<void, LoginUserActionProps>(
       }
     } catch (e) {
       notify('Check field', 'error');
-      console.log(e);
+      console.error(e);
     }
   },
 );

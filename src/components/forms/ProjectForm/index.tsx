@@ -11,11 +11,10 @@ import { createProject } from '@/store/actions/projectsActions/createProject';
 import { Member } from '@/store/slices/types/projectSliceTypes';
 import { useNavigate } from 'react-router-dom';
 import AddMember from './AddTaskForm/AddMember';
+import { setRecomendationMemberVisible, setSelectedMembersVisible } from '@/store/slices/mainSlice';
 
 function ProjectForm() {
   const [selectedMembersList, setSelectedMembersList] = useState<Member[]>([]);
-  const [recomendationMemberVisible, setRecomendationMemberVisible] = useState<boolean>(false);
-  const [selectedMembersVisible, setSelectedMembersVisible] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -50,8 +49,8 @@ function ProjectForm() {
         <div
           className={styles.projectFormWrapper}
           onClick={() => {
-            setSelectedMembersVisible(false);
-            setRecomendationMemberVisible(false);
+            dispatch(setSelectedMembersVisible(false));
+            dispatch(setRecomendationMemberVisible(false));
           }}
         >
           <Form onClick={(e) => e.stopPropagation()}>
@@ -60,13 +59,9 @@ function ProjectForm() {
               <TextArea name='description' label='Project description' placeholder='Project description' />
               <AddMember
                 inputValue={inputValue}
-                recomendationMemberVisible={recomendationMemberVisible}
                 selectedMembersList={selectedMembersList}
-                selectedMembersVisible={selectedMembersVisible}
                 setInputValue={setInputValue}
-                setRecomendationMemberVisible={setRecomendationMemberVisible}
                 setSelectedMembersList={setSelectedMembersList}
-                setSelectedMembersVisible={setSelectedMembersVisible}
               />
               <div className={styles.submitBtnWrapper}>
                 <SubmitButton>Create a project</SubmitButton>

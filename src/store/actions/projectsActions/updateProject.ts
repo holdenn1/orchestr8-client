@@ -34,9 +34,7 @@ export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionPro
           dispatch(updateProject(data));
         }
       }
-      if (membersIds?.length) {
-        console.log(membersIds);
-
+      if (membersIds) {
         const { data }: UpdatedProjectRequest = await updateOwnProjectsRequest(projectId, {
           membersIds,
         });

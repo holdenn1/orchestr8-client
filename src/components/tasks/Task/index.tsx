@@ -20,22 +20,26 @@ function Task() {
   const handleCompleteTask = () => {
     if (taskId) {
       if (currentTask?.completed) {
-        dispatch(updateTaskAction({ taskId, updateData: { completed: false } }));
+        if (projectId) {
+          dispatch(updateTaskAction({ taskId, updateData: { completed: false }, navigate, projectId }));
+        }
         notify('The task is returned to work', 'success');
-        navigate(`/profile/project/${projectId}/all-tasks`);
       } else {
-        dispatch(updateTaskAction({ taskId, updateData: { completed: true } }));
+        if (projectId) {
+          dispatch(updateTaskAction({ taskId, updateData: { completed: true }, navigate, projectId }));
+        }
         notify('The task is completed', 'success');
-        navigate(`/profile/project/${projectId}/all-tasks`);
       }
     }
   };
 
   const handleRemoveTask = async () => {
     if (taskId) {
-      await removeTaskRequest(taskId);
-      notify('The task has been deleted', 'success');
-      navigate(`/profile/project/${projectId}/all-tasks`);
+      const data = await removeTaskRequest(taskId);
+      if (data) {
+        notify('The task has been deleted', 'success');
+        navigate(`/profile/project/${projectId}/all-tasks`);
+      }
     }
   };
 

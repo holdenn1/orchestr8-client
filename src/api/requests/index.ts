@@ -44,7 +44,6 @@ export const getOwnProjectsRequest = (status: string = StatusProject.ALL) =>
 
 export const updateOwnProjectsRequest = (projectId: string, updateProjectData: UpdateProjectData) =>
   instance.patch(`/project/${projectId}`, updateProjectData);
-
 export const removeOwnProjectsRequest = (projectId: string) => instance.delete(`/project/${projectId}`);
 
 export const getProjectCountsByStatusRequest = () => instance.get(`/project/project-count`);
@@ -62,4 +61,5 @@ export const updateTaskRequest = (taskId: string, updateTaskData: UpdateTaskData
 
 export const removeTaskRequest = (taskId: string) => instance.delete(`/task/${taskId}`);
 
-export const geTasksCountsByStatusRequest = (projectId: string) => instance.get(`task/tasks/count/${projectId}`);
+export const geTasksCountsByStatusRequest = (projectId: string) =>
+  instance.get(`task/tasks/count/${projectId}`);

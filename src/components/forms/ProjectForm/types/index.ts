@@ -1,9 +1,8 @@
-import { Member } from '@/store/slices/types/userSliceTypes';
-import { Dispatch, SetStateAction, ChangeEvent } from 'react';
+import { Member } from '@/store/slices/types/projectSliceTypes';
+import { ChangeEvent } from 'react';
 
 export type SelectedMembersProps = {
   selectedMembersList: any[];
-  setSelectedMembersVisible: Dispatch<SetStateAction<boolean>>;
   selectedMembersVisible: boolean;
   removeMemberFromSelected: (memberId: number) => void;
 };

@@ -1,50 +1,61 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef, useState, useEffect } from 'react';
 import MemberToProjectInput from '../../MemberToProjectInput';
 import RecomendationMembers from '../../RecomendationMembers';
 import SelectedMembers from '../../SelectedMembers';
-import { Member } from '@/store/slices/types/projectSliceTypes';
-import { useAppDispatch } from '@/hooks/reduxHooks';
+import { Member, Project } from '@/store/slices/types/projectSliceTypes';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { searchUsersByEmail } from '@/store/actions/projectsActions/searchUsersByEmail';
 import { notify } from '@/components/Toast';
-import styles from './../../styles.module.scss'
+import styles from './../../styles.module.scss';
+import { useParams } from 'react-router-dom';
+import { setRecomendationMemberVisible, setSelectedMembersVisible } from '@/store/slices/mainSlice';
 
 type AddMemberProps = {
   inputValue: string;
   setInputValue: Dispatch<SetStateAction<string>>;
-  selectedMembersVisible: boolean;
-  setSelectedMembersVisible: Dispatch<SetStateAction<boolean>>;
-  recomendationMemberVisible: boolean;
-  setRecomendationMemberVisible: Dispatch<SetStateAction<boolean>>;
   selectedMembersList: Member[];
   setSelectedMembersList: Dispatch<React.SetStateAction<Member[]>>;
 };
 
 function AddMember({
   inputValue,
-  recomendationMemberVisible,
-  selectedMembersVisible,
   setInputValue,
-  setRecomendationMemberVisible,
-  setSelectedMembersVisible,
   selectedMembersList,
   setSelectedMembersList,
 }: AddMemberProps) {
+  const { allProjects } = useAppSelector((state) => state.project);
+  const { selectedMembersVisible, recomendationMemberVisible } = useAppSelector((state) => state.main);
   const [recomendationMembersList, setRecomendationMembersList] = useState<Member[]>([]);
+  const [currentProject, setCurrentProject] = useState<Project>();
   const debounceTimeoutRef = useRef<number | null>(null);
   const dispatch = useAppDispatch();
+  const { projectId } = useParams();
+
+  useEffect(() => {
+    if (projectId) {
+      console.log(111111111111);
+      
+      const project = allProjects.find((project) => project.id === +projectId);
+      setCurrentProject(project);
+    }
+  }, [projectId, allProjects]);
 
   async function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value.toLowerCase();
     setInputValue(value);
-    setSelectedMembersVisible(false);
-    setRecomendationMemberVisible(true);
+    dispatch(setSelectedMembersVisible(false));
+    dispatch(setRecomendationMemberVisible(true));
     dispatch(searchUsersByEmail({ value, debounceTimeoutRef, setRecomendationMembersList }));
   }
 
   function handleUser(memberId: number) {
     const selectedMembers = recomendationMembersList.find((member) => member.id === memberId);
-    const isMember = selectedMembersList.some((member) => member.id === selectedMembers?.id);
-    if (selectedMembers && !isMember) {
+    const isAddedMemberToForm = selectedMembersList.some((member) => member.id === selectedMembers?.id);
+    const isAddedMemberToProject = currentProject?.members.some(
+      (member) => member.id === selectedMembers?.id,
+    );
+
+    if (selectedMembers && !isAddedMemberToForm && !isAddedMemberToProject) {
       setInputValue('');
       setSelectedMembersList([...selectedMembersList, selectedMembers]);
       const recomendationMembers = recomendationMembersList.filter((member) => {
@@ -71,7 +82,6 @@ function AddMember({
         recomendationMembersList={recomendationMembersList}
       />
       <SelectedMembers
-        setSelectedMembersVisible={setSelectedMembersVisible}
         selectedMembersVisible={selectedMembersVisible}
         removeMemberFromSelected={removeMemberFromSelected}
         selectedMembersList={selectedMembersList}

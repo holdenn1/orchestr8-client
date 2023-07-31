@@ -1,5 +1,6 @@
 import { UpdateTaskData } from '@/api/requests/types';
 import { ProjectTask, TasksCountPayload } from '@/store/slices/types/taskSliceTypes';
+import { NavigateFunction } from 'react-router-dom';
 
 export type CreateTaskActionProps = {
   task: string;
@@ -20,8 +21,10 @@ export type FetchTasksResponse = {
 };
 
 export type UpdateTaskActionProps = {
+  projectId: string;
   taskId: string;
   updateData: UpdateTaskData;
+  navigate: NavigateFunction;
 };
 
 export type UpdatedTaskRequest = {
@@ -29,5 +32,5 @@ export type UpdatedTaskRequest = {
 };
 
 export type GeTasksCountActionResponse = {
-  data: TasksCountPayload[]
-}
+  data: TasksCountPayload[];
+};

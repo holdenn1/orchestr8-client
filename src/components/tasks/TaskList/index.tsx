@@ -15,7 +15,7 @@ function TaskList() {
     if (statusTask && projectId) {
       dispatch(fetchTasks({ statusTask, projectId }));
     }
-  }, [statusTask]);
+  }, []);
 
   return (
     <>

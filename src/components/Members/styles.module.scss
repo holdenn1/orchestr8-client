@@ -6,10 +6,12 @@
   grid-auto-rows: minmax(120px, 200px);
   justify-items: center;
   justify-content: center;
-
+  margin-top: 20px;
+  gap: 20px;
   .participantsProjectItem {
     width: 100%;
     padding: 20px;
+    box-sizing: border-box;
     border: 1px solid rgb(136, 136, 136);
     border-radius: 12px;
     .participantsName {
