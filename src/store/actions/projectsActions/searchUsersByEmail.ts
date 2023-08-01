@@ -4,7 +4,7 @@ import { searchUsersByEmailRequest } from '@/api/requests';
 import { SearchUsersByEmailActionProps } from '../types/projectTypes';
 
 export const searchUsersByEmail = createAsyncThunk<void, SearchUsersByEmailActionProps>(
-  'user/searchUsersByEmail',
+  'project/searchUsersByEmail',
   async ({ value, debounceTimeoutRef, setRecomendationMembersList }) => {
     try {
       if (debounceTimeoutRef.current) {

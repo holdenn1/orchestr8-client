@@ -1,12 +1,12 @@
 import { updateOwnProjectsRequest, updateTaskRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { UpdateProjectActionProps, UpdatedProjectRequest } from '../types/projectTypes';
-import { updateProject } from '@/store/slices/projectSlice';
+import { updateOwnProject } from '@/store/slices/projectSlice';
 import { UpdatedTaskRequest } from '../types/tasksTypes';
 import { updateTask } from '@/store/slices/taskSlice';
 
-export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionProps>(
-  'project/updateProject',
+export const updateOwnProjectAction = createAsyncThunk<void, UpdateProjectActionProps>(
+  'project/updateOwnProjectAction',
   async (
     { updateProjectData: { title, description, status, membersIds }, updateTaskData, taskId, projectId },
     { dispatch },
@@ -16,14 +16,14 @@ export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionPro
         status,
       });
       if (data) {
-        dispatch(updateProject(data));
+        dispatch(updateOwnProject(data));
       }
       if (title?.length) {
         const { data }: UpdatedProjectRequest = await updateOwnProjectsRequest(projectId, {
           title,
         });
         if (data) {
-          dispatch(updateProject(data));
+          dispatch(updateOwnProject(data));
         }
       }
       if (description?.length) {
@@ -31,7 +31,7 @@ export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionPro
           description,
         });
         if (data) {
-          dispatch(updateProject(data));
+          dispatch(updateOwnProject(data));
         }
       }
       if (membersIds) {
@@ -39,7 +39,7 @@ export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionPro
           membersIds,
         });
         if (data) {
-          dispatch(updateProject(data));
+          dispatch(updateOwnProject(data));
         }
       }
       if (updateTaskData?.task?.length && taskId) {

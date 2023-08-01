@@ -2,10 +2,10 @@ import './../styles.scss';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { getProjectsCountAction } from '@/store/actions/projectsActions/getProjectsCount';
+import { getOwnProjectsCountAction } from '@/store/actions/projectsActions/getOwnProjectsCount';
 
 function ProjectsSection() {
-  const { allProjects, projectCount } = useAppSelector((state) => state.project);
+  const { ownProjects, projectCount } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
 
   const profiles = [
@@ -40,8 +40,8 @@ function ProjectsSection() {
   ];
 
   useEffect(() => {
-    dispatch(getProjectsCountAction());
-  }, [allProjects]);
+    dispatch(getOwnProjectsCountAction());
+  }, [ownProjects]);
 
   return (
     <div className='profile-nav-wrapper'>

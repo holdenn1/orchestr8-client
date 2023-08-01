@@ -8,7 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 function TasksSection() {
   const [currentProject, setCurrentProject] = useState<Project>();
   const { tasks, tasksCount } = useAppSelector((state) => state.task);
-  const { allProjects } = useAppSelector((state) => state.project);
+  const { ownProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { projectId } = useParams();
 
@@ -41,7 +41,7 @@ function TasksSection() {
 
   useEffect(() => {
     if (projectId) {
-      const project = allProjects.find((project) => project.id === +projectId);
+      const project = ownProjects.find((project) => project.id === +projectId);
       if (project) setCurrentProject(project);
     }
   }, [tasks]);

@@ -5,12 +5,12 @@ import { useEffect, useState } from 'react';
 import { Member, Project } from '@/store/slices/types/projectSliceTypes';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { useParams } from 'react-router-dom';
-import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
+import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
 import SubmitButton from '@/components/UI/buttons/SubmitButton';
 
 function AddMemberToProject() {
   const [selectedMembersList, setSelectedMembersList] = useState<Member[]>([]);
-  const { allProjects } = useAppSelector((state) => state.project);
+  const { ownProjects } = useAppSelector((state) => state.project);
   const [currentProject, setCurrentProject] = useState<Project>();
   const [inputValue, setInputValue] = useState('');
   const { projectId } = useParams();
@@ -21,7 +21,7 @@ function AddMemberToProject() {
       const newMembersIds: number[] = selectedMembersList.map((member) => member.id);
       const oldMembers: number[] = currentProject?.members.map((memberId) => memberId.id);
       dispatch(
-        updateProjectAction({
+        updateOwnProjectAction({
           projectId,
           updateProjectData: { membersIds: [...oldMembers, ...newMembersIds] },
         }),
@@ -34,10 +34,10 @@ function AddMemberToProject() {
 
   useEffect(() => {
     if (projectId) {
-      const project = allProjects.find((project) => project.id === +projectId);
+      const project = ownProjects.find((project) => project.id === +projectId);
       setCurrentProject(project);
     }
-  }, [allProjects]);
+  }, [ownProjects]);
 
   return (
     <div className={styles.AddPaticipantToProject}>

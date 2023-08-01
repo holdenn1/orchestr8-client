@@ -4,26 +4,26 @@ import AddMemberToProject from './AddMemberToProject';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { useParams } from 'react-router-dom';
 import { Project } from '@/store/slices/types/projectSliceTypes';
-import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
+import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
 
 function Members() {
-  const { allProjects } = useAppSelector((state) => state.project);
+  const { ownProjects } = useAppSelector((state) => state.project);
   const [currentProject, setCurrentProject] = useState<Project>();
   const { projectId } = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (projectId) {
-      const project = allProjects.find((project) => project.id === +projectId);
+      const project = ownProjects.find((project) => project.id === +projectId);
       setCurrentProject(project);
     }
-  }, [projectId, allProjects]);
+  }, [projectId, ownProjects]);
 
   const deleteMember = (id: number) => {
     const currentMembers = currentProject?.members.filter((member) => member.id !== id);
     if (currentMembers && projectId) {
       const membersIds: number[] = currentMembers?.map((member) => member.id);
-      dispatch(updateProjectAction({ projectId, updateProjectData: { membersIds } }));
+      dispatch(updateOwnProjectAction({ projectId, updateProjectData: { membersIds } }));
     }
   };
   return (

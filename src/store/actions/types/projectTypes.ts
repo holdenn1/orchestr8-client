@@ -7,6 +7,8 @@ export type GetOwnProjectResponse = {
   data: Project[];
 };
 
+export type GetForeignProjectResponse = GetOwnProjectResponse
+
 export type SearchUsersByEmailActionProps = {
   debounceTimeoutRef: MutableRefObject<number | null>;
   value: string;
@@ -31,6 +33,6 @@ export type UpdatedProjectRequest = {
   data: Project;
 };
 
-export type GetProjectsCountActionResponse = {
+export type GetOwnProjectsCountActionResponse = {
   data: ProjectCountPayload[];
 };

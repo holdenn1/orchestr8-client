@@ -9,7 +9,7 @@ import ProjectListHeader from '@/components/headers/ProjectListHeader';
 import { setIsAddTaskForm } from '@/store/slices/mainSlice';
 
 function ProjectList() {
-  const { allProjects } = useAppSelector((state) => state.project);
+  const { ownProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { status } = useParams();
 
@@ -26,10 +26,10 @@ function ProjectList() {
   return (
     <>
       <ProjectListHeader />
-      {allProjects.length ? (
+      {ownProjects.length ? (
         <div className={styles.projectsListWrapper}>
           <div className={styles.projectsList}>
-            {allProjects.map((project) => (
+            {ownProjects.map((project) => (
               <ProjectItem project={project} key={project.id} />
             ))}
           </div>

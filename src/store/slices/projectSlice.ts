@@ -2,7 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InitialStateProjectSlice, Project, ProjectCountPayload } from './types/projectSliceTypes';
 
 const initialState: InitialStateProjectSlice = {
-  allProjects: [],
+  ownProjects: [],
+  foreignProjects: [],
   projectCount: {} as ProjectCountPayload,
 };
 
@@ -11,21 +12,24 @@ const projectSlice = createSlice({
   initialState,
   reducers: {
     setProjects(state, action: PayloadAction<Project[]>) {
-      state.allProjects = action.payload;
+      state.ownProjects = action.payload;
     },
-    updateProject(state, action: PayloadAction<Project>) {
-      state.allProjects = state.allProjects.map((project) => {
+    setForeignProjects(state, action: PayloadAction<Project[]>) {
+      state.foreignProjects = action.payload;
+    },
+    updateOwnProject(state, action: PayloadAction<Project>) {
+      state.ownProjects = state.ownProjects.map((project) => {
         if (project.id === action.payload.id) {
           project = action.payload;
         }
         return project;
       });
     },
-    setProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
+    setOwnProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
       state.projectCount = action.payload;
     },
   },
 });
 
-export const { setProjects, updateProject, setProjectsCount } = projectSlice.actions;
+export const { setProjects, updateOwnProject, setOwnProjectsCount,setForeignProjects } = projectSlice.actions;
 export default projectSlice.reducer;

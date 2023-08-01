@@ -1,7 +1,8 @@
 import { UserRoles } from './userSliceTypes';
 
 export type InitialStateProjectSlice = {
-  allProjects:Project[]
+  ownProjects:Project[]
+  foreignProjects:Project[]
   projectCount: ProjectCountPayload
 }
 

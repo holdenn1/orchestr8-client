@@ -21,19 +21,19 @@ function Project() {
   const { isAddTaskForm, isEditTaskForm, isShowMembers } = useAppSelector((state) => state.main);
   const [isMenu, setIsMenu] = useState(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
-  const { allProjects } = useAppSelector((state) => state.project);
+  const { ownProjects } = useAppSelector((state) => state.project);
   const { projectId, tasks: status, taskId } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (projectId) {
-      const project = allProjects.find((project) => project.id === Number(projectId));
+      const project = ownProjects.find((project) => project.id === Number(projectId));
       if (project) {
         setCurrentProject(project);
       }
     }
-  }, [projectId, allProjects]);
+  }, [projectId, ownProjects]);
 
   const deleteProject = async () => {
     if (projectId) {
