@@ -36,3 +36,5 @@ export type UpdatedProjectRequest = {
 export type GetOwnProjectsCountActionResponse = {
   data: ProjectCountPayload[];
 };
+
+export type GetForeignProjectsCountActionResponse = GetOwnProjectsCountActionResponse

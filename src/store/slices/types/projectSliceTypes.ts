@@ -3,7 +3,8 @@ import { UserRoles } from './userSliceTypes';
 export type InitialStateProjectSlice = {
   ownProjects:Project[]
   foreignProjects:Project[]
-  projectCount: ProjectCountPayload
+  ownProjectCount: ProjectCountPayload
+  foreignProjectCount: ProjectCountPayload
 }
 
 export enum StatusProject {
