@@ -16,7 +16,7 @@ export const registrationUser = createAsyncThunk<void, RegistrationUserActionPro
         dispatch(setUser(user));
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
-        navigate('/profile/projects/all-projects');
+        navigate('/profile/own/projects/all-projects');
         setStep(0);
         resetForm();
       }

@@ -15,7 +15,7 @@ export const loginUser = createAsyncThunk<void, LoginUserActionProps>(
         dispatch(setUser(user));
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
-        navigate('/profile/projects/all-projects');
+        navigate('/profile/own/projects/all-projects');
         resetForm();
       }
     } catch (e) {

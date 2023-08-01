@@ -5,11 +5,11 @@ import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';
 
 function ProfileNavBar() {
-  const { projectId, taskId } = useParams();
+  const { projectId, taskId, list } = useParams();
 
   return (
     <div className={styles.profileNavBarwrapper}>
-      <Link className={styles.contactsIconWrapper} to='/profile/projects/all-projects'>
+      <Link className={styles.contactsIconWrapper} to={`/profile/${list}/projects/all-projects`}>
         <div>
           <img className={styles.contactsIcon} src={contactsIcon} alt='contacts-icon' />
         </div>
@@ -18,7 +18,7 @@ function ProfileNavBar() {
         className={classNames(styles.contactsIconWrapper, styles.taskIconWrapper, {
           [styles.taskIconWrapperActive]: taskId,
         })}
-        to={`/profile/project/${projectId}/all-tasks`}
+        to={`/profile/${list}/project/${projectId}/all-tasks`}
       >
         <div>
           <img className={styles.contactsIcon} src={tasksIcon} alt='contacts-icon' />

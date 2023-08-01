@@ -17,29 +17,36 @@ import {
 } from '@/store/slices/mainSlice';
 import Members from '@/components/Members';
 
-function Project() {
+function OwnProject() {
   const { isAddTaskForm, isEditTaskForm, isShowMembers } = useAppSelector((state) => state.main);
+  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
   const [isMenu, setIsMenu] = useState(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
-  const { ownProjects } = useAppSelector((state) => state.project);
-  const { projectId, tasks: status, taskId } = useParams();
+  const { projectId, tasks: status, taskId, list } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (projectId) {
-      const project = ownProjects.find((project) => project.id === Number(projectId));
-      if (project) {
-        setCurrentProject(project);
+      if (list === 'own') {
+        const project = ownProjects.find((project) => project.id === Number(projectId));
+        if (project) {
+          setCurrentProject(project);
+        }
+      } else {
+        const project = foreignProjects.find((project) => project.id === Number(projectId));
+        if (project) {
+          setCurrentProject(project);
+        }
       }
     }
-  }, [projectId, ownProjects]);
+  }, [projectId, ownProjects, list]);
 
   const deleteProject = async () => {
     if (projectId) {
       const project = await removeOwnProjectsRequest(projectId);
       if (project) {
-        navigate('/profile/projects/all-projects');
+        navigate('/profile/own/projects/all-projects');
       }
     }
   };
@@ -68,14 +75,21 @@ function Project() {
           <DotMenuIcon />
         </div>
         {taskId && (
-          <img
-            onClick={() => dispatch(setShowEditTaskForm(!isEditTaskForm))}
-            className={styles.editIcon}
-            src={editIcon}
-            alt=''
-          />
+          <>
+            {list === 'own' && (
+              <img
+                onClick={() => dispatch(setShowEditTaskForm(!isEditTaskForm))}
+                className={styles.editIcon}
+                src={editIcon}
+                alt=''
+              />
+            )}
+          </>
         )}
         <TaskNavigation deleteProject={deleteProject} isMenu={isMenu} />
+        <h3 className={styles.title}>
+          Owner {currentProject?.owner.firstName} {currentProject?.owner.lastName}
+        </h3>
         <h3 className={styles.title}>{currentProject?.title}</h3>
         <p className={styles.description}>{currentProject?.description}</p>
         {!isShowMembers ? (
@@ -101,4 +115,4 @@ function Project() {
   );
 }
 
-export default Project;
+export default OwnProject;

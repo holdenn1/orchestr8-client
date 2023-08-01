@@ -87,7 +87,7 @@ function ProjectsSection() {
       <h4 className='profile-nav-title'>Own projects</h4>
       <div className='profile-list'>
         {ownProjectsCount.map((project) => (
-          <Link key={project.id} to={`/profile/projects/${project.link}`}>
+          <Link key={project.id} to={`/profile/own/projects/${project.link}`}>
             <div className='profile-list__item'>
               <h4 className='profile-list__title'>{project.title}</h4>
               <span className={`profile-list__${project.style} count`}>{project.countProjects}</span>
@@ -100,7 +100,7 @@ function ProjectsSection() {
           <h4 className='profile-nav-title'>Member in</h4>
           <div className='profile-list'>
             {foreignProjectsCount.map((project) => (
-              <Link key={project.id} to={`/profile/projects/${project.link}`}>
+              <Link key={project.id} to={`/profile/foreign/projects/${project.link}`}>
                 <div className='profile-list__item'>
                   <h4 className='profile-list__title'>{project.title}</h4>
                   <span className={`profile-list__${project.style} count`}>{project.countProjects}</span>

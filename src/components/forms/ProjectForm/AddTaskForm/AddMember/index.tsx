@@ -33,8 +33,6 @@ function AddMember({
 
   useEffect(() => {
     if (projectId) {
-      console.log(111111111111);
-      
       const project = ownProjects.find((project) => project.id === +projectId);
       setCurrentProject(project);
     }

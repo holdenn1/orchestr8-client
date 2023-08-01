@@ -5,17 +5,23 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { useParams } from 'react-router-dom';
 import { Project } from '@/store/slices/types/projectSliceTypes';
 import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
+import EmptyList from '../errors/listError/EmptyList';
 
 function Members() {
-  const { ownProjects } = useAppSelector((state) => state.project);
+  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
   const [currentProject, setCurrentProject] = useState<Project>();
-  const { projectId } = useParams();
+  const { projectId, list } = useParams();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (projectId) {
-      const project = ownProjects.find((project) => project.id === +projectId);
-      setCurrentProject(project);
+      if (list === 'own') {
+        const project = ownProjects.find((project) => project.id === +projectId);
+        setCurrentProject(project);
+      } else {
+        const project = foreignProjects.find((project) => project.id === +projectId);
+        setCurrentProject(project);
+      }
     }
   }, [projectId, ownProjects]);
 
@@ -28,24 +34,32 @@ function Members() {
   };
   return (
     <>
-      <AddMemberToProject />
+      {list === 'own' && <AddMemberToProject />}
       <div className={styles.participantsProjectWrapper}>
-        {currentProject?.members.map(({ id, email, firstName, lastName }) => (
-          <div key={id} className={styles.participantsProjectItem}>
-            <h4 className={styles.participantsName}>
-              {firstName} {lastName}
-            </h4>
-            <p className={styles.participantsEmail}>Email: {email}</p>
-            <div className={styles.btnConteiner}>
-              <button type='button' className={styles.messageBtn}>
-                Message
-              </button>
-              <button onClick={() => deleteMember(id)} type='button' className={styles.deleteBtn}>
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
+        {currentProject?.members ? (
+          <>
+            {currentProject?.members.map(({ id, email, firstName, lastName }) => (
+              <div key={id} className={styles.participantsProjectItem}>
+                <h4 className={styles.participantsName}>
+                  {firstName} {lastName}
+                </h4>
+                <p className={styles.participantsEmail}>Email: {email}</p>
+                {list === 'own' && (
+                  <div className={styles.btnConteiner}>
+                    <button type='button' className={styles.messageBtn}>
+                      Message
+                    </button>
+                    <button onClick={() => deleteMember(id)} type='button' className={styles.deleteBtn}>
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
+            ))}
+          </>
+        ) : (
+          <EmptyList>Members not found</EmptyList>
+        )}
       </div>
     </>
   );

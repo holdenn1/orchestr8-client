@@ -10,7 +10,7 @@ function TasksSection() {
   const { tasks, tasksCount } = useAppSelector((state) => state.task);
   const { ownProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
-  const { projectId } = useParams();
+  const { projectId, list } = useParams();
 
   const tasksList = [
     {
@@ -51,7 +51,7 @@ function TasksSection() {
       <h4 className='profile-nav-title' title={currentProject?.title}>Tasks for the project {currentProject?.title}</h4>
       <div className='profile-list'>
         {tasksList.map((task) => (
-          <Link key={task.id} to={`/profile/project/${projectId}/${task.link}`}>
+          <Link key={task.id} to={`/profile/${list}/project/${projectId}/${task.link}`}>
             <div className='profile-list__item'>
               <h4 className='profile-list__title'>{task.title}</h4>
               <span className={`profile-list__${task.style} count`}>{task.count}</span>

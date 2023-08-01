@@ -8,12 +8,13 @@ import { notify } from '@/components/Toast';
 import { removeTaskRequest } from '@/api/requests';
 import EditProjectAndTaskForm from '@/components/forms/ProjectForm/EditProjectAndTaskForm';
 import { setShowEditTaskForm } from '@/store/slices/mainSlice';
+import EmptyList from '@/components/errors/listError/EmptyList';
 
 function Task() {
   const [currentTask, setCurrentTask] = useState<ProjectTask>();
   const { tasks } = useAppSelector((state) => state.task);
   const { isEditTaskForm } = useAppSelector((state) => state.main);
-  const { projectId, taskId } = useParams();
+  const { projectId, taskId, list } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -59,26 +60,34 @@ function Task() {
   return (
     <div className={styles.taskWrapper}>
       {isEditTaskForm ? (
-        <EditProjectAndTaskForm />
+        <>{list === 'own' && <EditProjectAndTaskForm />}</>
       ) : (
         <>
-          <div className={styles.btnWrapper}>
-            <button className={styles.allTasksBtn} onClick={handleCompleteTask}>
-              {currentTask?.completed ? 'Return to work' : 'Completed'}
-            </button>
-            <button onClick={handleRemoveTask} className={styles.completedTasksBtn}>
-              Remove
-            </button>
-          </div>
-          {tasks?.map(({ id, task }) => {
-            if (id === +taskId!) {
-              return (
-                <div className={styles.taskWrapper} key={id}>
-                  <span>{task}</span>
-                </div>
-              );
-            }
-          })}
+          {list === 'own' && (
+            <div className={styles.btnWrapper}>
+              <button className={styles.allTasksBtn} onClick={handleCompleteTask}>
+                {currentTask?.completed ? 'Return to work' : 'Completed'}
+              </button>
+              <button onClick={handleRemoveTask} className={styles.completedTasksBtn}>
+                Remove
+              </button>
+            </div>
+          )}
+          {taskId ? (
+            <>
+              {tasks?.map(({ id, task }) => {
+                if (id === +taskId) {
+                  return (
+                    <div className={styles.taskWrapper} key={id}>
+                      <span>{task}</span>
+                    </div>
+                  );
+                }
+              })}
+            </>
+          ) : (
+            <EmptyList>Something wrong way</EmptyList>
+          )}
         </>
       )}
     </div>

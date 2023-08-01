@@ -8,7 +8,7 @@ export const createProject = createAsyncThunk<void, CreateProjectActionProps>(
     try {
       const { data } = await createProjectRequest({ title, description, membersIds });
       if (data) {
-        navigate('/profile/projects/all-projects');
+        navigate('/profile/own/projects/all-projects');
       }
     } catch (e) {
       console.error(e);
