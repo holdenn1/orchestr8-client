@@ -25,19 +25,11 @@
       opacity: 1;
     }
   }
-  .projectsFilter {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    .categories {
-      margin-right: 40px;
-      width: 112px;
-      p {
-        text-align: left;
-        font-size: 1.125rem;
-        color: rgb(136, 136, 136);
-        margin-bottom: 4px;
-      }
+  .projectsTitle{
+    margin-right: 20px;
+    h3{
+      font-size: 20px;
+      font-weight: 500;
     }
   }
 }

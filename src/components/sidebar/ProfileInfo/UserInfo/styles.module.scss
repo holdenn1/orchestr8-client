@@ -1,4 +1,3 @@
-
 .profileInfo {
   height: 160px;
   display: flex;
@@ -18,13 +17,6 @@
     .photo {
       cursor: pointer;
       border-radius: 100%;
-    }
-    .dotMenuWrapper {
-      cursor: pointer;
-      position: absolute;
-      top: 45px;
-      right: -20px;
-      transform: rotate(90deg);
     }
   }
 }

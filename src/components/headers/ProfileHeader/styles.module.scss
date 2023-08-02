@@ -8,6 +8,7 @@
   display: grid;
   grid-template-columns: minmax(200px, 280px) 1fr minmax(100px, 300px);
   align-items: center;
+  position: relative;
   .logoIcon {
     margin: 0 20px;
   }
@@ -21,7 +22,13 @@
   }
 
   .bellIconWrapper {
+    width: 24px;
+    height: 24px;
     margin: 0 20px 0 auto;
+    position: absolute;
+    top: 20px;
+    right: 0px;
     @include profleIconWrapper;
+
   }
 }

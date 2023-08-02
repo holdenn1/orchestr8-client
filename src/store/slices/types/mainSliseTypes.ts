@@ -4,8 +4,4 @@ export type InitialStateMainSlice = {
   isShowMembers: Boolean;
   selectedMembersVisible: boolean;
   recomendationMemberVisible: boolean;
-  selectedOption: {
-    sort: string;
-    category: string;
-  };
 };
