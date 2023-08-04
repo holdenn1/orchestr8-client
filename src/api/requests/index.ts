@@ -32,6 +32,19 @@ export const refreshTokensLogin = (refreshToken: string) =>
     headers: { authorization: `Bearer ${refreshToken}` },
   } as AxiosRequestConfig);
 
+export const uploadAvatar = (cover: File) => {
+  const formData = new FormData();
+  formData.append('cover', cover);
+
+  return instance.post('user/upload-cover', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};
+
+export const getUserRequest = () => instance.get('user/get-user');
+
 /* projects' requests */
 
 export const createProjectRequest = (data: CreateProjectData) => instance.post('/project/create', data);

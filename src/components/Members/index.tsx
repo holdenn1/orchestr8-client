@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { useParams } from 'react-router-dom';
 import { Project } from '@/store/slices/types/projectSliceTypes';
 import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
+import profileIcon from 'icons/icons8-male-user-100.png';
 import EmptyList from '../errors/listError/EmptyList';
 
 function Members() {
@@ -38,11 +39,14 @@ function Members() {
       <div className={styles.participantsProjectWrapper}>
         {currentProject?.members ? (
           <>
-            {currentProject?.members.map(({ id, email, firstName, lastName }) => (
+            {currentProject?.members.map(({ id, email, firstName, lastName, photo }) => (
               <div key={id} className={styles.participantsProjectItem}>
-                <h4 className={styles.participantsName}>
+                <div className={styles.memberInfoWrapper}>
+                <img className={styles.memberAvatar} src={photo ?? profileIcon} alt='' />
+                <h4  className={styles.participantsName}>
                   {firstName} {lastName}
                 </h4>
+                </div>
                 <p className={styles.participantsEmail}>Email: {email}</p>
                 {list === 'own' && (
                   <div className={styles.btnConteiner}>

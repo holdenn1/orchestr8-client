@@ -15,8 +15,21 @@
   .profilePhotoWrapper {
     position: relative;
     .photo {
-      cursor: pointer;
       border-radius: 100%;
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+    .photoInput{
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      width: 100px;
+      height: 100px;
+      border-radius: 100%;
+      cursor: pointer;
+
     }
   }
 }

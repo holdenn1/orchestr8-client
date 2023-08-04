@@ -14,6 +14,18 @@
     box-sizing: border-box;
     border: 1px solid rgb(136, 136, 136);
     border-radius: 12px;
+    .memberInfoWrapper {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 20px;
+      .memberAvatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        object-fit: cover;
+      }
+    }
     .participantsName {
       text-align: center;
       font-size: 18px;
@@ -23,7 +35,6 @@
     .participantsEmail {
       text-align: left;
       font-weight: 600;
-      margin-bottom: 40px;
     }
     .btnConteiner {
       display: flex;

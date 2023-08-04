@@ -20,6 +20,7 @@ export type Member = {
   firstName: string;
   lastName: string;
   phone: string;
+  photo: string
   email: string;
   roles: UserRoles[];
 };
