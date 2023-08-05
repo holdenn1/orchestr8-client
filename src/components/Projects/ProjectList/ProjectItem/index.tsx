@@ -1,10 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styles from './styles.module.scss';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
 import StatusProjectMenu from '@/components/menus/StatusProjectMenu';
 import { Project } from '@/store/slices/types/projectSliceTypes';
-import { useAppDispatch } from '@/hooks/reduxHooks';
-import { setShowMembers } from '@/store/slices/mainSlice';
 import { useParams } from 'react-router-dom';
 
 type ProjectItemProps = {
@@ -14,11 +12,6 @@ type ProjectItemProps = {
 function ProjectItem({ project }: ProjectItemProps) {
   const [isMenu, setIsMenu] = useState(false);
   const { list } = useParams();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setShowMembers(false));
-  }, []);
 
   return (
     <div className={styles.projectItem}>

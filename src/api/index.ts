@@ -1,7 +1,7 @@
 import axios, { CreateAxiosDefaults } from 'axios';
 import { refreshRequest } from '@/api/requests';
 
-const BASE_URL = 'http://localhost:7000/';
+export const BASE_URL = 'http://localhost:7000/';
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -9,6 +9,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
+    config.headers.socketId = (window as any)?.socket?.id;
     const accessToken = localStorage.getItem('accessToken');
     if (config.headers.authorization) {
       return config;

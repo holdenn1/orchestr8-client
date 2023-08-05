@@ -5,7 +5,7 @@ const initialState: InitialStateProjectSlice = {
   ownProjects: [],
   foreignProjects: [],
   ownProjectCount: {} as ProjectCountPayload,
-  foreignProjectCount: {} as ProjectCountPayload
+  foreignProjectCount: {} as ProjectCountPayload,
 };
 
 const projectSlice = createSlice({
@@ -32,6 +32,16 @@ const projectSlice = createSlice({
     setForeignProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
       state.foreignProjectCount = action.payload;
     },
+    addToProjectNotification(state, action: PayloadAction<keyof ProjectCountPayload>) {
+      state.foreignProjectCount = {
+        ...state.foreignProjectCount,
+        [action.payload]: String(+state.foreignProjectCount[action.payload] + 1),
+        totalCount: String(+state.foreignProjectCount.totalCount + 1),
+      };
+    },
+    removeForeignProject(state, action: PayloadAction<Project>) {
+      state.foreignProjects = state.foreignProjects.filter((project) => project.id !== action.payload.id);
+    },
   },
 });
 
@@ -41,5 +51,7 @@ export const {
   setOwnProjectsCount,
   setForeignProjects,
   setForeignProjectsCount,
+  addToProjectNotification,
+  removeForeignProject,
 } = projectSlice.actions;
 export default projectSlice.reducer;

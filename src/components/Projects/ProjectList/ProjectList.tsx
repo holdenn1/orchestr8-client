@@ -5,7 +5,7 @@ import { fetchOwnProjectsAction } from '@/store/actions/projectsActions/fetchOwn
 import ProjectItem from './ProjectItem';
 import { Link, useParams } from 'react-router-dom';
 import ProjectListHeader from '@/components/headers/ProjectListHeader';
-import { setIsAddTaskForm } from '@/store/slices/mainSlice';
+import { setIsAddTaskForm, setShowMembers } from '@/store/slices/mainSlice';
 import { fetchForeignProjectsAction } from '@/store/actions/projectsActions/fetchForeignProjects';
 import EmptyList from '@/components/errors/listError/EmptyList';
 
@@ -29,6 +29,10 @@ function ProjectList() {
       dispatch(fetchForeignProjectsAction({ status }));
     }
   }, [status]);
+
+  useEffect(() => {
+    dispatch(setShowMembers(false));
+  }, []);
 
   return (
     <>

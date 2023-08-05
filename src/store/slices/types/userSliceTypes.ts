@@ -3,6 +3,7 @@ import { Project } from "./projectSliceTypes";
 export enum UserRoles {
   USER = 'user',
   PROJECT_OWNER = 'project owner',
+  PROJECT_MANAGER = 'project manager',
 }
 
 
