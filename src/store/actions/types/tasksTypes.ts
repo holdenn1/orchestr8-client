@@ -22,6 +22,7 @@ export type FetchTasksResponse = {
 
 export type UpdateTaskActionProps = {
   projectId: string;
+  list: string;
   taskId: string;
   updateData: UpdateTaskData;
   navigate: NavigateFunction;

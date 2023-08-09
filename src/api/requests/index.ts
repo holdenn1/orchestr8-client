@@ -55,6 +55,9 @@ export const searchUsersByEmailRequest = (email: string) =>
 export const updateOwnProjectsRequest = (projectId: string, updateProjectData: UpdateProjectData) =>
   instance.patch(`/project/${projectId}`, updateProjectData);
 
+export const updateOwnProjectStatusRequest = (projectId: string, updateProjectData: UpdateProjectData) =>
+  instance.patch(`/project/update-status-proj/${projectId}`, updateProjectData);
+
 export const removeOwnProjectsRequest = (projectId: string) => instance.delete(`/project/${projectId}`);
 
 export const getOwnProjectsRequest = (status: string = StatusProject.ALL) =>

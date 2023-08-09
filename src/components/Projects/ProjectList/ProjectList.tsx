@@ -43,7 +43,7 @@ function ProjectList() {
             <div className={styles.projectsListWrapper}>
               <div className={styles.projectsList}>
                 {ownProjects.map((project) => (
-                  <Link to={`/profile/own/project/${project.id}/all-tasks`} key={project.id}>
+                  <Link to={`/profile/own/project/${project.id}/tasks-all`} key={project.id}>
                     <ProjectItem project={project} />
                   </Link>
                 ))}
@@ -59,7 +59,7 @@ function ProjectList() {
             <div className={styles.projectsListWrapper}>
               <div className={styles.projectsList}>
                 {foreignProjects.map((project) => (
-                  <Link to={`/profile/foreign/project/${project.id}/all-tasks`} key={project.id}>
+                  <Link to={`/profile/foreign/project/${project.id}/tasks-all`} key={project.id}>
                     <ProjectItem project={project} />
                   </Link>
                 ))}

@@ -12,6 +12,9 @@ const projectSlice = createSlice({
   name: 'project',
   initialState,
   reducers: {
+    addForeignProject(state, action: PayloadAction<Project>) {
+      state.foreignProjects.push(action.payload);
+    },
     setProjects(state, action: PayloadAction<Project[]>) {
       state.ownProjects = action.payload;
     },
@@ -23,6 +26,30 @@ const projectSlice = createSlice({
         return project;
       });
     },
+    updateStatusForeignProject(state, action: PayloadAction<Project>) {
+      const url = location.href;
+      if (state.foreignProjects.some((proj) => proj.id === action.payload.id)) {
+        if (!url.includes('all-projects') && !url.includes('tasks')) {
+          state.foreignProjects = state.foreignProjects.filter(
+            (proj) => proj.id !== action.payload.id && proj.status !== action.payload.status,
+          );
+        }
+      } else {
+        state.foreignProjects.unshift(action.payload);
+      }
+    },
+    updateForeignProject(state, action: PayloadAction<Project>) {
+      if (state.foreignProjects.some((proj) => proj.id === action.payload.id)) {
+        state.foreignProjects = state.foreignProjects.map((project) => {
+          if (project.id === action.payload.id) {
+            project = action.payload;
+          }
+          return project;
+        });
+      } else {
+        state.foreignProjects.unshift(action.payload);
+      }
+    },
     setOwnProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
       state.ownProjectCount = action.payload;
     },
@@ -31,13 +58,6 @@ const projectSlice = createSlice({
     },
     setForeignProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
       state.foreignProjectCount = action.payload;
-    },
-    addToProjectNotification(state, action: PayloadAction<keyof ProjectCountPayload>) {
-      state.foreignProjectCount = {
-        ...state.foreignProjectCount,
-        [action.payload]: String(+state.foreignProjectCount[action.payload] + 1),
-        totalCount: String(+state.foreignProjectCount.totalCount + 1),
-      };
     },
     removeForeignProject(state, action: PayloadAction<Project>) {
       state.foreignProjects = state.foreignProjects.filter((project) => project.id !== action.payload.id);
@@ -51,7 +71,9 @@ export const {
   setOwnProjectsCount,
   setForeignProjects,
   setForeignProjectsCount,
-  addToProjectNotification,
   removeForeignProject,
+  addForeignProject,
+  updateStatusForeignProject,
+  updateForeignProject,
 } = projectSlice.actions;
 export default projectSlice.reducer;

@@ -1,15 +1,13 @@
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { getTasksCountAction } from '@/store/actions/tasksActions/getTasksCount';
-import { setTasksCount } from '@/store/slices/taskSlice';
 import { Project } from '@/store/slices/types/projectSliceTypes';
-import { useEffect, useState } from 'react';
+import { TasksCountPayload } from '@/store/slices/types/taskSliceTypes';
 import { Link, useParams } from 'react-router-dom';
 
-function TasksSection() {
-  const [currentProject, setCurrentProject] = useState<Project>();
-  const { tasks, tasksCount } = useAppSelector((state) => state.task);
-  const { ownProjects } = useAppSelector((state) => state.project);
-  const dispatch = useAppDispatch();
+type TasksSectionProps = {
+  tasksCount: TasksCountPayload;
+  currentProject: Project | undefined;
+};
+
+function TasksSection({ tasksCount, currentProject }: TasksSectionProps) {
   const { projectId, list } = useParams();
 
   const tasksList = [
@@ -18,37 +16,22 @@ function TasksSection() {
       title: 'Total tasks',
       style: 'totalTask',
       count: tasksCount?.totalCount ?? 0,
-      link: 'all-tasks',
+      link: 'tasks-all',
     },
     {
       id: 2,
       title: 'Completed',
       style: 'completedTasks',
       count: tasksCount?.completed ?? 0,
-      link: 'completed',
+      link: 'tasks-completed',
     },
   ];
 
-  useEffect(() => {
-    dispatch(setTasksCount({ completed: 0, totalCount: 0 }));
-  }, [projectId]);
-
-  useEffect(() => {
-    if (projectId) {
-      dispatch(getTasksCountAction({ projectId }));
-    }
-  }, [tasks]);
-
-  useEffect(() => {
-    if (projectId) {
-      const project = ownProjects.find((project) => project.id === +projectId);
-      if (project) setCurrentProject(project);
-    }
-  }, [tasks]);
-
   return (
     <div className='profile-nav-wrapper'>
-      <h4 className='profile-nav-title' title={currentProject?.title}>Tasks for the project {currentProject?.title}</h4>
+      <h4 className='profile-nav-title' title={currentProject?.title}>
+        Tasks for the project {currentProject?.title}
+      </h4>
       <div className='profile-list'>
         {tasksList.map((task) => (
           <Link key={task.id} to={`/profile/${list}/project/${projectId}/${task.link}`}>

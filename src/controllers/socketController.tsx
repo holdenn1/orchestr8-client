@@ -3,18 +3,28 @@ import { useEffect } from 'react';
 import { Manager } from 'socket.io-client';
 import { NotificationType } from './types';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
-import { addToProjectNotification, removeForeignProject } from '@/store/slices/projectSlice';
-import { Member, Project, ProjectCountPayload } from '@/store/slices/types/projectSliceTypes';
+import {
+  addForeignProject,
+  removeForeignProject,
+  updateForeignProject,
+  updateStatusForeignProject,
+} from '@/store/slices/projectSlice';
+import { Project } from '@/store/slices/types/projectSliceTypes';
 import { getForeignProjectsCountAction } from '@/store/actions/projectsActions/getForeignProjectsCount';
+import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
+import { removeTask, setTask, updateTask } from '@/store/slices/taskSlice';
 
 type ProjectData = {
   payload: Project;
   socketId: string;
 };
-
+type TaskData = {
+  payload: ProjectTask;
+  socketId: string;
+};
 function SocketController() {
-  const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.account);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const manager = new Manager(BASE_URL, {
@@ -24,37 +34,62 @@ function SocketController() {
     (window as any).socket = socket;
 
     socket.on(NotificationType.CREATE_PROJECT, handleProjectCreate);
-    socket.on(NotificationType.UPDATE_COUNT_PROJECT, handleUpdateCountProject);
+    socket.on(NotificationType.UPDATE_PROJECT, handleUpdateProject);
+    socket.on(NotificationType.UPDATE_PROJECT_STATUS, handleUpdateProjectStatus);
     socket.on(NotificationType.REMOVE_PROJECT, handleRemoveProject);
+    socket.on(NotificationType.ADD_TASK, handleTaskCreate);
+    socket.on(NotificationType.REMOVE_TASK, handleRemoveTask);
+    socket.on(NotificationType.UPDATE_TASK, handleUpdateTask);
     return () => {
       socket.disconnect();
     };
   }, []);
 
   const handleProjectCreate = (data: ProjectData) => {
-    console.log(data);
-
     if ((window as any)?.socket?.id === data.socketId) return;
+    dispatch(addForeignProject(data.payload));
+  };
 
+  const handleUpdateProject = (data: ProjectData) => {
+    if ((window as any)?.socket?.id === data.socketId) return;
     if (data.payload.members.some((member) => member.id === user.id)) {
-      dispatch(addToProjectNotification(data.payload.status as keyof ProjectCountPayload));
+      dispatch(updateForeignProject(data.payload));
+    } else {
+      dispatch(removeForeignProject(data.payload));
     }
   };
 
-  const handleUpdateCountProject = (data: { socketId: string }) => {
+  const handleUpdateProjectStatus = (data: ProjectData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
-
     dispatch(getForeignProjectsCountAction());
+    if (data.payload.members.some((member) => member.id === user.id)) {
+      dispatch(updateStatusForeignProject(data.payload));
+    } else {
+      dispatch(removeForeignProject(data.payload));
+    }
   };
 
   const handleRemoveProject = (data: ProjectData) => {
-    console.log(data);
     if ((window as any)?.socket?.id === data.socketId) return;
-
     if (data.payload.members.some((member) => member.id === user.id)) {
-      dispatch(getForeignProjectsCountAction());
       dispatch(removeForeignProject(data.payload));
     }
+  };
+
+  const handleTaskCreate = (data: TaskData) => {
+    if ((window as any)?.socket?.id === data.socketId) return;
+    dispatch(setTask(data.payload));
+  };
+
+  const handleRemoveTask = (data: TaskData) => {
+    if ((window as any)?.socket?.id === data.socketId) return;
+    dispatch(removeTask(data.payload));
+  };
+
+  const handleUpdateTask = (data: TaskData) => {
+    if ((window as any)?.socket?.id === data.socketId) return;
+    
+    dispatch(updateTask(data.payload));
   };
 
   return null;

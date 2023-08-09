@@ -4,14 +4,16 @@ export type InitialStateTaskSlice = {
 };
 
 export enum StatusTask {
-  ALL = 'all-tasks',
-  COMPLETED = 'completed',
+  ALL = 'tasks-all',
+  COMPLETED = 'tasks-completed',
 }
 
 export type ProjectTask = {
   id: number;
   task: string;
   completed: boolean;
+  createAt: Date;
+  updateAt: Date;
 };
 
 export type TasksCountPayload = {

@@ -16,13 +16,16 @@ import {
   setShowEditTaskForm,
 } from '@/store/slices/mainSlice';
 import Members from '@/components/Members';
+import { fetchTasks } from '@/store/actions/tasksActions/fetchTasks';
 
-function OwnProject() {
+function Project() {
   const { isAddTaskForm, isEditTaskForm, isShowMembers } = useAppSelector((state) => state.main);
   const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
+  const { tasks } = useAppSelector((state) => state.task);
   const [isMenu, setIsMenu] = useState(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
   const { projectId, tasks: status, taskId, list } = useParams();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -34,13 +37,27 @@ function OwnProject() {
           setCurrentProject(project);
         }
       } else {
+      }
+    }
+  }, [projectId, ownProjects, list]);
+
+  useEffect(() => {
+    if (projectId) {
+      if (list === 'foreign') {
         const project = foreignProjects.find((project) => project.id === Number(projectId));
         if (project) {
           setCurrentProject(project);
         }
       }
     }
-  }, [projectId, ownProjects, list]);
+  }, [projectId, foreignProjects, list]);
+
+  useEffect(() => {
+   
+    if (status && projectId) {
+      dispatch(fetchTasks({ statusTask: status, projectId }));
+    }
+  }, [status]);
 
   const deleteProject = async () => {
     if (projectId) {
@@ -100,10 +117,10 @@ function OwnProject() {
               <>
                 {!isAddTaskForm && (
                   <h4 className={styles.taskTitle}>
-                    Task list ({status === 'all-tasks' ? 'All tasks' : 'Completed tasks'})
+                    Task list ({status === 'tasks-all' ? 'All tasks' : 'Completed tasks'})
                   </h4>
                 )}
-                {!isAddTaskForm ? <TaskList /> : <AddTaskForm />}
+                {!isAddTaskForm ? <TaskList tasks={tasks} /> : <AddTaskForm />}
               </>
             )}
           </>
@@ -115,4 +132,4 @@ function OwnProject() {
   );
 }
 
-export default OwnProject;
+export default Project;

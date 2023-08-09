@@ -5,17 +5,13 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { Link, useParams } from 'react-router-dom';
 import { fetchTasks } from '@/store/actions/tasksActions/fetchTasks';
 import EmptyList from '@/components/errors/listError/EmptyList';
+import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
 
-function TaskList() {
-  const { tasks } = useAppSelector((state) => state.task);
+type TaskListProps = {
+  tasks: ProjectTask[];
+};
+function TaskList({ tasks }: TaskListProps) {
   const { projectId, tasks: statusTask, list } = useParams();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (statusTask && projectId) {
-      dispatch(fetchTasks({ statusTask, projectId }));
-    }
-  }, [statusTask]);
 
   return (
     <>

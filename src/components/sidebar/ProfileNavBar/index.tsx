@@ -18,7 +18,7 @@ function ProfileNavBar() {
         className={classNames(styles.contactsIconWrapper, styles.taskIconWrapper, {
           [styles.taskIconWrapperActive]: taskId,
         })}
-        to={`/profile/${list}/project/${projectId}/all-tasks`}
+        to={`/profile/${list}/project/${projectId}/tasks-all`}
       >
         <div>
           <img className={styles.contactsIcon} src={tasksIcon} alt='contacts-icon' />

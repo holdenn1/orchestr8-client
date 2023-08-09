@@ -21,13 +21,13 @@ function Task() {
   const handleCompleteTask = () => {
     if (taskId) {
       if (currentTask?.completed) {
-        if (projectId) {
-          dispatch(updateTaskAction({ taskId, updateData: { completed: false }, navigate, projectId }));
+        if (projectId && list) {
+          dispatch(updateTaskAction({ taskId, updateData: { completed: false }, navigate, projectId, list }));
         }
         notify('The task is returned to work', 'success');
       } else {
-        if (projectId) {
-          dispatch(updateTaskAction({ taskId, updateData: { completed: true }, navigate, projectId }));
+        if (projectId && list) {
+          dispatch(updateTaskAction({ taskId, updateData: { completed: true }, navigate, projectId, list }));
         }
         notify('The task is completed', 'success');
       }
@@ -39,7 +39,7 @@ function Task() {
       const data = await removeTaskRequest(taskId);
       if (data) {
         notify('The task has been deleted', 'success');
-        navigate(`/profile/project/${projectId}/all-tasks`);
+        navigate(`/profile/${list}/project/${projectId}/tasks-all`);
       }
     }
   };
