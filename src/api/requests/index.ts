@@ -60,13 +60,13 @@ export const updateOwnProjectStatusRequest = (projectId: string, updateProjectDa
 
 export const removeOwnProjectsRequest = (projectId: string) => instance.delete(`/project/${projectId}`);
 
-export const getOwnProjectsRequest = (status: string = StatusProject.ALL) =>
-  instance.get(`/project/own-projects/${status}`);
+export const getOwnProjectsRequest = (status: string = StatusProject.ALL, currentPage: string) =>
+  instance.get(`/project/own-projects/${status}?page=${currentPage}&pageSize=10`);
 
 export const getOwnProjectCountsByStatusRequest = () => instance.get(`/project/own-project-count`);
 
-export const getForeignProjectsRequest = (status: string = StatusProject.ALL) =>
-  instance.get(`/project/foreign-projects/${status}`);
+export const getForeignProjectsRequest = (status: string = StatusProject.ALL, currentPage: string) =>
+  instance.get(`/project/foreign-projects/${status}?page=${currentPage}&pageSize=10`);
 
 export const getForeignProjectCountsByStatusRequest = () => instance.get(`/project/foreign-project-count`);
 

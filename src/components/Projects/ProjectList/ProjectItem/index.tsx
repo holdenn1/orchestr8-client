@@ -16,7 +16,9 @@ function ProjectItem({ project }: ProjectItemProps) {
   return (
     <div className={styles.projectItem}>
       <h3 className={styles.title}>{project.title}</h3>
+      <div className={styles.descriptionBlock}>
       <p className={styles.description}>{project.description}</p>
+      </div>
       {list === 'own' && (
         <div
           className={styles.menu}

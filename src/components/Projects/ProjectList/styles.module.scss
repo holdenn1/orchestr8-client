@@ -1,17 +1,24 @@
 @import 'src/styles/mixins/scrollbar.scss';
+@import 'src/styles/mixins/contentCenterFlex.scss';
 
-.projectsListWrapper {
+.wrapper {
   height: calc(100vh - 200px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  @include scrollbar(6px, black);
+  margin: 20px;
   .projectsList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 270px));
-    grid-auto-rows: minmax(250px, 270px);
-    justify-items: center;
-    justify-content: center;
-    align-items: center;
-    margin: 20px;
-    height: 100%;
-    overflow: auto;
-    @include scrollbar(6px, black);
+    margin: 0 60px;
   }
+
+  .obs {
+    background-color: black;
+    height: 4px;
+    width: 100%;
+    bottom: 0;
+  }
+}
+
+.wrapperLoading {
+  @include contentCenterFlex;
 }

@@ -1,11 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InitialStateProjectSlice, Project, ProjectCountPayload } from './types/projectSliceTypes';
+import { fetchOwnProjectsAction } from '../actions/projectsActions/fetchOwnProjects';
+import { fetchForeignProjectsAction } from '../actions/projectsActions/fetchForeignProjects';
 
 const initialState: InitialStateProjectSlice = {
   ownProjects: [],
   foreignProjects: [],
   ownProjectCount: {} as ProjectCountPayload,
   foreignProjectCount: {} as ProjectCountPayload,
+  isLoading: false,
+  currentPageOwnProjectList: 1,
+  currentPageForeignProjectList: 1,
 };
 
 const projectSlice = createSlice({
@@ -16,7 +21,13 @@ const projectSlice = createSlice({
       state.foreignProjects.push(action.payload);
     },
     setProjects(state, action: PayloadAction<Project[]>) {
-      state.ownProjects = action.payload;
+      state.ownProjects = [...state.ownProjects, ...action.payload];
+    },
+    clearOwnProjectsList(state) {
+      state.ownProjects = [];
+    },
+    clearForeignProjectsList(state) {
+      state.foreignProjects = [];
     },
     updateOwnProject(state, action: PayloadAction<Project>) {
       state.ownProjects = state.ownProjects.map((project) => {
@@ -54,7 +65,7 @@ const projectSlice = createSlice({
       state.ownProjectCount = action.payload;
     },
     setForeignProjects(state, action: PayloadAction<Project[]>) {
-      state.foreignProjects = action.payload;
+      state.foreignProjects = [...state.foreignProjects, ...action.payload];
     },
     setForeignProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
       state.foreignProjectCount = action.payload;
@@ -62,6 +73,32 @@ const projectSlice = createSlice({
     removeForeignProject(state, action: PayloadAction<Project>) {
       state.foreignProjects = state.foreignProjects.filter((project) => project.id !== action.payload.id);
     },
+    setCurrentPageOwnProjectList(state, action: PayloadAction<number>) {
+      state.currentPageOwnProjectList = action.payload;
+    },
+    setCurrentPageForeignProjectList(state, action: PayloadAction<number>) {
+      state.currentPageForeignProjectList = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchOwnProjectsAction.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchOwnProjectsAction.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(fetchOwnProjectsAction.rejected, (state, action) => {
+      state.isLoading = action.payload as boolean;
+    });
+    builder.addCase(fetchForeignProjectsAction.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchForeignProjectsAction.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(fetchForeignProjectsAction.rejected, (state, action) => {
+      state.isLoading = action.payload as boolean;
+    });
   },
 });
 
@@ -75,5 +112,9 @@ export const {
   addForeignProject,
   updateStatusForeignProject,
   updateForeignProject,
+  clearOwnProjectsList,
+  clearForeignProjectsList,
+  setCurrentPageOwnProjectList,
+  setCurrentPageForeignProjectList,
 } = projectSlice.actions;
 export default projectSlice.reducer;

@@ -1,9 +1,6 @@
-import { useEffect } from 'react';
 import styles from './styles.module.scss';
 import TaskItem from './TaskItem';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { Link, useParams } from 'react-router-dom';
-import { fetchTasks } from '@/store/actions/tasksActions/fetchTasks';
 import EmptyList from '@/components/errors/listError/EmptyList';
 import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
 

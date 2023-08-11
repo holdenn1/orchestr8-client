@@ -1,9 +1,7 @@
 @import 'src/styles/mixins/contentCenterFlex.scss';
 @import 'src/styles/mixins/scrollbar.scss';
 
-
 .projectItem {
-  width: 240px;
   height: 240px;
   background-color: white;
   border: 2px solid rgb(6, 58, 94);
@@ -14,6 +12,7 @@
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  margin-bottom: 20px;
   .title {
     font-size: 18px;
     font-weight: 700;
@@ -22,12 +21,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-  .description {
+  .descriptionBlock {
     max-height: 120px;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    font-weight: 500;
     @include scrollbar(6px, black);
+    .description {
+      font-weight: 500;
+    }
   }
   .menu {
     width: 40px;

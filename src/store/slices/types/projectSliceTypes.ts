@@ -1,11 +1,14 @@
 import { UserRoles } from './userSliceTypes';
 
 export type InitialStateProjectSlice = {
-  ownProjects:Project[]
-  foreignProjects:Project[]
-  ownProjectCount: ProjectCountPayload
-  foreignProjectCount: ProjectCountPayload
-}
+  ownProjects: Project[];
+  foreignProjects: Project[];
+  ownProjectCount: ProjectCountPayload;
+  foreignProjectCount: ProjectCountPayload;
+  isLoading: boolean;
+  currentPageOwnProjectList: number;
+  currentPageForeignProjectList: number;
+};
 
 export enum StatusProject {
   COMPLETED = 'completed',
@@ -20,7 +23,7 @@ export type Member = {
   firstName: string;
   lastName: string;
   phone: string;
-  photo: string
+  photo: string;
   email: string;
   roles: UserRoles[];
 };
@@ -42,4 +45,3 @@ export type ProjectCountPayload = {
   'in-progress': string;
   suspend: string;
 };
-

@@ -1,36 +1,64 @@
 import { useEffect } from 'react';
-import styles from './styles.module.scss';
-import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 import { fetchOwnProjectsAction } from '@/store/actions/projectsActions/fetchOwnProjects';
-import ProjectItem from './ProjectItem';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ProjectListHeader from '@/components/headers/ProjectListHeader';
 import { setIsAddTaskForm, setShowMembers } from '@/store/slices/mainSlice';
 import { fetchForeignProjectsAction } from '@/store/actions/projectsActions/fetchForeignProjects';
-import EmptyList from '@/components/errors/listError/EmptyList';
+import OwnProjectList from './OwnProjectList';
+import ForeignProjectList from './ForeignProjectList';
+import { useInView } from 'react-intersection-observer';
+import {
+  clearForeignProjectsList,
+  clearOwnProjectsList,
+  setCurrentPageForeignProjectList,
+  setCurrentPageOwnProjectList,
+} from '@/store/slices/projectSlice';
 
 function ProjectList() {
-  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { status, list } = useParams();
+  const { ref: ownListRef, inView: OwnInView } = useInView({
+    threshold: 0,
+  });
+  const { ref: foreignListRef, inView: foreignInView } = useInView({
+    threshold: 0,
+  });
+
+  useEffect(() => {
+    if (list === 'own') {
+      dispatch(setCurrentPageOwnProjectList(1));
+      dispatch(clearOwnProjectsList());
+    }
+    if (list === 'foreign') {
+      dispatch(setCurrentPageForeignProjectList(1));
+      dispatch(clearForeignProjectsList());
+    }
+  }, [status]);
+
+  useEffect(() => {
+    if (OwnInView) {
+      if (list === 'own' && status) {
+        dispatch(
+          fetchOwnProjectsAction({
+            status,
+          }),
+        );
+      }
+    }
+    if (foreignInView) {
+      if (list === 'foreign' && status) {
+        dispatch(
+          fetchForeignProjectsAction({
+            status,
+          }),
+        );
+      }
+    }
+  }, [OwnInView, foreignInView, status]);
 
   useEffect(() => {
     dispatch(setIsAddTaskForm(false));
-  }, []);
-
-  useEffect(() => {
-    if (status) {
-      dispatch(fetchOwnProjectsAction({ status }));
-    }
-  }, [status]);
-
-  useEffect(() => {
-    if (status) {
-      dispatch(fetchForeignProjectsAction({ status }));
-    }
-  }, [status]);
-
-  useEffect(() => {
     dispatch(setShowMembers(false));
   }, []);
 
@@ -38,37 +66,9 @@ function ProjectList() {
     <>
       <ProjectListHeader />
       {list === 'own' ? (
-        <>
-          {ownProjects.length ? (
-            <div className={styles.projectsListWrapper}>
-              <div className={styles.projectsList}>
-                {ownProjects.map((project) => (
-                  <Link to={`/profile/own/project/${project.id}/tasks-all`} key={project.id}>
-                    <ProjectItem project={project} />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <EmptyList>It's still empty here, add new projects!</EmptyList>
-          )}
-        </>
+        <OwnProjectList ownListRef={ownListRef} />
       ) : (
-        <>
-          {foreignProjects.length ? (
-            <div className={styles.projectsListWrapper}>
-              <div className={styles.projectsList}>
-                {foreignProjects.map((project) => (
-                  <Link to={`/profile/foreign/project/${project.id}/tasks-all`} key={project.id}>
-                    <ProjectItem project={project} />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <EmptyList>It's still empty here, add new projects!</EmptyList>
-          )}
-        </>
+        <ForeignProjectList foreignListRef={foreignListRef} />
       )}
     </>
   );
