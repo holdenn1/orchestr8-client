@@ -83,7 +83,7 @@ function SocketController() {
 
   const handleRemoveTask = (data: TaskData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
-    dispatch(removeTask(data.payload));
+    dispatch(removeTask(data.payload.id));
   };
 
   const handleUpdateTask = (data: TaskData) => {

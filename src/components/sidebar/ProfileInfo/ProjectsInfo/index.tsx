@@ -9,10 +9,10 @@ import { Project } from '@/store/slices/types/projectSliceTypes';
 
 function ProjectsInfo() {
   const [currentProject, setCurrentProject] = useState<Project>();
-  const { tasks, tasksCount } = useAppSelector((state) => state.task);
-  const { ownProjects } = useAppSelector((state) => state.project);
+  const { tasks } = useAppSelector((state) => state.task);
+  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
-  const { projectId } = useParams();
+  const { projectId, list } = useParams();
 
   useEffect(() => {
     dispatch(setTasksCount({ completed: 0, totalCount: 0 }));
@@ -26,15 +26,20 @@ function ProjectsInfo() {
 
   useEffect(() => {
     if (projectId) {
-      const project = ownProjects.find((project) => project.id === +projectId);
-      if (project) setCurrentProject(project);
+      if (list === 'own') {
+        const project = ownProjects.find((project) => project.id === +projectId);
+        if (project) setCurrentProject(project);
+      } else {
+        const project = foreignProjects.find((project) => project.id === +projectId);
+        if (project) setCurrentProject(project);
+      }
     }
-  }, [tasks]);
+  }, [projectId, ownProjects, foreignProjects]);
 
   return (
     <>
       <ProjectsSection />
-      {projectId && <TasksSection tasksCount={tasksCount} currentProject={currentProject} />}
+      {projectId && <TasksSection currentProject={currentProject} />}
     </>
   );
 }

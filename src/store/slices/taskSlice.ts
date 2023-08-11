@@ -36,8 +36,8 @@ const taskSlice = createSlice({
     setTasksCount(state, action: PayloadAction<TasksCountPayload>) {
       state.tasksCount = action.payload;
     },
-    removeTask(state, action: PayloadAction<ProjectTask>) {
-      state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
+    removeTask(state, action: PayloadAction<number>) {
+      state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
   },
 });

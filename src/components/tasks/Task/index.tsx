@@ -9,6 +9,7 @@ import { removeTaskRequest } from '@/api/requests';
 import EditProjectAndTaskForm from '@/components/forms/ProjectForm/EditProjectAndTaskForm';
 import { setShowEditTaskForm } from '@/store/slices/mainSlice';
 import EmptyList from '@/components/errors/listError/EmptyList';
+import { removeTask } from '@/store/slices/taskSlice';
 
 function Task() {
   const [currentTask, setCurrentTask] = useState<ProjectTask>();
@@ -37,6 +38,7 @@ function Task() {
   const handleRemoveTask = async () => {
     if (taskId) {
       const data = await removeTaskRequest(taskId);
+      dispatch(removeTask(+taskId))
       if (data) {
         notify('The task has been deleted', 'success');
         navigate(`/profile/${list}/project/${projectId}/tasks-all`);

@@ -19,7 +19,7 @@ function ForeignProjectList({ foreignListRef }: ForeignProjectListProps) {
           <div>
             <div className={styles.projectsList}>
               {foreignProjects.map((project) => (
-                <Link to={`/profile/own/project/${project.id}/tasks-all`} key={project.id}>
+                <Link to={`/profile/foreign/project/${project.id}/tasks-all`} key={project.id}>
                   <ProjectItem project={project} />
                 </Link>
               ))}

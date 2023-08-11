@@ -18,7 +18,13 @@ const projectSlice = createSlice({
   initialState,
   reducers: {
     addForeignProject(state, action: PayloadAction<Project>) {
-      state.foreignProjects.push(action.payload);
+      const url = location.href;
+      
+      if (url.includes('all-projects') || url.includes('in-progress')) {
+        console.log(2);
+        
+        state.foreignProjects.push(action.payload);
+      }
     },
     setProjects(state, action: PayloadAction<Project[]>) {
       state.ownProjects = [...state.ownProjects, ...action.payload];
@@ -46,7 +52,9 @@ const projectSlice = createSlice({
           );
         }
       } else {
-        state.foreignProjects.unshift(action.payload);
+        if (state.foreignProjects.every((proj) => proj.status === action.payload.status)) {
+          state.foreignProjects.unshift(action.payload);
+        }
       }
     },
     updateForeignProject(state, action: PayloadAction<Project>) {
@@ -58,7 +66,9 @@ const projectSlice = createSlice({
           return project;
         });
       } else {
-        state.foreignProjects.unshift(action.payload);
+        if (state.foreignProjects.every((proj) => proj.status === action.payload.status)) {
+          state.foreignProjects.unshift(action.payload);
+        }
       }
     },
     setOwnProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {

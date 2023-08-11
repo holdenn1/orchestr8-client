@@ -1,13 +1,13 @@
+import { useAppSelector } from '@/hooks/reduxHooks';
 import { Project } from '@/store/slices/types/projectSliceTypes';
-import { TasksCountPayload } from '@/store/slices/types/taskSliceTypes';
 import { Link, useParams } from 'react-router-dom';
 
 type TasksSectionProps = {
-  tasksCount: TasksCountPayload;
   currentProject: Project | undefined;
 };
 
-function TasksSection({ tasksCount, currentProject }: TasksSectionProps) {
+function TasksSection({ currentProject }: TasksSectionProps) {
+  const { tasksCount } = useAppSelector((state) => state.task);
   const { projectId, list } = useParams();
 
   const tasksList = [

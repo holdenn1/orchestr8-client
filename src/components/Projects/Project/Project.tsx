@@ -37,23 +37,15 @@ function Project() {
           setCurrentProject(project);
         }
       } else {
-      }
-    }
-  }, [projectId, ownProjects, list]);
-
-  useEffect(() => {
-    if (projectId) {
-      if (list === 'foreign') {
         const project = foreignProjects.find((project) => project.id === Number(projectId));
         if (project) {
           setCurrentProject(project);
         }
       }
     }
-  }, [projectId, foreignProjects, list]);
+  }, [projectId, ownProjects, foreignProjects, list]);
 
   useEffect(() => {
-   
     if (status && projectId) {
       dispatch(fetchTasks({ statusTask: status, projectId }));
     }

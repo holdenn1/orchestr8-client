@@ -2,7 +2,7 @@
 @import 'src/styles/mixins/contentCenterFlex.scss';
 
 .wrapper {
-  height: calc(100vh - 200px);
+  height: calc(100vh - 220px);
   overflow-y: auto;
   overflow-x: hidden;
   @include scrollbar(6px, black);
@@ -10,15 +10,5 @@
   .projectsList {
     margin: 0 60px;
   }
-
-  .obs {
-    background-color: black;
-    height: 4px;
-    width: 100%;
-    bottom: 0;
-  }
 }
 
-.wrapperLoading {
-  @include contentCenterFlex;
-}
