@@ -7,6 +7,7 @@ export type InitialStateProjectSlice = {
   foreignProjectCount: ProjectCountPayload;
   currentPageOwnProjectList: number;
   currentPageForeignProjectList: number;
+  isSearching: boolean
 };
 
 export enum StatusProject {

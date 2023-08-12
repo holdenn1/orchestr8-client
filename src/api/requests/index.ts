@@ -52,6 +52,12 @@ export const createProjectRequest = (data: CreateProjectData) => instance.post('
 export const searchUsersByEmailRequest = (email: string) =>
   instance.get(`/project/members?searchText=${email}`);
 
+export const searchOwnProjectRequest = (titleProjectText: string, status: string) =>
+  instance.get(`/project/search-own-projects/${status}?searchText=${titleProjectText}`);
+
+export const searchForeignProjectRequest = (titleProjectText: string, status: string) =>
+  instance.get(`/project/search-foreign-projects/${status}?searchText=${titleProjectText}`);
+
 export const updateOwnProjectsRequest = (projectId: string, updateProjectData: UpdateProjectData) =>
   instance.patch(`/project/${projectId}`, updateProjectData);
 

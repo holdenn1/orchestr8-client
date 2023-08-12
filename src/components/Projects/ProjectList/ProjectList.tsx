@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchOwnProjectsAction } from '@/store/actions/projectsActions/fetchOwnProjects';
 import { useParams } from 'react-router-dom';
 import ProjectListHeader from '@/components/headers/ProjectListHeader';
@@ -16,6 +16,7 @@ import {
 } from '@/store/slices/projectSlice';
 
 function ProjectList() {
+  const { isSearching } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { status, list } = useParams();
   const { ref: ownListRef, inView: OwnInView } = useInView({
@@ -34,7 +35,7 @@ function ProjectList() {
       dispatch(setCurrentPageForeignProjectList(1));
       dispatch(clearForeignProjectsList());
     }
-  }, [status]);
+  }, [status, isSearching]);
 
   useEffect(() => {
     if (OwnInView) {
@@ -55,7 +56,7 @@ function ProjectList() {
         );
       }
     }
-  }, [OwnInView, foreignInView, status]);
+  }, [OwnInView, foreignInView, status, isSearching, list]);
 
   useEffect(() => {
     dispatch(setIsAddTaskForm(false));

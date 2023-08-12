@@ -9,24 +9,25 @@ export const fetchOwnProjectsAction = createAsyncThunk<void, { status: string }>
   async ({ status }, { dispatch, getState, rejectWithValue }) => {
     try {
       const {
-        project: { currentPageOwnProjectList },
+        project: { currentPageOwnProjectList, isSearching },
       } = getState() as RootState;
 
-      const { data }: GetOwnProjectResponse = await getOwnProjectsRequest(
-        status,
-        String(currentPageOwnProjectList),
-      );
+      if (!isSearching) {
+        const { data }: GetOwnProjectResponse = await getOwnProjectsRequest(
+          status,
+          String(currentPageOwnProjectList),
+        );
+        if (data.length) {
+          dispatch(setCurrentPageOwnProjectList(currentPageOwnProjectList + 1));
+        }
 
-      if (data.length) {
-        dispatch(setCurrentPageOwnProjectList(currentPageOwnProjectList + 1));
-      }
-
-      if (data) {
-        dispatch(setProjects(data));
+        if (data) {
+          dispatch(setProjects(data));
+        }
       }
     } catch (e) {
       console.error(e);
-      rejectWithValue(false)
+      rejectWithValue(false);
     }
   },
 );

@@ -8,6 +8,7 @@ const initialState: InitialStateProjectSlice = {
   foreignProjectCount: {} as ProjectCountPayload,
   currentPageOwnProjectList: 1,
   currentPageForeignProjectList: 1,
+  isSearching: false
 };
 
 const projectSlice = createSlice({
@@ -29,6 +30,9 @@ const projectSlice = createSlice({
     },
     clearForeignProjectsList(state) {
       state.foreignProjects = [];
+    },
+    setIsSearching(state, action:PayloadAction<boolean>){
+      state.isSearching = action.payload
     },
     updateOwnProject(state, action: PayloadAction<Project>) {
       state.ownProjects = state.ownProjects.map((project) => {
@@ -89,6 +93,7 @@ const projectSlice = createSlice({
 
 export const {
   setProjects,
+  setIsSearching,
   updateOwnProject,
   setOwnProjectsCount,
   setForeignProjects,

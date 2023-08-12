@@ -9,20 +9,21 @@ export const fetchForeignProjectsAction = createAsyncThunk<void, { status: strin
   async ({ status }, { dispatch, getState, rejectWithValue }) => {
     try {
       const {
-        project: { currentPageForeignProjectList },
+        project: { currentPageForeignProjectList, isSearching },
       } = getState() as RootState;
+      if (!isSearching) {
+        const { data }: GetForeignProjectResponse = await getForeignProjectsRequest(
+          status,
+          String(currentPageForeignProjectList),
+        );
 
-      const { data }: GetForeignProjectResponse = await getForeignProjectsRequest(
-        status,
-        String(currentPageForeignProjectList),
-      );
+        if (data.length) {
+          dispatch(setCurrentPageForeignProjectList(currentPageForeignProjectList + 1));
+        }
 
-      if (data.length) {
-        dispatch(setCurrentPageForeignProjectList(currentPageForeignProjectList + 1));
-      }
-
-      if (data) {
-        dispatch(setForeignProjects(data));
+        if (data) {
+          dispatch(setForeignProjects(data));
+        }
       }
     } catch (e) {
       console.error(e);

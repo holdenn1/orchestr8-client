@@ -15,6 +15,12 @@ export type SearchUsersByEmailActionProps = {
   setRecomendationMembersList: Dispatch<SetStateAction<Member[]>>;
 };
 
+export type searchProjectsActionProps = {
+  debounceTimeoutRef: MutableRefObject<number | null>;
+  value: string;
+  status: string
+}
+
 export type CreateProjectActionProps = {
   title: string;
   description: string;
