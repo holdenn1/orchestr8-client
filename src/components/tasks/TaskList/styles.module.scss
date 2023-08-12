@@ -1,18 +1,29 @@
 @import 'src/styles/mixins/contentCenterFlex.scss';
+@import 'src/styles/mixins/scrollbar.scss';
 .tasksList {
   color: black;
-  .taskItem {
-    background-color: rgb(228, 228, 228);
-    padding: 14px;
-    cursor: pointer;
+  .taskItemWrapper {
+    height: 60px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-bottom: 8px;
     border-radius: 12px;
-    margin-bottom: 6px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    background-color: rgb(228, 228, 228);
     &:hover {
       background-color: rgb(93, 134, 160);
       color: white;
+    }
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .taskItem {
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 12px;
+      span {
+        line-height: 120%;
+      }
     }
   }
   .taskComplete {
@@ -30,6 +41,10 @@
   }
 }
 .errorWrapper {
-  height: calc(100% - 210px);
+  height: calc(100vh - 420px);
+  p {
+    font-size: 36px;
+    font-weight: 500;
+  }
   @include contentCenterFlex;
 }

@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import ProjectItem from './ProjectItem';
 import EmptyList from '@/components/errors/listError/EmptyList';
 import { useAppSelector } from '@/hooks/reduxHooks';
-import Spinner from '@/components/UI/Spinner';
 
 type ForeignProjectListProps = {
   foreignListRef: (node?: Element | null | undefined) => void;
 };
 
 function ForeignProjectList({ foreignListRef }: ForeignProjectListProps) {
-  const { isLoading, foreignProjects } = useAppSelector((state) => state.project);
+  const { foreignProjects } = useAppSelector((state) => state.project);
 
   return (
     <div className={styles.wrapper}>
@@ -26,11 +25,10 @@ function ForeignProjectList({ foreignListRef }: ForeignProjectListProps) {
             </div>
           </div>
         ) : (
-          <>{!isLoading && <EmptyList>It's still empty here, add new projects!</EmptyList>}</>
+          <EmptyList>It's still empty here, add new projects!</EmptyList>
         )}
       </>
       <div className={styles.obs} ref={foreignListRef}></div>
-      {isLoading && <Spinner />}
     </div>
   );
 }

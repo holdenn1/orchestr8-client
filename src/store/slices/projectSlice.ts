@@ -1,14 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InitialStateProjectSlice, Project, ProjectCountPayload } from './types/projectSliceTypes';
-import { fetchOwnProjectsAction } from '../actions/projectsActions/fetchOwnProjects';
-import { fetchForeignProjectsAction } from '../actions/projectsActions/fetchForeignProjects';
 
 const initialState: InitialStateProjectSlice = {
   ownProjects: [],
   foreignProjects: [],
   ownProjectCount: {} as ProjectCountPayload,
   foreignProjectCount: {} as ProjectCountPayload,
-  isLoading: false,
   currentPageOwnProjectList: 1,
   currentPageForeignProjectList: 1,
 };
@@ -19,10 +16,8 @@ const projectSlice = createSlice({
   reducers: {
     addForeignProject(state, action: PayloadAction<Project>) {
       const url = location.href;
-      
+
       if (url.includes('all-projects') || url.includes('in-progress')) {
-        console.log(2);
-        
         state.foreignProjects.push(action.payload);
       }
     },
@@ -89,26 +84,6 @@ const projectSlice = createSlice({
     setCurrentPageForeignProjectList(state, action: PayloadAction<number>) {
       state.currentPageForeignProjectList = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addCase(fetchOwnProjectsAction.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchOwnProjectsAction.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(fetchOwnProjectsAction.rejected, (state, action) => {
-      state.isLoading = action.payload as boolean;
-    });
-    builder.addCase(fetchForeignProjectsAction.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchForeignProjectsAction.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(fetchForeignProjectsAction.rejected, (state, action) => {
-      state.isLoading = action.payload as boolean;
-    });
   },
 });
 

@@ -1,6 +1,8 @@
 export type InitialStateTaskSlice = {
   tasks: ProjectTask[];
   tasksCount: TasksCountPayload;
+  isLoading: boolean;
+  currentPageTaskList: number;
 };
 
 export enum StatusTask {

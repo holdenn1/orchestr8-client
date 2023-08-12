@@ -5,7 +5,6 @@ export type InitialStateProjectSlice = {
   foreignProjects: Project[];
   ownProjectCount: ProjectCountPayload;
   foreignProjectCount: ProjectCountPayload;
-  isLoading: boolean;
   currentPageOwnProjectList: number;
   currentPageForeignProjectList: number;
 };

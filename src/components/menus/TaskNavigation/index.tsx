@@ -2,16 +2,13 @@ import classNames from 'classnames';
 import styles from './styles.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { setIsAddTaskForm, setShowMembers } from '@/store/slices/mainSlice';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { removeProjectAction } from '@/store/actions/projectsActions/removeProject';
 
-type TaskNavigationProps = {
-  deleteProject: () => Promise<void>;
-  isMenu: boolean;
-};
-
-function TaskNavigation({ deleteProject, isMenu }: TaskNavigationProps) {
+function TaskNavigation({ isMenu }: { isMenu: boolean }) {
   const { isAddTaskForm, isShowMembers } = useAppSelector((state) => state.main);
-  const { list } = useParams();
+  const { list, projectId } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   return (
@@ -31,7 +28,7 @@ function TaskNavigation({ deleteProject, isMenu }: TaskNavigationProps) {
         )}
         {list === 'own' && (
           <li
-            onClick={() => deleteProject()}
+            onClick={() => dispatch(removeProjectAction({ navigate, projectId }))}
             className={classNames(styles.projectMenuItem, styles.removeMenuItem)}
           >
             Remove project

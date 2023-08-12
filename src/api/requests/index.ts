@@ -75,8 +75,8 @@ export const getForeignProjectCountsByStatusRequest = () => instance.get(`/proje
 export const createTaskRequest = (data: CreateTaskData, projectId: string) =>
   instance.post(`/task/create/${projectId}`, data);
 
-export const getTaskRequest = (projectId: string, status: string = StatusTask.ALL) =>
-  instance.get(`/task/${projectId}/${status}`);
+export const getTaskRequest = (projectId: string, status: string = StatusTask.ALL, currentPage: string) =>
+  instance.get(`/task/${projectId}/${status}?page=${currentPage}&pageSize=10`);
 
 export const updateTaskRequest = (taskId: string, updateTaskData: UpdateTaskData) =>
   instance.patch(`/task/${taskId}`, updateTaskData);

@@ -4,6 +4,8 @@ import { InitialStateTaskSlice, ProjectTask, TasksCountPayload } from './types/t
 const initialState: InitialStateTaskSlice = {
   tasks: [],
   tasksCount: {} as TasksCountPayload,
+  isLoading: false,
+  currentPageTaskList: 1,
 };
 
 const taskSlice = createSlice({
@@ -14,7 +16,7 @@ const taskSlice = createSlice({
       state.tasks.unshift(action.payload);
     },
     setTasks(state, action: PayloadAction<ProjectTask[]>) {
-      state.tasks = action.payload;
+      state.tasks = [...state.tasks, ...action.payload];
     },
     updateTask(state, action: PayloadAction<ProjectTask>) {
       if (state.tasks.every((task) => task.completed)) {
@@ -39,8 +41,22 @@ const taskSlice = createSlice({
     removeTask(state, action: PayloadAction<number>) {
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
+    clearTaskList(state) {
+      state.tasks = [];
+    },
+    setCurrentPageTaskList(state, action: PayloadAction<number>) {
+      state.currentPageTaskList = action.payload;
+    },
   },
 });
 
-export const { setTask, setTasks, updateTask, setTasksCount, removeTask } = taskSlice.actions;
+export const {
+  setTask,
+  setTasks,
+  updateTask,
+  setTasksCount,
+  removeTask,
+  clearTaskList,
+  setCurrentPageTaskList,
+} = taskSlice.actions;
 export default taskSlice.reducer;

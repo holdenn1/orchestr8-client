@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import ProjectItem from './ProjectItem';
 import EmptyList from '@/components/errors/listError/EmptyList';
 import { useAppSelector } from '@/hooks/reduxHooks';
-import Spinner from '@/components/UI/Spinner';
 
 type OwnProjectListProps = {
   ownListRef: (node?: Element | null | undefined) => void;
 };
 
 function OwnProjectList({ ownListRef }: OwnProjectListProps) {
-  const { isLoading, ownProjects } = useAppSelector((state) => state.project);
+  const { ownProjects } = useAppSelector((state) => state.project);
   return (
     <div className={styles.wrapper}>
       <>
@@ -25,11 +24,10 @@ function OwnProjectList({ ownListRef }: OwnProjectListProps) {
             </div>
           </div>
         ) : (
-          <>{!isLoading && <EmptyList>It's still empty here, add new projects!</EmptyList>}</>
+          <EmptyList>It's still empty here, add new projects!</EmptyList>
         )}
       </>
-      <div className={styles.obs} ref={ownListRef}></div>
-      {isLoading && <Spinner />}
+      <div  ref={ownListRef}></div>
     </div>
   );
 }

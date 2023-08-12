@@ -1,8 +1,7 @@
 import styles from './styles.module.scss';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import DotMenuIcon from '@/components/UI/DotMenuIcon';
-import { removeOwnProjectsRequest } from '@/api/requests';
 import TaskNavigation from '@/components/menus/TaskNavigation';
 import TaskList from '@/components/tasks/TaskList';
 import { Project as ProjectType } from '@/store/slices/types/projectSliceTypes';
@@ -17,17 +16,19 @@ import {
 } from '@/store/slices/mainSlice';
 import Members from '@/components/Members';
 import { fetchTasks } from '@/store/actions/tasksActions/fetchTasks';
+import { useInView } from 'react-intersection-observer';
+import { clearTaskList, setCurrentPageTaskList } from '@/store/slices/taskSlice';
 
 function Project() {
   const { isAddTaskForm, isEditTaskForm, isShowMembers } = useAppSelector((state) => state.main);
   const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
-  const { tasks } = useAppSelector((state) => state.task);
   const [isMenu, setIsMenu] = useState(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
-  const { projectId, tasks: status, taskId, list } = useParams();
-
+  const { projectId, tasks: statusTask, taskId, list } = useParams();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
 
   useEffect(() => {
     if (projectId) {
@@ -46,19 +47,22 @@ function Project() {
   }, [projectId, ownProjects, foreignProjects, list]);
 
   useEffect(() => {
-    if (status && projectId) {
-      dispatch(fetchTasks({ statusTask: status, projectId }));
-    }
-  }, [status]);
+    dispatch(setCurrentPageTaskList(1));
+    dispatch(clearTaskList());
+  }, [statusTask]);
 
-  const deleteProject = async () => {
-    if (projectId) {
-      const project = await removeOwnProjectsRequest(projectId);
-      if (project) {
-        navigate('/profile/own/projects/all-projects');
+  useEffect(() => {
+    if (inView) {
+      if (projectId && statusTask) {
+        dispatch(
+          fetchTasks({
+            projectId,
+            statusTask,
+          }),
+        );
       }
     }
-  };
+  }, [inView, statusTask]);
 
   return (
     <div
@@ -95,7 +99,7 @@ function Project() {
             )}
           </>
         )}
-        <TaskNavigation deleteProject={deleteProject} isMenu={isMenu} />
+        <TaskNavigation isMenu={isMenu} />
         <h3 className={styles.title}>
           Owner {currentProject?.owner.firstName} {currentProject?.owner.lastName}
         </h3>
@@ -109,10 +113,10 @@ function Project() {
               <>
                 {!isAddTaskForm && (
                   <h4 className={styles.taskTitle}>
-                    Task list ({status === 'tasks-all' ? 'All tasks' : 'Completed tasks'})
+                    Task list ({statusTask === 'tasks-all' ? 'All tasks' : 'Completed tasks'})
                   </h4>
                 )}
-                {!isAddTaskForm ? <TaskList tasks={tasks} /> : <AddTaskForm />}
+                {!isAddTaskForm ? <TaskList observeRef={ref} /> : <AddTaskForm />}
               </>
             )}
           </>

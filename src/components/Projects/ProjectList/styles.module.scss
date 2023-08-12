@@ -1,14 +1,6 @@
-@import 'src/styles/mixins/scrollbar.scss';
-@import 'src/styles/mixins/contentCenterFlex.scss';
-
 .wrapper {
-  height: calc(100vh - 220px);
-  overflow-y: auto;
-  overflow-x: hidden;
-  @include scrollbar(6px, black);
   margin: 20px;
   .projectsList {
     margin: 0 60px;
   }
 }
-

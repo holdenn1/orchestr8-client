@@ -2,14 +2,10 @@ import classNames from 'classnames';
 import styles from './../styles.module.scss';
 import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
 
-type TaskItemProps = {
-  task: ProjectTask;
-};
-
-function TaskItem({ task: { task, completed } }: TaskItemProps) {
+function TaskItem({ task: { task, completed } }: { task: ProjectTask }) {
   return (
-    <div>
-      <li className={classNames(styles.taskItem, { [styles.taskComplete]: completed })}>
+    <div className={classNames(styles.taskItemWrapper, { [styles.taskComplete]: completed })}>
+      <li className={styles.taskItem}>
         <span>{task}</span>
       </li>
     </div>

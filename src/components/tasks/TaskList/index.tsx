@@ -1,17 +1,14 @@
 import styles from './styles.module.scss';
 import TaskItem from './TaskItem';
 import { Link, useParams } from 'react-router-dom';
-import EmptyList from '@/components/errors/listError/EmptyList';
-import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
-type TaskListProps = {
-  tasks: ProjectTask[];
-};
-function TaskList({ tasks }: TaskListProps) {
+function TaskList({ observeRef }: { observeRef: (node?: Element | null | undefined) => void }) {
+  const { tasks } = useAppSelector((state) => state.task);
   const { projectId, tasks: statusTask, list } = useParams();
 
   return (
-    <>
+    <div>
       {tasks.length ? (
         <ul className={styles.tasksList}>
           {tasks?.map((task) => (
@@ -22,10 +19,11 @@ function TaskList({ tasks }: TaskListProps) {
         </ul>
       ) : (
         <div className={styles.errorWrapper}>
-          <EmptyList>No tasks found</EmptyList>
+          <p>No tasks found</p>
         </div>
       )}
-    </>
+      <div  ref={observeRef}></div>
+    </div>
   );
 }
 
