@@ -26,7 +26,7 @@ function SelectedMembers({
         <ul className={styles.selectesMembersList}>
           {selectedMembersList.map(({ id, email }) => (
             <li key={id} className={styles.selectesMembersItem}>
-              <span>{email}</span>{' '}
+              <span>{email}</span>
               <img onClick={() => removeMemberFromSelected(id)} src={removeIcon} alt='' />
             </li>
           ))}

@@ -5,6 +5,7 @@ import {
   CreateTaskData,
   LoginUserData,
   RegistrationUserData,
+  UpdateMemberRole,
   UpdateProjectData,
   UpdateTaskData,
 } from './types';
@@ -45,12 +46,15 @@ export const uploadAvatar = (cover: File) => {
 
 export const getUserRequest = () => instance.get('user/get-user');
 
+export const updateMemberRole = (memberId: string, memberRole: UpdateMemberRole) =>
+  instance.patch(`user/update/member-role/${memberId}`, memberRole);
+
 /* projects' requests */
 
 export const createProjectRequest = (data: CreateProjectData) => instance.post('/project/create', data);
 
 export const searchUsersByEmailRequest = (email: string) =>
-  instance.get(`/project/members?searchText=${email}`);
+  instance.get(`/project/users?searchText=${email}`);
 
 export const searchOwnProjectRequest = (titleProjectText: string, status: string) =>
   instance.get(`/project/search-own-projects/${status}?searchText=${titleProjectText}`);

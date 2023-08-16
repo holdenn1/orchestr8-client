@@ -1,5 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InitialStateProjectSlice, Project, ProjectCountPayload } from './types/projectSliceTypes';
+import {
+  InitialStateProjectSlice,
+  Project,
+  ProjectCountPayload,
+  UpdateMemberRoleTypes,
+} from './types/projectSliceTypes';
 
 const initialState: InitialStateProjectSlice = {
   ownProjects: [],
@@ -8,7 +13,7 @@ const initialState: InitialStateProjectSlice = {
   foreignProjectCount: {} as ProjectCountPayload,
   currentPageOwnProjectList: 1,
   currentPageForeignProjectList: 1,
-  isSearching: false
+  isSearching: false,
 };
 
 const projectSlice = createSlice({
@@ -31,13 +36,25 @@ const projectSlice = createSlice({
     clearForeignProjectsList(state) {
       state.foreignProjects = [];
     },
-    setIsSearching(state, action:PayloadAction<boolean>){
-      state.isSearching = action.payload
+    setIsSearching(state, action: PayloadAction<boolean>) {
+      state.isSearching = action.payload;
     },
     updateOwnProject(state, action: PayloadAction<Project>) {
       state.ownProjects = state.ownProjects.map((project) => {
         if (project.id === action.payload.id) {
           project = action.payload;
+        }
+        return project;
+      });
+    },
+    updateRole(state, { payload: { projectId, memberId, role } }: PayloadAction<UpdateMemberRoleTypes>) {
+      state.ownProjects = state.ownProjects.map((project) => {
+        if (project.id === projectId) {
+          project.members.forEach((member) => {
+            if (member.id === memberId) {
+              member.role = role;
+            }
+          });
         }
         return project;
       });
@@ -103,6 +120,7 @@ export const {
   updateStatusForeignProject,
   updateForeignProject,
   clearOwnProjectsList,
+  updateRole,
   clearForeignProjectsList,
   setCurrentPageOwnProjectList,
   setCurrentPageForeignProjectList,

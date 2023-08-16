@@ -1,11 +1,11 @@
 import { useAppSelector } from '@/hooks/reduxHooks';
 
 export function useAuth() {
-  const { userId, email, roles } = useAppSelector((state) => state.account.user);
+  const { id, email } = useAppSelector((state) => state.account.user);
   return {
     isAuth: !!email,
-    userId,
+    id,
     email,
-    roles,
   };
 }
+

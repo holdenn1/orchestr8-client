@@ -9,7 +9,6 @@ const initialState: InitialStateAccountSlice = {
     photo: null,
     phone: '',
     email: '',
-    roles: [],
     memberProjects: [],
   },
 };

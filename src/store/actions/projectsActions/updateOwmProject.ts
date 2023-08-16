@@ -48,6 +48,7 @@ export const updateOwnProjectAction = createAsyncThunk<void, UpdateProjectAction
         const { data }: UpdatedTaskRequest = await updateTaskRequest(taskId, {
           task: updateTaskData.task,
         });
+
         if (data) {
           dispatch(updateTask(data));
         }

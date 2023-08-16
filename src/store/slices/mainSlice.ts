@@ -2,7 +2,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { InitialStateMainSlice } from './types/mainSliseTypes';
 
 const initialState: InitialStateMainSlice = {
-
   isAddTaskForm: false,
   isEditTaskForm: false,
   isShowMembers: false,

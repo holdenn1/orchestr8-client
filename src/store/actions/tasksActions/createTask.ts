@@ -10,7 +10,7 @@ export const createTask = createAsyncThunk<void, CreateTaskActionProps>(
     try {
       const { data }: CreateTaskResponse = await createTaskRequest({ task }, projectId);
       if (data) {
-        dispatch(setTask({ ...data }));
+        // dispatch(setTask({ ...data }));
         dispatch(setIsAddTaskForm(false));
       }
     } catch (e) {

@@ -1,4 +1,4 @@
-import { UserRoles } from './userSliceTypes';
+import { MemberRole } from './userSliceTypes';
 
 export type InitialStateProjectSlice = {
   ownProjects: Project[];
@@ -7,7 +7,7 @@ export type InitialStateProjectSlice = {
   foreignProjectCount: ProjectCountPayload;
   currentPageOwnProjectList: number;
   currentPageForeignProjectList: number;
-  isSearching: boolean
+  isSearching: boolean;
 };
 
 export enum StatusProject {
@@ -25,10 +25,10 @@ export type Member = {
   phone: string;
   photo: string;
   email: string;
-  roles: UserRoles[];
+  role: MemberRole;
 };
 
-export type Owner = Member;
+export type Owner = Omit<Member, 'role'>;
 
 export type Project = {
   id: number;
@@ -44,4 +44,10 @@ export type ProjectCountPayload = {
   completed: string;
   'in-progress': string;
   suspend: string;
+};
+
+export type UpdateMemberRoleTypes = {
+  projectId: number;
+  memberId: number;
+  role: MemberRole;
 };

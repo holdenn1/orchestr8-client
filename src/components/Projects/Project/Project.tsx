@@ -49,9 +49,10 @@ function Project() {
   useEffect(() => {
     dispatch(setCurrentPageTaskList(1));
     dispatch(clearTaskList());
-  }, [statusTask]);
+  }, [statusTask, isAddTaskForm]);
 
   useEffect(() => {
+   
     if (inView) {
       if (projectId && statusTask) {
         dispatch(

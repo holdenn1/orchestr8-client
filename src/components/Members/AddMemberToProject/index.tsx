@@ -19,11 +19,10 @@ function AddMemberToProject() {
   function handleSubmit(resetForm: any) {
     if (currentProject && projectId && selectedMembersList.length) {
       const newMembersIds: number[] = selectedMembersList.map((member) => member.id);
-      const oldMembers: number[] = currentProject?.members.map((memberId) => memberId.id);
       dispatch(
         updateOwnProjectAction({
           projectId,
-          updateProjectData: { membersIds: [...oldMembers, ...newMembersIds] },
+          updateProjectData: { membersIds: newMembersIds },
         }),
       );
       setSelectedMembersList([]);

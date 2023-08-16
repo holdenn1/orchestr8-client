@@ -1,11 +1,9 @@
 import { Project } from "./projectSliceTypes";
 
-export enum UserRoles {
-  USER = 'user',
-  PROJECT_OWNER = 'project owner',
-  PROJECT_MANAGER = 'project manager',
+export enum MemberRole {
+  PROJECT_MEMBER = 'project_member',
+  PROJECT_MANAGER = 'project_manager',
 }
-
 
 export type User = {
   id: number | null;
@@ -14,7 +12,6 @@ export type User = {
   photo: string | null;
   phone: string;
   email: string;
-  roles: UserRoles[];
   memberProjects: Project[];
 };
 

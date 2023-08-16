@@ -7,6 +7,9 @@ import { Project } from '@/store/slices/types/projectSliceTypes';
 import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
 import profileIcon from 'icons/icons8-male-user-100.png';
 import EmptyList from '../errors/listError/EmptyList';
+import { MemberRole } from '@/store/slices/types/userSliceTypes';
+import { updateMemberRole } from '@/api/requests';
+import { updateRole } from '@/store/slices/projectSlice';
 
 function Members() {
   const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
@@ -27,31 +30,48 @@ function Members() {
   }, [projectId, ownProjects]);
 
   const deleteMember = (id: number) => {
-    const currentMembers = currentProject?.members.filter((member) => member.id !== id);
+    const currentMembers = currentProject?.members.filter((member) => member.id === id);
     if (currentMembers && projectId) {
       const membersIds: number[] = currentMembers?.map((member) => member.id);
       dispatch(updateOwnProjectAction({ projectId, updateProjectData: { membersIds } }));
     }
   };
+
+  const setMemberRole = async (memberId: number, memberRole: MemberRole) => {
+    console.log(12);
+
+    const role =
+      memberRole === MemberRole.PROJECT_MEMBER ? MemberRole.PROJECT_MANAGER : MemberRole.PROJECT_MEMBER;
+    await updateMemberRole(String(memberId), { memberRole: role });
+    if (projectId) dispatch(updateRole({ memberId, projectId: +projectId, role }));
+  };
+
   return (
     <>
       {list === 'own' && <AddMemberToProject />}
       <div className={styles.participantsProjectWrapper}>
         {currentProject?.members ? (
           <>
-            {currentProject?.members.map(({ id, email, firstName, lastName, photo }) => (
+            {currentProject?.members.map(({ id, email, firstName, lastName, photo, role }) => (
               <div key={id} className={styles.participantsProjectItem}>
                 <div className={styles.memberInfoWrapper}>
-                <img className={styles.memberAvatar} src={photo ?? profileIcon} alt='' />
-                <h4  className={styles.participantsName}>
-                  {firstName} {lastName}
-                </h4>
+                  <img className={styles.memberAvatar} src={photo ?? profileIcon} alt='' />
+                  <div>
+                    <h4 className={styles.participantsName}>
+                      {firstName} {lastName}
+                    </h4>
+                    <h3>{role === MemberRole.PROJECT_MEMBER ? 'Member' : 'Manager'}</h3>
+                  </div>
                 </div>
                 <p className={styles.participantsEmail}>Email: {email}</p>
                 {list === 'own' && (
                   <div className={styles.btnConteiner}>
-                    <button type='button' className={styles.messageBtn}>
-                      Message
+                    <button
+                      type='button'
+                      className={styles.messageBtn}
+                      onClick={() => setMemberRole(id, role)}
+                    >
+                      {role === MemberRole.PROJECT_MEMBER ? 'Appoint a Manager' : 'Appoint a Member'}
                     </button>
                     <button onClick={() => deleteMember(id)} type='button' className={styles.deleteBtn}>
                       Delete
