@@ -13,15 +13,16 @@ const mainSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-   
     setIsAddTaskForm(state, action: PayloadAction<boolean>) {
       state.isAddTaskForm = action.payload;
+      state.isShowMembers = false;
     },
     setShowEditTaskForm(state, action: PayloadAction<boolean>) {
       state.isEditTaskForm = action.payload;
     },
     setShowMembers(state, action: PayloadAction<boolean>) {
       state.isShowMembers = action.payload;
+      state.isAddTaskForm = false;
     },
     setSelectedMembersVisible(state, action: PayloadAction<boolean>) {
       state.selectedMembersVisible = action.payload;
@@ -33,7 +34,6 @@ const mainSlice = createSlice({
 });
 
 export const {
- 
   setIsAddTaskForm,
   setShowEditTaskForm,
   setShowMembers,

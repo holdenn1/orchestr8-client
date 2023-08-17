@@ -8,6 +8,7 @@ export type InitialStateProjectSlice = {
   currentPageOwnProjectList: number;
   currentPageForeignProjectList: number;
   isSearching: boolean;
+  isLoading:boolean
 };
 
 export enum StatusProject {

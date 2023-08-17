@@ -9,7 +9,7 @@ type OwnProjectListProps = {
 };
 
 function OwnProjectList({ ownListRef }: OwnProjectListProps) {
-  const { ownProjects } = useAppSelector((state) => state.project);
+  const { ownProjects, isLoading } = useAppSelector((state) => state.project);
   return (
     <div className={styles.wrapper}>
       <>
@@ -24,10 +24,10 @@ function OwnProjectList({ ownListRef }: OwnProjectListProps) {
             </div>
           </div>
         ) : (
-          <EmptyList>It's still empty here, add new projects!</EmptyList>
+          <>{!isLoading && <EmptyList>It's still empty here, add new projects!</EmptyList>}</>
         )}
       </>
-      <div  ref={ownListRef}></div>
+      <div ref={ownListRef}></div>
     </div>
   );
 }

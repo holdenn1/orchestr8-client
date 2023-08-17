@@ -38,12 +38,12 @@ function Members() {
   };
 
   const setMemberRole = async (memberId: number, memberRole: MemberRole) => {
-    console.log(12);
-
     const role =
       memberRole === MemberRole.PROJECT_MEMBER ? MemberRole.PROJECT_MANAGER : MemberRole.PROJECT_MEMBER;
-    await updateMemberRole(String(memberId), { memberRole: role });
-    if (projectId) dispatch(updateRole({ memberId, projectId: +projectId, role }));
+    if (projectId) {
+      await updateMemberRole(String(projectId), String(memberId), { memberRole: role });
+      dispatch(updateRole({ memberId, projectId: +projectId, role }));
+    }
   };
 
   return (
@@ -60,7 +60,9 @@ function Members() {
                     <h4 className={styles.participantsName}>
                       {firstName} {lastName}
                     </h4>
-                    <h3>{role === MemberRole.PROJECT_MEMBER ? 'Member' : 'Manager'}</h3>
+                    <h3 style={{ textAlign: 'center' }}>
+                      {role === MemberRole.PROJECT_MEMBER ? 'Member' : 'Manager'}
+                    </h3>
                   </div>
                 </div>
                 <p className={styles.participantsEmail}>Email: {email}</p>

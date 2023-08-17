@@ -9,7 +9,7 @@ type ForeignProjectListProps = {
 };
 
 function ForeignProjectList({ foreignListRef }: ForeignProjectListProps) {
-  const { foreignProjects } = useAppSelector((state) => state.project);
+  const { foreignProjects, isLoading } = useAppSelector((state) => state.project);
 
   return (
     <div className={styles.wrapper}>
@@ -25,7 +25,7 @@ function ForeignProjectList({ foreignListRef }: ForeignProjectListProps) {
             </div>
           </div>
         ) : (
-          <EmptyList>It's still empty here, add new projects!</EmptyList>
+          <>{!isLoading && <EmptyList>It's still empty here, add new projects!</EmptyList>}</>
         )}
       </>
       <div className={styles.obs} ref={foreignListRef}></div>

@@ -52,7 +52,6 @@ function Project() {
   }, [statusTask, isAddTaskForm]);
 
   useEffect(() => {
-   
     if (inView) {
       if (projectId && statusTask) {
         dispatch(

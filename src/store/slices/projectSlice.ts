@@ -5,6 +5,8 @@ import {
   ProjectCountPayload,
   UpdateMemberRoleTypes,
 } from './types/projectSliceTypes';
+import { fetchOwnProjectsAction } from '../actions/projectsActions/fetchOwnProjects';
+import { fetchForeignProjectsAction } from '../actions/projectsActions/fetchForeignProjects';
 
 const initialState: InitialStateProjectSlice = {
   ownProjects: [],
@@ -14,6 +16,7 @@ const initialState: InitialStateProjectSlice = {
   currentPageOwnProjectList: 1,
   currentPageForeignProjectList: 1,
   isSearching: false,
+  isLoading: false,
 };
 
 const projectSlice = createSlice({
@@ -24,6 +27,8 @@ const projectSlice = createSlice({
       const url = location.href;
 
       if (url.includes('all-projects') || url.includes('in-progress')) {
+        console.log(1);
+
         state.foreignProjects.push(action.payload);
       }
     },
@@ -82,7 +87,9 @@ const projectSlice = createSlice({
           return project;
         });
       } else {
-        if (state.foreignProjects.every((proj) => proj.status === action.payload.status)) {
+        const url = location.href;
+
+        if (url.includes('all-projects') || url.includes('in-progress')) {
           state.foreignProjects.unshift(action.payload);
         }
       }
@@ -105,6 +112,27 @@ const projectSlice = createSlice({
     setCurrentPageForeignProjectList(state, action: PayloadAction<number>) {
       state.currentPageForeignProjectList = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchOwnProjectsAction.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchOwnProjectsAction.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(fetchOwnProjectsAction.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(fetchForeignProjectsAction.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchForeignProjectsAction.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(fetchForeignProjectsAction.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 

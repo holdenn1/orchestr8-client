@@ -18,7 +18,6 @@ export const fetchTasks = createAsyncThunk<void, FetchTasksActionProps>(
         String(currentPageTaskList),
       );
 
-     
       if (data.length) {
         dispatch(setCurrentPageTaskList(currentPageTaskList + 1));
       }

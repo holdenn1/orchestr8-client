@@ -88,7 +88,7 @@ function SocketController() {
 
   const handleUpdateTask = (data: TaskData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
-    
+
     dispatch(updateTask(data.payload));
   };
 

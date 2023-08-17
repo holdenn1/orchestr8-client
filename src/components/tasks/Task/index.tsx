@@ -38,7 +38,7 @@ function Task() {
   const handleRemoveTask = async () => {
     if (taskId) {
       const data = await removeTaskRequest(taskId);
-      dispatch(removeTask(+taskId))
+      dispatch(removeTask(+taskId));
       if (data) {
         notify('The task has been deleted', 'success');
         navigate(`/profile/${list}/project/${projectId}/tasks-all`);
@@ -58,6 +58,15 @@ function Task() {
   useEffect(() => {
     dispatch(setShowEditTaskForm(false));
   }, []);
+
+  useEffect(() => {
+    if (taskId) {
+      const isCurrentTask = tasks.some((task) => task.id === +taskId);
+      if (!isCurrentTask) {
+        navigate(`/profile/${list}/project/${projectId}/tasks-all/`);
+      }
+    }
+  }, [tasks.length]);
 
   return (
     <div className={styles.taskWrapper}>
