@@ -3,8 +3,8 @@ import { MemberRole } from './userSliceTypes';
 export type InitialStateProjectSlice = {
   ownProjects: Project[];
   foreignProjects: Project[];
-  ownProjectCount: ProjectCountPayload;
-  foreignProjectCount: ProjectCountPayload;
+  ownProjectCount: ProjectCountPayload | null;
+  foreignProjectCount: ProjectCountPayload | null;
   currentPageOwnProjectList: number;
   currentPageForeignProjectList: number;
   isSearching: boolean;

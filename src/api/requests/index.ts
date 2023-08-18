@@ -3,6 +3,7 @@ import { AxiosRequestConfig } from 'axios';
 import {
   CreateProjectData,
   CreateTaskData,
+  GetForeignProjectsRequestProps,
   LoginUserData,
   RegistrationUserData,
   UpdateMemberRole,
@@ -46,7 +47,7 @@ export const uploadAvatar = (cover: File) => {
 
 export const getUserRequest = () => instance.get('user/get-user');
 
-export const updateMemberRole = (projectId:string, memberId: string, memberRole: UpdateMemberRole) =>
+export const updateMemberRole = (projectId: string, memberId: string, memberRole: UpdateMemberRole) =>
   instance.patch(`user/update-project/${projectId}/member/${memberId}`, memberRole);
 
 /* projects' requests */
@@ -75,10 +76,10 @@ export const getOwnProjectsRequest = (status: string = StatusProject.ALL, curren
 
 export const getOwnProjectCountsByStatusRequest = () => instance.get(`/project/own-project-count`);
 
-export const getForeignProjectsRequest = (status: string = StatusProject.ALL, currentPage: string) =>
+export const getForeignProjectsRequest = ({ status, currentPage }: GetForeignProjectsRequestProps) =>
   instance.get(`/project/foreign-projects/${status}?page=${currentPage}&pageSize=10`);
 
-export const getForeignProjectCountsByStatusRequest = () => instance.get(`/project/foreign-project-count`);
+export const getForeignProjectCountsByStatusRequest = () => instance.get(`/project/foreign/project/count`);
 
 /* tasks' requests */
 
@@ -88,10 +89,17 @@ export const createTaskRequest = (data: CreateTaskData, projectId: string) =>
 export const getTaskRequest = (projectId: string, status: string = StatusTask.ALL, currentPage: string) =>
   instance.get(`/task/${projectId}/${status}?page=${currentPage}&pageSize=10`);
 
-export const updateTaskRequest = (taskId: string, updateTaskData: UpdateTaskData) =>
-  instance.patch(`/task/${taskId}`, updateTaskData);
+type UpdateTaskRequestProps = {
+  projectId: string;
+  taskId: string | undefined;
+  updateTaskData: UpdateTaskData | undefined;
+};
 
-export const removeTaskRequest = (taskId: string) => instance.delete(`/task/${taskId}`);
+export const updateTaskRequest = ({ projectId, taskId, updateTaskData }: UpdateTaskRequestProps) =>
+  instance.patch(`/task/update-task-project/${projectId}/${taskId}`, updateTaskData);
+
+export const removeTaskRequest = (projectId: string, taskId: string) =>
+  instance.delete(`/task/remove/task/${taskId}/${projectId}`);
 
 export const geTasksCountsByStatusRequest = (projectId: string) =>
   instance.get(`task/tasks/count/${projectId}`);

@@ -80,7 +80,6 @@ function ProjectsSection() {
 
   useEffect(() => {
     dispatch(getForeignProjectsCountAction());
-    
   }, [foreignProjects]);
 
   return (

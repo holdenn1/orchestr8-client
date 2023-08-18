@@ -6,16 +6,17 @@ import { RootState } from '@/store';
 
 export const fetchForeignProjectsAction = createAsyncThunk<void, { status: string }>(
   'project/fetchForeignProjectsAction',
-  async ({ status }, { dispatch, getState, rejectWithValue }) => {
+  async ({ status,  }, { dispatch, getState, rejectWithValue }) => {
     try {
       const {
         project: { currentPageForeignProjectList, isSearching },
       } = getState() as RootState;
       if (!isSearching) {
-        const { data }: GetForeignProjectResponse = await getForeignProjectsRequest(
+        
+        const { data }: GetForeignProjectResponse = await getForeignProjectsRequest({
+          currentPage: String(currentPageForeignProjectList),
           status,
-          String(currentPageForeignProjectList),
-        );
+        });
 
         if (data.length) {
           dispatch(setCurrentPageForeignProjectList(currentPageForeignProjectList + 1));

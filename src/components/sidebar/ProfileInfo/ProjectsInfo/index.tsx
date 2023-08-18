@@ -15,7 +15,7 @@ function ProjectsInfo() {
   const { projectId, list } = useParams();
 
   useEffect(() => {
-    dispatch(setTasksCount({ completed: 0, totalCount: 0 }));
+    dispatch(setTasksCount(null));
   }, [projectId]);
 
   useEffect(() => {

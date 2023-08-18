@@ -10,14 +10,16 @@ import SubmitButton from '@/components/UI/buttons/SubmitButton';
 
 function AddMemberToProject() {
   const [selectedMembersList, setSelectedMembersList] = useState<Member[]>([]);
-  const { ownProjects } = useAppSelector((state) => state.project);
+  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
   const [currentProject, setCurrentProject] = useState<Project>();
   const [inputValue, setInputValue] = useState('');
-  const { projectId } = useParams();
+  const { projectId, list } = useParams();
   const dispatch = useAppDispatch();
 
   function handleSubmit(resetForm: any) {
+
     if (currentProject && projectId && selectedMembersList.length) {
+     
       const newMembersIds: number[] = selectedMembersList.map((member) => member.id);
       dispatch(
         updateOwnProjectAction({
@@ -33,10 +35,15 @@ function AddMemberToProject() {
 
   useEffect(() => {
     if (projectId) {
-      const project = ownProjects.find((project) => project.id === +projectId);
-      setCurrentProject(project);
+      if (list === 'own') {
+        const project = ownProjects.find((project) => project.id === +projectId);
+        setCurrentProject(project);
+      } else {
+        const project = foreignProjects.find((project) => project.id === +projectId);
+        setCurrentProject(project);
+      }
     }
-  }, [ownProjects]);
+  }, [ownProjects, foreignProjects, list]);
 
   return (
     <div className={styles.AddPaticipantToProject}>

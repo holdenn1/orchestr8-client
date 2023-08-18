@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { geTasksCountsByStatusRequest } from '@/api/requests';
 import { GeTasksCountActionResponse } from '../types/tasksTypes';
 import { setTasksCount } from '@/store/slices/taskSlice';
-import { TasksCountPayload } from '@/store/slices/types/taskSliceTypes';
 
 export const getTasksCountAction = createAsyncThunk<void, { projectId: string }>(
   'project/getTasksCountAction',
@@ -14,7 +13,7 @@ export const getTasksCountAction = createAsyncThunk<void, { projectId: string }>
           dispatch(setTasksCount({ totalCount, completed }));
         });
       } else {
-        dispatch(setTasksCount({} as TasksCountPayload));
+        dispatch(setTasksCount(null));
       }
     } catch (e) {
       console.error(e);

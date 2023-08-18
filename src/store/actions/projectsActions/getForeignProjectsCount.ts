@@ -2,7 +2,6 @@ import { getForeignProjectCountsByStatusRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { GetForeignProjectsCountActionResponse } from '../types/projectTypes';
 import { setForeignProjectsCount } from '@/store/slices/projectSlice';
-import { ProjectCountPayload } from '@/store/slices/types/projectSliceTypes';
 
 export const getForeignProjectsCountAction = createAsyncThunk<void>(
   'project/getForeignProjectsCountAction',
@@ -14,7 +13,7 @@ export const getForeignProjectsCountAction = createAsyncThunk<void>(
           dispatch(setForeignProjectsCount({ 'in-progress': inProgress, completed, suspend, totalCount }));
         });
       } else {
-        dispatch(setForeignProjectsCount({} as ProjectCountPayload));
+        dispatch(setForeignProjectsCount(null));
       }
     } catch (e) {
       console.error(e);

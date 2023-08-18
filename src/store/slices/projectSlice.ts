@@ -11,8 +11,8 @@ import { fetchForeignProjectsAction } from '../actions/projectsActions/fetchFore
 const initialState: InitialStateProjectSlice = {
   ownProjects: [],
   foreignProjects: [],
-  ownProjectCount: {} as ProjectCountPayload,
-  foreignProjectCount: {} as ProjectCountPayload,
+  ownProjectCount: null,
+  foreignProjectCount: null,
   currentPageOwnProjectList: 1,
   currentPageForeignProjectList: 1,
   isSearching: false,
@@ -25,15 +25,14 @@ const projectSlice = createSlice({
   reducers: {
     addForeignProject(state, action: PayloadAction<Project>) {
       const url = location.href;
-
       if (url.includes('all-projects') || url.includes('in-progress')) {
-        console.log(1);
-
         state.foreignProjects.push(action.payload);
       }
     },
     setProjects(state, action: PayloadAction<Project[]>) {
-      state.ownProjects = [...state.ownProjects, ...action.payload];
+      const oldProjectIds = state.ownProjects.map((proj) => proj.id);
+      const newProjects = action.payload.filter((proj) => !oldProjectIds.includes(proj.id));
+      state.ownProjects = [...state.ownProjects, ...newProjects];
     },
     clearOwnProjectsList(state) {
       state.ownProjects = [];
@@ -88,19 +87,20 @@ const projectSlice = createSlice({
         });
       } else {
         const url = location.href;
-
         if (url.includes('all-projects') || url.includes('in-progress')) {
           state.foreignProjects.unshift(action.payload);
         }
       }
     },
-    setOwnProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
+    setOwnProjectsCount(state, action: PayloadAction<ProjectCountPayload | null>) {
       state.ownProjectCount = action.payload;
     },
     setForeignProjects(state, action: PayloadAction<Project[]>) {
-      state.foreignProjects = [...state.foreignProjects, ...action.payload];
+      const oldProjectIds = state.foreignProjects.map((proj) => proj.id);
+      const newProjects = action.payload.filter((proj) => !oldProjectIds.includes(proj.id));
+      state.foreignProjects = [...state.foreignProjects, ...newProjects];
     },
-    setForeignProjectsCount(state, action: PayloadAction<ProjectCountPayload>) {
+    setForeignProjectsCount(state, action: PayloadAction<ProjectCountPayload | null>) {
       state.foreignProjectCount = action.payload;
     },
     removeForeignProject(state, action: PayloadAction<Project>) {

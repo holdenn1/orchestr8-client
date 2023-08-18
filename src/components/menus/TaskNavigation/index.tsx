@@ -5,7 +5,7 @@ import { setIsAddTaskForm, setShowMembers } from '@/store/slices/mainSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import { removeProjectAction } from '@/store/actions/projectsActions/removeProject';
 
-function TaskNavigation({ isMenu }: { isMenu: boolean }) {
+function TaskNavigation({ isMenu, isManager }: { isMenu: boolean; isManager: boolean }) {
   const { isAddTaskForm, isShowMembers } = useAppSelector((state) => state.main);
   const { list, projectId } = useParams();
   const navigate = useNavigate();
@@ -18,10 +18,12 @@ function TaskNavigation({ isMenu }: { isMenu: boolean }) {
       })}
     >
       <ul className={styles.projectMenuList}>
-        <li onClick={() => dispatch(setShowMembers(!isShowMembers))} className={styles.projectMenuItem}>
-          {!isShowMembers ? 'Show members' : 'Return to tasks'}
-        </li>
         {list === 'own' && (
+          <li onClick={() => dispatch(setShowMembers(!isShowMembers))} className={styles.projectMenuItem}>
+            {!isShowMembers ? 'Show members' : 'Return to tasks'}
+          </li>
+        )}
+        {(list === 'own' || isManager) && (
           <li onClick={() => dispatch(setIsAddTaskForm(!isAddTaskForm))} className={styles.projectMenuItem}>
             {isAddTaskForm ? 'Task list' : 'Add task'}
           </li>

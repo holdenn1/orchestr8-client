@@ -11,7 +11,7 @@ import { setShowEditTaskForm } from '@/store/slices/mainSlice';
 import EmptyList from '@/components/errors/listError/EmptyList';
 import { removeTask } from '@/store/slices/taskSlice';
 
-function Task() {
+function Task({ isManager }: { isManager: boolean }) {
   const [currentTask, setCurrentTask] = useState<ProjectTask>();
   const { tasks } = useAppSelector((state) => state.task);
   const { isEditTaskForm } = useAppSelector((state) => state.main);
@@ -20,14 +20,24 @@ function Task() {
   const navigate = useNavigate();
 
   const handleCompleteTask = () => {
+    console.log(2);
+
     if (taskId) {
+      console.log(taskId);
+
       if (currentTask?.completed) {
         if (projectId && list) {
+          console.log(projectId && list);
+
           dispatch(updateTaskAction({ taskId, updateData: { completed: false }, navigate, projectId, list }));
         }
         notify('The task is returned to work', 'success');
       } else {
+        console.log();
+
         if (projectId && list) {
+          console.log(projectId && list);
+
           dispatch(updateTaskAction({ taskId, updateData: { completed: true }, navigate, projectId, list }));
         }
         notify('The task is completed', 'success');
@@ -36,8 +46,9 @@ function Task() {
   };
 
   const handleRemoveTask = async () => {
-    if (taskId) {
-      const data = await removeTaskRequest(taskId);
+    if (taskId && projectId) {
+     
+      const data = await removeTaskRequest(projectId, taskId);
       dispatch(removeTask(+taskId));
       if (data) {
         notify('The task has been deleted', 'success');
@@ -71,10 +82,10 @@ function Task() {
   return (
     <div className={styles.taskWrapper}>
       {isEditTaskForm ? (
-        <>{list === 'own' && <EditProjectAndTaskForm />}</>
+        <>{(list === 'own' || isManager) && <EditProjectAndTaskForm />}</>
       ) : (
         <>
-          {list === 'own' && (
+          {(list === 'own' || isManager) && (
             <div className={styles.btnWrapper}>
               <button className={styles.allTasksBtn} onClick={handleCompleteTask}>
                 {currentTask?.completed ? 'Return to work' : 'Completed'}

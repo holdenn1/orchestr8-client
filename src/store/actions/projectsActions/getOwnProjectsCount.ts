@@ -2,7 +2,6 @@ import { getOwnProjectCountsByStatusRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { GetOwnProjectsCountActionResponse } from '../types/projectTypes';
 import { setOwnProjectsCount } from '@/store/slices/projectSlice';
-import { ProjectCountPayload } from '@/store/slices/types/projectSliceTypes';
 
 export const getOwnProjectsCountAction = createAsyncThunk<void>(
   'project/getOwnProjectsCountAction',
@@ -14,7 +13,7 @@ export const getOwnProjectsCountAction = createAsyncThunk<void>(
           dispatch(setOwnProjectsCount({ 'in-progress': inProgress, completed, suspend, totalCount }));
         });
       } else {
-        dispatch(setOwnProjectsCount({} as ProjectCountPayload));
+        dispatch(setOwnProjectsCount(null));
       }
     } catch (e) {
       console.error(e);

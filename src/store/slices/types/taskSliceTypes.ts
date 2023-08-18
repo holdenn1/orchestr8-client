@@ -1,6 +1,6 @@
 export type InitialStateTaskSlice = {
   tasks: ProjectTask[];
-  tasksCount: TasksCountPayload;
+  tasksCount: TasksCountPayload | null;
   isLoading: boolean;
   currentPageTaskList: number;
 };

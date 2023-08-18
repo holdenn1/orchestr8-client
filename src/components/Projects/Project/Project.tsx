@@ -18,13 +18,17 @@ import Members from '@/components/Members';
 import { fetchTasks } from '@/store/actions/tasksActions/fetchTasks';
 import { useInView } from 'react-intersection-observer';
 import { clearTaskList, setCurrentPageTaskList } from '@/store/slices/taskSlice';
+import { MemberRole } from '@/store/slices/types/userSliceTypes';
+import { useAuth } from '@/hooks/useAuth';
 
 function Project() {
   const { isAddTaskForm, isEditTaskForm, isShowMembers } = useAppSelector((state) => state.main);
   const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
-  const [isMenu, setIsMenu] = useState(false);
+  const [isManager, setIsManager] = useState<boolean>(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
   const { projectId, tasks: statusTask, taskId, list } = useParams();
+  const [isMenu, setIsMenu] = useState(false);
+  const { id: userId } = useAuth();
   const dispatch = useAppDispatch();
   const { ref, inView } = useInView({
     threshold: 0,
@@ -35,11 +39,23 @@ function Project() {
       if (list === 'own') {
         const project = ownProjects.find((project) => project.id === Number(projectId));
         if (project) {
+          const manager = project.members.some((member) => {
+            if (member.id === userId) {
+              if (member.role === MemberRole.PROJECT_MANAGER) return true;
+            }
+          });
+          setIsManager(manager);
           setCurrentProject(project);
         }
       } else {
         const project = foreignProjects.find((project) => project.id === Number(projectId));
         if (project) {
+          const manager = project.members.some((member) => {
+            if (member.id === userId) {
+              if (member.role === MemberRole.PROJECT_MANAGER) return true;
+            }
+          });
+          setIsManager(manager);
           setCurrentProject(project);
         }
       }
@@ -89,7 +105,7 @@ function Project() {
         </div>
         {taskId && (
           <>
-            {list === 'own' && (
+            {(list === 'own' || isManager) && (
               <img
                 onClick={() => dispatch(setShowEditTaskForm(!isEditTaskForm))}
                 className={styles.editIcon}
@@ -99,7 +115,7 @@ function Project() {
             )}
           </>
         )}
-        <TaskNavigation isMenu={isMenu} />
+        <TaskNavigation isMenu={isMenu} isManager={isManager} />
         <h3 className={styles.title}>
           Owner {currentProject?.owner.firstName} {currentProject?.owner.lastName}
         </h3>
@@ -108,7 +124,7 @@ function Project() {
         {!isShowMembers ? (
           <>
             {taskId ? (
-              <Task />
+              <Task isManager={isManager} />
             ) : (
               <>
                 {!isAddTaskForm && (

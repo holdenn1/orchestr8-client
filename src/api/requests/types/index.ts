@@ -30,3 +30,8 @@ export type UpdateTaskData = {
 export type UpdateMemberRole = {
   memberRole: MemberRole
 }
+
+export type GetForeignProjectsRequestProps = {
+  status: string;
+  currentPage: string;
+};

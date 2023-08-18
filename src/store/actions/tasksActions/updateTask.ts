@@ -7,8 +7,10 @@ export const updateTaskAction = createAsyncThunk<void, UpdateTaskActionProps>(
   'task/updateTaskAction',
   async ({ taskId, updateData, navigate, list, projectId }, { dispatch }) => {
     try {
-      const { data }: UpdatedTaskRequest = await updateTaskRequest(taskId, {
-        ...updateData,
+      const { data }: UpdatedTaskRequest = await updateTaskRequest({
+        projectId,
+        taskId,
+        updateTaskData: updateData,
       });
       if (data) {
         dispatch(updateTask(data));

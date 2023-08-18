@@ -3,7 +3,7 @@ import { InitialStateTaskSlice, ProjectTask, TasksCountPayload } from './types/t
 
 const initialState: InitialStateTaskSlice = {
   tasks: [],
-  tasksCount: {} as TasksCountPayload,
+  tasksCount: null,
   isLoading: false,
   currentPageTaskList: 1,
 };
@@ -16,7 +16,9 @@ const taskSlice = createSlice({
       state.tasks.unshift(action.payload);
     },
     setTasks(state, action: PayloadAction<ProjectTask[]>) {
-      state.tasks = [...state.tasks, ...action.payload];
+      const oldTasksIds = state.tasks.map((task) => task.id);
+      const newTasks = action.payload.filter((task) => !oldTasksIds.includes(task.id));
+      state.tasks = [...state.tasks, ...newTasks];
     },
     updateTask(state, action: PayloadAction<ProjectTask>) {
       if (state.tasks.every((task) => task.completed)) {
@@ -35,7 +37,7 @@ const taskSlice = createSlice({
       }
       state.tasks.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1));
     },
-    setTasksCount(state, action: PayloadAction<TasksCountPayload>) {
+    setTasksCount(state, action: PayloadAction<TasksCountPayload | null>) {
       state.tasksCount = action.payload;
     },
     removeTask(state, action: PayloadAction<number>) {
