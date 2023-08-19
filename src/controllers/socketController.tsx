@@ -1,30 +1,26 @@
 import { BASE_URL } from '@/api';
 import { useEffect } from 'react';
 import { Manager } from 'socket.io-client';
-import { NotificationType } from './types';
+import { NotificationType, ProjectData, TaskData, UpdateMemberRole } from './types';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import {
   addForeignProject,
   removeForeignProject,
   updateForeignProject,
+  updateMemberRoleToForeignProject,
+  updateOwnProject,
   updateStatusForeignProject,
 } from '@/store/slices/projectSlice';
-import { Project } from '@/store/slices/types/projectSliceTypes';
 import { getForeignProjectsCountAction } from '@/store/actions/projectsActions/getForeignProjectsCount';
-import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
 import { removeTask, setTask, updateTask } from '@/store/slices/taskSlice';
+import { useAuth } from '@/hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
-type ProjectData = {
-  payload: Project;
-  socketId: string;
-};
-type TaskData = {
-  payload: ProjectTask;
-  socketId: string;
-};
 function SocketController() {
   const { user } = useAppSelector((state) => state.account);
   const dispatch = useAppDispatch();
+  const { id: userId } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const manager = new Manager(BASE_URL, {
@@ -40,6 +36,7 @@ function SocketController() {
     socket.on(NotificationType.ADD_TASK, handleTaskCreate);
     socket.on(NotificationType.REMOVE_TASK, handleRemoveTask);
     socket.on(NotificationType.UPDATE_TASK, handleUpdateTask);
+    socket.on(NotificationType.UPDATE_MEMBER_ROLE, handleUpdateMemberRole);
     return () => {
       socket.disconnect();
     };
@@ -47,16 +44,33 @@ function SocketController() {
 
   const handleProjectCreate = (data: ProjectData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
-    dispatch(addForeignProject(data.payload));
+    if (data.payload.members.some((member) => member.id === user.id)) {
+      dispatch(addForeignProject(data.payload));
+    }
   };
 
   const handleUpdateProject = (data: ProjectData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
+
     if (data.payload.members.some((member) => member.id === user.id)) {
       dispatch(updateForeignProject(data.payload));
     } else {
+      const url = location.href;
+
       dispatch(removeForeignProject(data.payload));
+      if (url.includes('tasks') && data.payload.owner.id !== userId) {
+        navigate('/profile/foreign/projects/all-projects');
+      }
     }
+
+    if (data.payload.owner.id === userId) {
+      dispatch(updateOwnProject(data.payload));
+    }
+  };
+
+  const handleUpdateMemberRole = (data: UpdateMemberRole) => {
+    if ((window as any)?.socket?.id === data.socketId) return;
+    dispatch(updateMemberRoleToForeignProject(data.payload));
   };
 
   const handleUpdateProjectStatus = (data: ProjectData) => {
@@ -70,9 +84,16 @@ function SocketController() {
   };
 
   const handleRemoveProject = (data: ProjectData) => {
+    const url = location.href;
+
     if ((window as any)?.socket?.id === data.socketId) return;
+
     if (data.payload.members.some((member) => member.id === user.id)) {
       dispatch(removeForeignProject(data.payload));
+    }
+
+    if (url.includes('tasks')) {
+      navigate('/profile/foreign/projects/all-projects');
     }
   };
 
@@ -83,6 +104,7 @@ function SocketController() {
 
   const handleRemoveTask = (data: TaskData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
+
     dispatch(removeTask(data.payload.id));
   };
 

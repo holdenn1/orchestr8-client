@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { MouseEvent, Dispatch } from 'react';
 import { Project, StatusProject } from '@/store/slices/types/projectSliceTypes';
-import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
+import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
 
 type StatusProjectMenuProps = {
   setIsMenu: Dispatch<React.SetStateAction<boolean>>;
@@ -18,9 +18,9 @@ function StatusProjectMenu({ isMenu, setIsMenu, project: {id, status} }: StatusP
   const handleComplete = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     if (status !== StatusProject.COMPLETED) {
-      dispatch(updateOwnProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.COMPLETED } }));
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.COMPLETED } }));
     } else {
-      dispatch(updateOwnProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
     }
     setIsMenu(false);
   };
@@ -28,9 +28,9 @@ function StatusProjectMenu({ isMenu, setIsMenu, project: {id, status} }: StatusP
   const handleSuspend = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     if (status !== StatusProject.SUSPEND) {
-      dispatch(updateOwnProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.SUSPEND } }));
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.SUSPEND } }));
     } else {
-      dispatch(updateOwnProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
+      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
     }
     setIsMenu(false);
   };

@@ -4,7 +4,7 @@ import AddMemberToProject from './AddMemberToProject';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { useParams } from 'react-router-dom';
 import { Project } from '@/store/slices/types/projectSliceTypes';
-import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
+import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
 import profileIcon from 'icons/icons8-male-user-100.png';
 import EmptyList from '../errors/listError/EmptyList';
 import { MemberRole } from '@/store/slices/types/userSliceTypes';
@@ -39,7 +39,7 @@ function Members() {
     const currentMembers = currentProject?.members.filter((member) => member.id === id);
     if (currentMembers && projectId) {
       const membersIds: number[] = currentMembers?.map((member) => member.id);
-      dispatch(updateOwnProjectAction({ projectId, updateProjectData: { membersIds } }));
+      dispatch(updateProjectAction({ projectId, updateProjectData: { membersIds }, list }));
     }
   };
 

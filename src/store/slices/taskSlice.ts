@@ -21,7 +21,7 @@ const taskSlice = createSlice({
       state.tasks = [...state.tasks, ...newTasks];
     },
     updateTask(state, action: PayloadAction<ProjectTask>) {
-      if (state.tasks.every((task) => task.completed)) {
+      if (state.tasks.every((task) => task.completed) && state.tasks.length !== 1) {
         if (action.payload.completed) {
           state.tasks.unshift(action.payload);
         } else {

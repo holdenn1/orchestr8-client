@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Member, Project } from '@/store/slices/types/projectSliceTypes';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { useParams } from 'react-router-dom';
-import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
+import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
 import SubmitButton from '@/components/UI/buttons/SubmitButton';
 
 function AddMemberToProject() {
@@ -17,12 +17,13 @@ function AddMemberToProject() {
   const dispatch = useAppDispatch();
 
   function handleSubmit(resetForm: any) {
+    
 
     if (currentProject && projectId && selectedMembersList.length) {
      
       const newMembersIds: number[] = selectedMembersList.map((member) => member.id);
       dispatch(
-        updateOwnProjectAction({
+        updateProjectAction({
           projectId,
           updateProjectData: { membersIds: newMembersIds },
         }),

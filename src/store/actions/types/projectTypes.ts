@@ -33,6 +33,7 @@ export type UpdateProjectActionProps = {
   updateProjectData: UpdateProjectData;
   updateTaskData?: UpdateTaskData;
   taskId?:string
+  list?: string
 };
 
 export type UpdatedProjectRequest = {

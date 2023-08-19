@@ -2,7 +2,7 @@ import SubmitButton from '@/components/UI/buttons/SubmitButton';
 import TextArea from '@/components/UI/inputs/formInputs/TextArea';
 import TextInput from '@/components/UI/inputs/formInputs/TextInput';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { updateOwnProjectAction } from '@/store/actions/projectsActions/updateOwmProject';
+import { updateProjectAction } from '@/store/actions/projectsActions/updateProject';
 import { setShowEditTaskForm } from '@/store/slices/mainSlice';
 import { Form, Formik } from 'formik';
 import { useParams } from 'react-router-dom';
@@ -14,7 +14,7 @@ type InitialValuesEditProjectAndTaskForm = {
 };
 
 function EditProjectAndTaskForm() {
-  const { projectId, taskId } = useParams();
+  const { projectId, taskId, list } = useParams();
   const dispatch = useAppDispatch();
 
   const initialValues: InitialValuesEditProjectAndTaskForm = {
@@ -29,11 +29,12 @@ function EditProjectAndTaskForm() {
   ) => {
     if (projectId && taskId) {
       dispatch(
-        updateOwnProjectAction({
+        updateProjectAction({
           projectId,
           taskId,
           updateProjectData: { title: title.trim(), description: description.trim() },
           updateTaskData: { task: task.trim() },
+          list,
         }),
       );
       resetForm();
@@ -49,7 +50,7 @@ function EditProjectAndTaskForm() {
       {() => (
         <Form>
           <TextInput name='title' type='text' label='Title Project' placeholder='Edit title' />
-          <TextArea name='description' label='descriptionProject' placeholder='Edidt description project' />
+          <TextArea name='description' label='Description Project' placeholder='Edidt description project' />
           <TextArea name='task' label='Task text' placeholder='Edit task text' />
           <div style={{ textAlign: 'center' }}>
             <SubmitButton>Edit project</SubmitButton>

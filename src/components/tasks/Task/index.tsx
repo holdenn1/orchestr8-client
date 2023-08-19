@@ -20,24 +20,14 @@ function Task({ isManager }: { isManager: boolean }) {
   const navigate = useNavigate();
 
   const handleCompleteTask = () => {
-    console.log(2);
-
     if (taskId) {
-      console.log(taskId);
-
       if (currentTask?.completed) {
         if (projectId && list) {
-          console.log(projectId && list);
-
           dispatch(updateTaskAction({ taskId, updateData: { completed: false }, navigate, projectId, list }));
         }
         notify('The task is returned to work', 'success');
       } else {
-        console.log();
-
         if (projectId && list) {
-          console.log(projectId && list);
-
           dispatch(updateTaskAction({ taskId, updateData: { completed: true }, navigate, projectId, list }));
         }
         notify('The task is completed', 'success');
@@ -47,7 +37,6 @@ function Task({ isManager }: { isManager: boolean }) {
 
   const handleRemoveTask = async () => {
     if (taskId && projectId) {
-     
       const data = await removeTaskRequest(projectId, taskId);
       dispatch(removeTask(+taskId));
       if (data) {

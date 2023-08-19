@@ -48,7 +48,7 @@ export const uploadAvatar = (cover: File) => {
 export const getUserRequest = () => instance.get('user/get-user');
 
 export const updateMemberRole = (projectId: string, memberId: string, memberRole: UpdateMemberRole) =>
-  instance.patch(`user/update-project/${projectId}/member/${memberId}`, memberRole);
+  instance.patch(`user/update-user-role-project/${projectId}/member/${memberId}`, memberRole);
 
 /* projects' requests */
 

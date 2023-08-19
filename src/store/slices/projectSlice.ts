@@ -7,6 +7,7 @@ import {
 } from './types/projectSliceTypes';
 import { fetchOwnProjectsAction } from '../actions/projectsActions/fetchOwnProjects';
 import { fetchForeignProjectsAction } from '../actions/projectsActions/fetchForeignProjects';
+import { UpdatedProjectAndUserRole } from '@/controllers/types';
 
 const initialState: InitialStateProjectSlice = {
   ownProjects: [],
@@ -57,6 +58,21 @@ const projectSlice = createSlice({
           project.members.forEach((member) => {
             if (member.id === memberId) {
               member.role = role;
+            }
+          });
+        }
+        return project;
+      });
+    },
+    updateMemberRoleToForeignProject(
+      state,
+      { payload: { projectId, memberId, memberRole } }: PayloadAction<UpdatedProjectAndUserRole>,
+    ) {
+      state.foreignProjects = state.foreignProjects.map((project) => {
+        if (project.id === projectId) {
+          project.members.forEach((member) => {
+            if (member.id === memberId) {
+              member.role = memberRole;
             }
           });
         }
@@ -152,5 +168,6 @@ export const {
   clearForeignProjectsList,
   setCurrentPageOwnProjectList,
   setCurrentPageForeignProjectList,
+  updateMemberRoleToForeignProject,
 } = projectSlice.actions;
 export default projectSlice.reducer;
