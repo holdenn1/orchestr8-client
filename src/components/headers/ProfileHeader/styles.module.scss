@@ -11,6 +11,30 @@
   position: relative;
   .logoIcon {
     margin: 0 20px;
+    @media screen and (max-width: 440px) {
+      margin: 0 20px 0 -16px;
+    }
+  }
+
+  .contactsIconWrapper {
+    visibility: hidden;
+    box-sizing: border-box;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(160, 160, 160);
+    padding: 8px;
+    border-radius: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 76px;
+    @media screen and (max-width: 787px) {
+      visibility: visible;
+    }
   }
   .addProjectBtn {
     display: block;
@@ -19,8 +43,39 @@
     width: 180px;
     border-radius: 20px;
     margin: 0 20px 0 auto;
+    @media screen and (max-width: 520px) {
+      display: none;
+    }
   }
 
+  .projIconWrapper,
+  .projIconWrapperMenu {
+    visibility: hidden;
+    box-sizing: border-box;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(160, 160, 160);
+    padding: 8px;
+    border-radius: 100%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 182px;
+    @media screen and (max-width: 520px) {
+      visibility: visible;
+    }
+    @media screen and (max-width: 379px) {
+      visibility: hidden;
+    }
+  }
+
+  .projIconWrapperMenu {
+    right: 130px;
+  }
   .bellIconWrapper {
     width: 24px;
     height: 24px;
@@ -29,6 +84,5 @@
     top: 20px;
     right: 0px;
     @include profleIconWrapper;
-
   }
 }

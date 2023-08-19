@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import contactsIcon from 'icons/icons8-person-30.png';
+import contactsIcon from 'icons/icons8-project-24 (1).png';
 import tasksIcon from 'icons/icons8-task-24.png';
 import { Link, useParams } from 'react-router-dom';
 import classNames from 'classnames';

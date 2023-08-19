@@ -59,7 +59,10 @@ function AddMemberToProject() {
                 setSelectedMembersList={setSelectedMembersList}
               />
             </div>
+            <div className={styles.btnSubWrapper}>
+
             <SubmitButton>Add members</SubmitButton>
+            </div>
           </Form>
         )}
       </Formik>

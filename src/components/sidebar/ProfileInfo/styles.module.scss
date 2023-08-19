@@ -1,5 +1,14 @@
 
 .wrapper {
   grid-area: profileInfo;
-
+  @media screen and (max-width: 787px) {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    z-index: 120;
+    background-color: #eeeef7;
+    border-top: 1px solid black;
+    border-left:1px solid black;
+    display: none;
+  }
 }

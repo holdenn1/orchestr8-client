@@ -8,8 +8,8 @@ import { searchForeignProjectsAction } from '@/store/actions/projectsActions/sea
 
 function ProjectListHeader() {
   const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
-  const debounceTimeoutRefOwn = useRef<number | null>(null);
   const debounceTimeoutRefForeign = useRef<number | null>(null);
+  const debounceTimeoutRefOwn = useRef<number | null>(null);
 
   const [inputValue, setInputValue] = useState('');
   const [projectList, setProjectList] = useState('');
@@ -49,7 +49,6 @@ function ProjectListHeader() {
       if (list === 'own') {
         dispatch(searchOwnProjectsAction({ value, debounceTimeoutRef: debounceTimeoutRefOwn, status }));
       } else {
-     
         dispatch(
           searchForeignProjectsAction({ value, debounceTimeoutRef: debounceTimeoutRefForeign, status }),
         );

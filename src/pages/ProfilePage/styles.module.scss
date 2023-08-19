@@ -8,17 +8,41 @@
     'header header header'
     'profileNav profileContent profileInfo'
     'profileNav profileContent profileInfo';
+
+  @media screen and (max-width: 787px) {
+    grid-template-columns: 80px 1fr 1fr;
+    grid-template-rows: 80px 1fr 1fr;
+    grid-template-areas:
+      'header header header'
+      'profileNav profileContent profileContent'
+      'profileNav profileContent profileContent';
+  }
+  @media screen and (max-width: 520px) {
+    grid-template-columns: 80px 1fr 1fr;
+    grid-template-rows: 80px 1fr 1fr;
+    grid-template-areas:
+      'header header header'
+      'profileContent profileContent profileContent'
+      'profileContent profileContent profileContent';
+  }
+
   .profileContentwrapper {
     grid-area: profileContent;
     border: 3px solid rgb(23, 120, 199);
     border-radius: 24px 24px 0 0;
     overflow: hidden;
-    padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
     overflow-x: hidden;
+    position: relative;
     &::-webkit-scrollbar {
       display: none;
+    }
+    @media screen and (max-width: 787px) {
+      border-radius: 24px 0 0 0;
+    }
+    @media screen and (max-width: 520px) {
+      border-radius: 24px 24px 0 0;
     }
   }
 }

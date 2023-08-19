@@ -1,3 +1,9 @@
 .AddPaticipantToProject {
   position: relative;
+  .btnSubWrapper {
+    width: 100%;
+    @media screen and (max-width: 520px) {
+      text-align: center;
+    }
+  }
 }
