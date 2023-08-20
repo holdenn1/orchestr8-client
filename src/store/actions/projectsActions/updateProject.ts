@@ -1,7 +1,7 @@
 import { updateOwnProjectStatusRequest, updateOwnProjectsRequest, updateTaskRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { UpdateProjectActionProps, UpdatedProjectRequest } from '../types/projectTypes';
-import { updateForeignProject, updateOwnProject } from '@/store/slices/projectSlice';
+import { updateForeignProject, updateOwnProject, updateStatusOwnProject } from '@/store/slices/projectSlice';
 import { UpdatedTaskRequest } from '../types/tasksTypes';
 import { updateTask } from '@/store/slices/taskSlice';
 
@@ -24,6 +24,7 @@ export const updateProjectAction = createAsyncThunk<void, UpdateProjectActionPro
         });
         if (data) {
           dispatch(updateOwnProject(data));
+          dispatch(updateStatusOwnProject(data));
         }
       }
 

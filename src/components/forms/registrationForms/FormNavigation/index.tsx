@@ -5,10 +5,8 @@ import SubmitButton from 'ui/buttons/SubmitButton';
 import { FormNavigationProps } from 'components/forms/types';
 
 function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
-  const { href } = location;
-
-  const isRegistration = href.includes('sign-up');
-
+  const isRegistration = location.href.includes('sign-up');
+  
   return (
     <div className={styles.formNavigationwrapper}>
       {isRegistration ? (

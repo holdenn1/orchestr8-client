@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState, useEffect } from 'react';
+import { ChangeEvent, useRef, useState, useEffect } from 'react';
 import MemberToProjectInput from '../../MemberToProjectInput';
 import RecomendationMembers from '../../RecomendationMembers';
 import SelectedMembers from '../../SelectedMembers';
@@ -9,13 +9,7 @@ import { notify } from '@/components/Toast';
 import styles from './../../styles.module.scss';
 import { useParams } from 'react-router-dom';
 import { setRecomendationMemberVisible, setSelectedMembersVisible } from '@/store/slices/mainSlice';
-
-type AddMemberProps = {
-  inputValue: string;
-  setInputValue: Dispatch<SetStateAction<string>>;
-  selectedMembersList: Member[];
-  setSelectedMembersList: Dispatch<React.SetStateAction<Member[]>>;
-};
+import { AddMemberProps } from '../../types';
 
 function AddMember({
   inputValue,

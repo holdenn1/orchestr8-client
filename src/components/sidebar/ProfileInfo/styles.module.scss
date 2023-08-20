@@ -1,14 +1,24 @@
-
 .wrapper {
   grid-area: profileInfo;
   @media screen and (max-width: 787px) {
+    transition: 1s;
+    width: 320px;
+    height: calc(100vh - 80px);
     position: absolute;
     top: 80px;
-    right: 0;
+    right: -520px;
     z-index: 120;
-    background-color: #eeeef7;
-    border-top: 1px solid black;
-    border-left:1px solid black;
-    display: none;
+    background-color: #ffffff;
   }
+  @media screen and (max-width: 425px) {
+    width: 100%;
+  }
+}
+.menuActive {
+  visibility: visible;
+  position: absolute;
+  top: 80px;
+  right: 0px;
+
+
 }

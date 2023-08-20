@@ -10,7 +10,6 @@ function ProjectListHeader() {
   const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
   const debounceTimeoutRefForeign = useRef<number | null>(null);
   const debounceTimeoutRefOwn = useRef<number | null>(null);
-
   const [inputValue, setInputValue] = useState('');
   const [projectList, setProjectList] = useState('');
   const dispatch = useAppDispatch();

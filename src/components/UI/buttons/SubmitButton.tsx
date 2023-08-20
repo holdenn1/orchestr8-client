@@ -1,9 +1,9 @@
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 import './styles.scss';
 
 type Children = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 function SubmitButton({ children }: Children) {
   return (

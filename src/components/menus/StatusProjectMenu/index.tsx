@@ -11,16 +11,25 @@ type StatusProjectMenuProps = {
   project: Project;
 };
 
-function StatusProjectMenu({ isMenu, setIsMenu, project: {id, status} }: StatusProjectMenuProps) {
+function StatusProjectMenu({ isMenu, setIsMenu, project: { id, status } }: StatusProjectMenuProps) {
   const dispatch = useAppDispatch();
-
 
   const handleComplete = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     if (status !== StatusProject.COMPLETED) {
-      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.COMPLETED } }));
+      dispatch(
+        updateProjectAction({
+          projectId: String(id),
+          updateProjectData: { status: StatusProject.COMPLETED },
+        }),
+      );
     } else {
-      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
+      dispatch(
+        updateProjectAction({
+          projectId: String(id),
+          updateProjectData: { status: StatusProject.IN_PROGRESS },
+        }),
+      );
     }
     setIsMenu(false);
   };
@@ -28,9 +37,16 @@ function StatusProjectMenu({ isMenu, setIsMenu, project: {id, status} }: StatusP
   const handleSuspend = async (e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) => {
     e.preventDefault();
     if (status !== StatusProject.SUSPEND) {
-      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.SUSPEND } }));
+      dispatch(
+        updateProjectAction({ projectId: String(id), updateProjectData: { status: StatusProject.SUSPEND } }),
+      );
     } else {
-      dispatch(updateProjectAction({ projectId: String(id)  , updateProjectData: { status: StatusProject.IN_PROGRESS } }));
+      dispatch(
+        updateProjectAction({
+          projectId: String(id),
+          updateProjectData: { status: StatusProject.IN_PROGRESS },
+        }),
+      );
     }
     setIsMenu(false);
   };

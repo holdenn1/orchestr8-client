@@ -2,7 +2,6 @@ import { MemberToProjectInputProps } from '../types';
 import styles from './styles.module.scss';
 
 function MemberToProjectInput({ handleInput, inputValue }: MemberToProjectInputProps) {
-
   return (
     <>
       <div className={styles.labelWrapper}>

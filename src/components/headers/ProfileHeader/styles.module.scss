@@ -2,6 +2,7 @@
 @import 'src/styles/mixins/contentCenterFlex.scss';
 @import 'src/styles/mixins/profileIconWrapper.scss';
 @import 'src/styles/mixins/contentCenterFlex.scss';
+@import 'src/styles/mixins/iconWrapper.scss';
 
 .header {
   grid-area: header;
@@ -16,26 +17,6 @@
     }
   }
 
-  .contactsIconWrapper {
-    visibility: hidden;
-    box-sizing: border-box;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgb(160, 160, 160);
-    padding: 8px;
-    border-radius: 100%;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 76px;
-    @media screen and (max-width: 787px) {
-      visibility: visible;
-    }
-  }
   .addProjectBtn {
     display: block;
     @include mainButton(#5293db, #3a76b8);
@@ -49,27 +30,23 @@
   }
 
   .projIconWrapper,
-  .projIconWrapperMenu {
-    visibility: hidden;
-    box-sizing: border-box;
-    width: 42px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgb(160, 160, 160);
-    padding: 8px;
-    border-radius: 100%;
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  .projIconWrapperMenu,
+  .taskIconWrapper {
+    @include iconWrapper;
     right: 182px;
     @media screen and (max-width: 520px) {
       visibility: visible;
     }
     @media screen and (max-width: 379px) {
       visibility: hidden;
+    }
+  }
+
+  .contactsIconProfileWrapper {
+    @include iconWrapper;
+    right: 76px;
+    @media screen and (max-width: 787px) {
+      visibility: visible;
     }
   }
 

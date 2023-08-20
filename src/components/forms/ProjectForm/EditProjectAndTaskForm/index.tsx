@@ -6,12 +6,8 @@ import { updateProjectAction } from '@/store/actions/projectsActions/updateProje
 import { setShowEditTaskForm } from '@/store/slices/mainSlice';
 import { Form, Formik } from 'formik';
 import { useParams } from 'react-router-dom';
+import { InitialValuesEditProjectAndTaskForm } from '../types';
 
-type InitialValuesEditProjectAndTaskForm = {
-  title: string;
-  description: string;
-  task: string;
-};
 
 function EditProjectAndTaskForm() {
   const { projectId, taskId, list } = useParams();

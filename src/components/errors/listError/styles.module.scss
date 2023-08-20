@@ -1,8 +1,7 @@
 @import 'src/styles/mixins/contentCenterFlex.scss';
 
 .emptyProjectListWrapper {
-  // height: calc(100vh - 220px);
-margin-top: 220px;
+  margin-top: 220px;
   @include contentCenterFlex;
   .emptyProjectsError {
     text-align: center;

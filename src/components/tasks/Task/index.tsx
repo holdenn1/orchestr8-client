@@ -11,7 +11,7 @@ import { setShowEditTaskForm } from '@/store/slices/mainSlice';
 import EmptyList from '@/components/errors/listError/EmptyList';
 import { removeTask } from '@/store/slices/taskSlice';
 
-function Task({ isManager }: { isManager: boolean }) {
+function Task({ isManager }: { isManager?: boolean }) {
   const [currentTask, setCurrentTask] = useState<ProjectTask>();
   const { tasks } = useAppSelector((state) => state.task);
   const { isEditTaskForm } = useAppSelector((state) => state.main);

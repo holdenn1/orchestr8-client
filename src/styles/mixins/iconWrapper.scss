@@ -1,0 +1,16 @@
+@mixin iconWrapper {
+  visibility: hidden;
+  box-sizing: border-box;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(160, 160, 160);
+  padding: 8px;
+  border-radius: 100%;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}

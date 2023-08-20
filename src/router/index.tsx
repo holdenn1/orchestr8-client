@@ -3,7 +3,8 @@ import { createHashRouter } from 'react-router-dom';
 import { ErrorPage, MainPage, ProfilePage, SignInPage, SignUpPage } from '@/pages';
 import ProjectForm from '@/components/forms/ProjectForm';
 import Task from '@/components/tasks/Task';
-import { Project, ProjectList } from '@/components/Projects';
+import ProjectList from '@/components/Projects/ProjectList/ProjectList';
+import Project from '@/components/Projects/Project/Project';
 
 export const router = createHashRouter([
   {

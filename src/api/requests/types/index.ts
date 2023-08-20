@@ -1,6 +1,7 @@
 import { InitialValuesSignInForm, InitialValuesSignUpForm } from '@/components/forms/types';
 import { StatusProject } from '@/store/slices/types/projectSliceTypes';
 import { MemberRole } from '@/store/slices/types/userSliceTypes';
+
 export type RegistrationUserData = Omit<InitialValuesSignUpForm, 'confirmPassword'>;
 
 export type LoginUserData = InitialValuesSignInForm;

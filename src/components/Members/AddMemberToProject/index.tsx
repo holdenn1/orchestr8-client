@@ -17,10 +17,7 @@ function AddMemberToProject() {
   const dispatch = useAppDispatch();
 
   function handleSubmit(resetForm: any) {
-    
-
     if (currentProject && projectId && selectedMembersList.length) {
-     
       const newMembersIds: number[] = selectedMembersList.map((member) => member.id);
       dispatch(
         updateProjectAction({
@@ -60,8 +57,7 @@ function AddMemberToProject() {
               />
             </div>
             <div className={styles.btnSubWrapper}>
-
-            <SubmitButton>Add members</SubmitButton>
+              <SubmitButton>Add members</SubmitButton>
             </div>
           </Form>
         )}

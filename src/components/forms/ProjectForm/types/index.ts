@@ -1,5 +1,5 @@
 import { Member } from '@/store/slices/types/projectSliceTypes';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
 export type SelectedMembersProps = {
   selectedMembersList: any[];
@@ -20,4 +20,17 @@ export type MemberToProjectInputProps = {
 
 export type FindedUsers = {
   data: Member[];
+};
+
+export type AddMemberProps = {
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
+  selectedMembersList: Member[];
+  setSelectedMembersList: Dispatch<React.SetStateAction<Member[]>>;
+};
+
+export type InitialValuesEditProjectAndTaskForm = {
+  title: string;
+  description: string;
+  task: string;
 };

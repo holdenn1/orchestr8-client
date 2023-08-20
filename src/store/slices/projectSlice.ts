@@ -52,6 +52,20 @@ const projectSlice = createSlice({
         return project;
       });
     },
+    updateStatusOwnProject(state, action: PayloadAction<Project>) {
+      const url = location.href;
+      if (state.ownProjects.some((proj) => proj.id === action.payload.id)) {
+        if (!url.includes('all-projects') && !url.includes('tasks')) {
+          state.ownProjects = state.ownProjects.filter(
+            (proj) => proj.id !== action.payload.id && proj.status !== action.payload.status,
+          );
+        }
+      } else {
+        if (state.ownProjects.every((proj) => proj.status === action.payload.status)) {
+          state.ownProjects.unshift(action.payload);
+        }
+      }
+    },
     updateRole(state, { payload: { projectId, memberId, role } }: PayloadAction<UpdateMemberRoleTypes>) {
       state.ownProjects = state.ownProjects.map((project) => {
         if (project.id === projectId) {
@@ -162,6 +176,7 @@ export const {
   removeForeignProject,
   addForeignProject,
   updateStatusForeignProject,
+  updateStatusOwnProject,
   updateForeignProject,
   clearOwnProjectsList,
   updateRole,

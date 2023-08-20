@@ -3,7 +3,7 @@
 .profile-nav-wrapper {
   margin: 20px 0 0;
   .profile-nav-title {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
     margin: 0 20px;
     white-space: nowrap;
@@ -19,7 +19,7 @@
     justify-items: center;
     align-items: center;
     height: 140px;
-    margin-bottom: 30px;
+    margin-bottom: 16px;
     &__item {
       width: 100px;
     }
@@ -30,7 +30,7 @@
     }
     .count {
       display: block;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 500;
       position: relative;
     }
