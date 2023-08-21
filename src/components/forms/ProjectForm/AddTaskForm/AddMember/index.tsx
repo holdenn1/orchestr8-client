@@ -17,7 +17,7 @@ function AddMember({
   selectedMembersList,
   setSelectedMembersList,
 }: AddMemberProps) {
-  const { ownProjects } = useAppSelector((state) => state.project);
+  const { projects } = useAppSelector((state) => state.project);
   const { selectedMembersVisible, recomendationMemberVisible } = useAppSelector((state) => state.main);
   const [recomendationMembersList, setRecomendationMembersList] = useState<Member[]>([]);
   const [currentProject, setCurrentProject] = useState<Project>();
@@ -27,10 +27,10 @@ function AddMember({
 
   useEffect(() => {
     if (projectId) {
-      const project = ownProjects.find((project) => project.id === +projectId);
+      const project = projects.find((project) => project.id === +projectId);
       setCurrentProject(project);
     }
-  }, [projectId, ownProjects]);
+  }, [projectId, projects]);
 
   async function handleInput(e: ChangeEvent<HTMLInputElement>) {
     const value = e.target.value.toLowerCase();

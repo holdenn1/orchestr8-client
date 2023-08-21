@@ -1,14 +1,12 @@
 import { MemberRole } from './userSliceTypes';
 
 export type InitialStateProjectSlice = {
-  ownProjects: Project[];
-  foreignProjects: Project[];
+  projects: Project[];
   ownProjectCount: ProjectCountPayload | null;
   foreignProjectCount: ProjectCountPayload | null;
-  currentPageOwnProjectList: number;
-  currentPageForeignProjectList: number;
+  currentPageProjectList: number;
   isSearching: boolean;
-  isLoading:boolean
+  isLoading: boolean;
 };
 
 export enum StatusProject {
@@ -50,5 +48,5 @@ export type ProjectCountPayload = {
 export type UpdateMemberRoleTypes = {
   projectId: number;
   memberId: number;
-  role: MemberRole;
+  memberRole: MemberRole;
 };

@@ -10,7 +10,7 @@ import { Project } from '@/store/slices/types/projectSliceTypes';
 function ProjectsInfo() {
   const [currentProject, setCurrentProject] = useState<Project>();
   const { tasks } = useAppSelector((state) => state.task);
-  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
+  const { projects } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { projectId, list } = useParams();
 
@@ -26,15 +26,12 @@ function ProjectsInfo() {
 
   useEffect(() => {
     if (projectId) {
-      if (list === 'own') {
-        const project = ownProjects.find((project) => project.id === +projectId);
+      if (list) {
+        const project = projects.find((project) => project.id === +projectId);
         if (project) setCurrentProject(project);
-      } else {
-        const project = foreignProjects.find((project) => project.id === +projectId);
-        if (project) setCurrentProject(project);
-      }
+      } 
     }
-  }, [projectId, ownProjects, foreignProjects]);
+  }, [projectId, projects]);
 
   return (
     <>

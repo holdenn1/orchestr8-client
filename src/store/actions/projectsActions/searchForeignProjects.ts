@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { searchForeignProjectRequest } from '@/api/requests';
 import { GetOwnProjectResponse, searchProjectsActionProps } from '../types/projectTypes';
-import { clearForeignProjectsList, setForeignProjects, setIsSearching } from '@/store/slices/projectSlice';
+import {  clearProjectsList, setIsSearching, setProjects } from '@/store/slices/projectSlice';
 
 export const searchForeignProjectsAction = createAsyncThunk<void, searchProjectsActionProps>(
   'project/searchForeignProjectsAction',
@@ -14,8 +14,8 @@ export const searchForeignProjectsAction = createAsyncThunk<void, searchProjects
         if (value.trim() !== '') {
           dispatch(setIsSearching(true));
           const { data }: GetOwnProjectResponse = await searchForeignProjectRequest(value, status);
-          dispatch(clearForeignProjectsList());
-          dispatch(setForeignProjects(data));
+          dispatch(clearProjectsList());
+          dispatch(setProjects(data));
         } else {
           dispatch(setIsSearching(false));
         }

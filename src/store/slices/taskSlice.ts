@@ -21,19 +21,34 @@ const taskSlice = createSlice({
       state.tasks = [...state.tasks, ...newTasks];
     },
     updateTask(state, action: PayloadAction<ProjectTask>) {
-      if (state.tasks.every((task) => task.completed) && state.tasks.length !== 1) {
+      const href = location.href;
+
+      if (
+        state.tasks.every((task) => task.completed) &&
+        href.includes('tasks-completed') &&
+        state.tasks.length !== 1
+      ) {
         if (action.payload.completed) {
           state.tasks.unshift(action.payload);
         } else {
           state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
         }
       } else {
-        state.tasks = state.tasks.map((task) => {
-          if (task.id === action.payload.id) {
-            task = action.payload;
-          }
-          return task;
-        });
+        if (
+          state.tasks.every((task) => task.completed) &&
+          href.includes('tasks-completed') &&
+          state.tasks.length === 1
+        ) {
+          state.tasks = state.tasks.filter((task) => task.id !== action.payload.id);
+        }
+        if (state.tasks.length) {
+          state.tasks = state.tasks.map((task) => {
+            if (task.id === action.payload.id) {
+              task = action.payload;
+            }
+            return task;
+          });
+        }
       }
       state.tasks.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1));
     },

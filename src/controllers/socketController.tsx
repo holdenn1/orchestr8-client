@@ -7,9 +7,9 @@ import {
   addForeignProject,
   removeForeignProject,
   updateForeignProject,
-  updateMemberRoleToForeignProject,
+  updateMemberToProjectRole,
   updateOwnProject,
-  updateStatusForeignProject,
+  updateStatusProject,
 } from '@/store/slices/projectSlice';
 import { getForeignProjectsCountAction } from '@/store/actions/projectsActions/getForeignProjectsCount';
 import { removeTask, setTask, updateTask } from '@/store/slices/taskSlice';
@@ -57,7 +57,7 @@ function SocketController() {
     } else {
       const url = location.href;
 
-      dispatch(removeForeignProject(data.payload));
+      // dispatch(removeForeignProject(data.payload));
       if (url.includes('tasks') && data.payload.owner.id !== userId) {
         navigate('/profile/foreign/projects/all-projects');
       }
@@ -70,14 +70,14 @@ function SocketController() {
 
   const handleUpdateMemberRole = (data: UpdateMemberRole) => {
     if ((window as any)?.socket?.id === data.socketId) return;
-    dispatch(updateMemberRoleToForeignProject(data.payload));
+    dispatch(updateMemberToProjectRole(data.payload));
   };
 
   const handleUpdateProjectStatus = (data: ProjectData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
     dispatch(getForeignProjectsCountAction());
     if (data.payload.members.some((member) => member.id === user.id)) {
-      dispatch(updateStatusForeignProject(data.payload));
+      dispatch(updateStatusProject(data.payload));
     } else {
       dispatch(removeForeignProject(data.payload));
     }

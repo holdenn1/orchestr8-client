@@ -1,21 +1,18 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
   InitialStateProjectSlice,
   Project,
   ProjectCountPayload,
   UpdateMemberRoleTypes,
 } from './types/projectSliceTypes';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchOwnProjectsAction } from '../actions/projectsActions/fetchOwnProjects';
 import { fetchForeignProjectsAction } from '../actions/projectsActions/fetchForeignProjects';
-import { UpdatedProjectAndUserRole } from '@/controllers/types';
 
 const initialState: InitialStateProjectSlice = {
-  ownProjects: [],
-  foreignProjects: [],
+  projects: [],
   ownProjectCount: null,
   foreignProjectCount: null,
-  currentPageOwnProjectList: 1,
-  currentPageForeignProjectList: 1,
+  currentPageProjectList: 1,
   isSearching: false,
   isLoading: false,
 };
@@ -27,62 +24,62 @@ const projectSlice = createSlice({
     addForeignProject(state, action: PayloadAction<Project>) {
       const url = location.href;
       if (url.includes('all-projects') || url.includes('in-progress')) {
-        state.foreignProjects.push(action.payload);
+        state.projects.push(action.payload);
       }
     },
     setProjects(state, action: PayloadAction<Project[]>) {
-      const oldProjectIds = state.ownProjects.map((proj) => proj.id);
+      const oldProjectIds = state.projects.map((proj) => proj.id);
       const newProjects = action.payload.filter((proj) => !oldProjectIds.includes(proj.id));
-      state.ownProjects = [...state.ownProjects, ...newProjects];
+      state.projects = [...state.projects, ...newProjects];
     },
-    clearOwnProjectsList(state) {
-      state.ownProjects = [];
-    },
-    clearForeignProjectsList(state) {
-      state.foreignProjects = [];
+    clearProjectsList(state) {
+      state.projects = [];
     },
     setIsSearching(state, action: PayloadAction<boolean>) {
       state.isSearching = action.payload;
     },
     updateOwnProject(state, action: PayloadAction<Project>) {
-      state.ownProjects = state.ownProjects.map((project) => {
+      state.projects = state.projects.map((project) => {
         if (project.id === action.payload.id) {
           project = action.payload;
         }
         return project;
       });
     },
-    updateStatusOwnProject(state, action: PayloadAction<Project>) {
+    updateForeignProject(state, action: PayloadAction<Project>) {
+      if (state.projects.some((proj) => proj.id === action.payload.id)) {
+        state.projects = state.projects.map((project) => {
+          if (project.id === action.payload.id) {
+            project = action.payload;
+          }
+          return project;
+        });
+      } else {
+        const url = location.href;
+        if (url.includes('all-projects') || url.includes('in-progress')) {
+          state.projects.unshift(action.payload);
+        }
+      }
+    },
+    updateStatusProject(state, action: PayloadAction<Project>) {
       const url = location.href;
-      if (state.ownProjects.some((proj) => proj.id === action.payload.id)) {
+      if (state.projects.some((proj) => proj.id === action.payload.id)) {
         if (!url.includes('all-projects') && !url.includes('tasks')) {
-          state.ownProjects = state.ownProjects.filter(
+          state.projects = state.projects.filter(
             (proj) => proj.id !== action.payload.id && proj.status !== action.payload.status,
           );
         }
       } else {
-        if (state.ownProjects.every((proj) => proj.status === action.payload.status)) {
-          state.ownProjects.unshift(action.payload);
+        if (state.projects.every((proj) => proj.status === action.payload.status)) {
+          state.projects.unshift(action.payload);
         }
       }
     },
-    updateRole(state, { payload: { projectId, memberId, role } }: PayloadAction<UpdateMemberRoleTypes>) {
-      state.ownProjects = state.ownProjects.map((project) => {
-        if (project.id === projectId) {
-          project.members.forEach((member) => {
-            if (member.id === memberId) {
-              member.role = role;
-            }
-          });
-        }
-        return project;
-      });
-    },
-    updateMemberRoleToForeignProject(
+    updateMemberToProjectRole(
       state,
-      { payload: { projectId, memberId, memberRole } }: PayloadAction<UpdatedProjectAndUserRole>,
+      { payload: { projectId, memberId, memberRole } }: PayloadAction<UpdateMemberRoleTypes>,
     ) {
-      state.foreignProjects = state.foreignProjects.map((project) => {
+      state.projects = state.projects.map((project) => {
         if (project.id === projectId) {
           project.members.forEach((member) => {
             if (member.id === memberId) {
@@ -93,54 +90,17 @@ const projectSlice = createSlice({
         return project;
       });
     },
-    updateStatusForeignProject(state, action: PayloadAction<Project>) {
-      const url = location.href;
-      if (state.foreignProjects.some((proj) => proj.id === action.payload.id)) {
-        if (!url.includes('all-projects') && !url.includes('tasks')) {
-          state.foreignProjects = state.foreignProjects.filter(
-            (proj) => proj.id !== action.payload.id && proj.status !== action.payload.status,
-          );
-        }
-      } else {
-        if (state.foreignProjects.every((proj) => proj.status === action.payload.status)) {
-          state.foreignProjects.unshift(action.payload);
-        }
-      }
-    },
-    updateForeignProject(state, action: PayloadAction<Project>) {
-      if (state.foreignProjects.some((proj) => proj.id === action.payload.id)) {
-        state.foreignProjects = state.foreignProjects.map((project) => {
-          if (project.id === action.payload.id) {
-            project = action.payload;
-          }
-          return project;
-        });
-      } else {
-        const url = location.href;
-        if (url.includes('all-projects') || url.includes('in-progress')) {
-          state.foreignProjects.unshift(action.payload);
-        }
-      }
-    },
     setOwnProjectsCount(state, action: PayloadAction<ProjectCountPayload | null>) {
       state.ownProjectCount = action.payload;
-    },
-    setForeignProjects(state, action: PayloadAction<Project[]>) {
-      const oldProjectIds = state.foreignProjects.map((proj) => proj.id);
-      const newProjects = action.payload.filter((proj) => !oldProjectIds.includes(proj.id));
-      state.foreignProjects = [...state.foreignProjects, ...newProjects];
     },
     setForeignProjectsCount(state, action: PayloadAction<ProjectCountPayload | null>) {
       state.foreignProjectCount = action.payload;
     },
     removeForeignProject(state, action: PayloadAction<Project>) {
-      state.foreignProjects = state.foreignProjects.filter((project) => project.id !== action.payload.id);
+      state.projects = state.projects.filter((project) => project.id !== action.payload.id);
     },
-    setCurrentPageOwnProjectList(state, action: PayloadAction<number>) {
-      state.currentPageOwnProjectList = action.payload;
-    },
-    setCurrentPageForeignProjectList(state, action: PayloadAction<number>) {
-      state.currentPageForeignProjectList = action.payload;
+    setCurrentPageProjectList(state, action: PayloadAction<number>) {
+      state.currentPageProjectList = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -171,18 +131,13 @@ export const {
   setIsSearching,
   updateOwnProject,
   setOwnProjectsCount,
-  setForeignProjects,
   setForeignProjectsCount,
   removeForeignProject,
   addForeignProject,
-  updateStatusForeignProject,
-  updateStatusOwnProject,
   updateForeignProject,
-  clearOwnProjectsList,
-  updateRole,
-  clearForeignProjectsList,
-  setCurrentPageOwnProjectList,
-  setCurrentPageForeignProjectList,
-  updateMemberRoleToForeignProject,
+  clearProjectsList,
+  setCurrentPageProjectList,
+  updateMemberToProjectRole,
+  updateStatusProject,
 } = projectSlice.actions;
 export default projectSlice.reducer;

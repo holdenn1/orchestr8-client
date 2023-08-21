@@ -7,7 +7,7 @@ import { setIsSearching } from '@/store/slices/projectSlice';
 import { searchForeignProjectsAction } from '@/store/actions/projectsActions/searchForeignProjects';
 
 function ProjectListHeader() {
-  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
+  const { projects } = useAppSelector((state) => state.project);
   const debounceTimeoutRefForeign = useRef<number | null>(null);
   const debounceTimeoutRefOwn = useRef<number | null>(null);
   const [inputValue, setInputValue] = useState('');
@@ -69,8 +69,8 @@ function ProjectListHeader() {
       <div className={styles.projectsTitle}>
         <h3>
           {list === 'own'
-            ? `Own projects list (${projectList}) on the page -  ${ownProjects.length}`
-            : `Foreign projects list (${projectList}) on the page -  ${foreignProjects.length}`}
+            ? `Own projects list (${projectList}) on the page -  ${projects.length}`
+            : `Foreign projects list (${projectList}) on the page -  ${projects.length}`}
         </h3>
       </div>
     </header>

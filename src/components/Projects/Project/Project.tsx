@@ -23,7 +23,7 @@ import { useAuth } from '@/hooks/useAuth';
 
 function Project() {
   const { isAddTaskForm, isEditTaskForm, isShowMembers } = useAppSelector((state) => state.main);
-  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
+  const { projects } = useAppSelector((state) => state.project);
   const [isManager, setIsManager] = useState<boolean>(false);
   const [currentProject, setCurrentProject] = useState<ProjectType>();
   const { projectId, tasks: statusTask, taskId, list } = useParams();
@@ -36,19 +36,8 @@ function Project() {
 
   useEffect(() => {
     if (projectId) {
-      if (list === 'own') {
-        const project = ownProjects.find((project) => project.id === Number(projectId));
-        if (project) {
-          const manager = project.members.some((member) => {
-            if (member.id === userId) {
-              if (member.role === MemberRole.PROJECT_MANAGER) return true;
-            }
-          });
-          setIsManager(manager);
-          setCurrentProject(project);
-        }
-      } else {
-        const project = foreignProjects.find((project) => project.id === Number(projectId));
+      if (list) {
+        const project = projects.find((project) => project.id === Number(projectId));
         if (project) {
           const manager = project.members.some((member) => {
             if (member.id === userId) {
@@ -60,7 +49,7 @@ function Project() {
         }
       }
     }
-  }, [projectId, ownProjects, foreignProjects, list]);
+  }, [projectId, projects, list]);
 
   useEffect(() => {
     dispatch(setCurrentPageTaskList(1));

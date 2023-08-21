@@ -1,6 +1,5 @@
-import { Project } from '@/store/slices/types/projectSliceTypes';
+import { Project, UpdateMemberRoleTypes } from '@/store/slices/types/projectSliceTypes';
 import { ProjectTask } from '@/store/slices/types/taskSliceTypes';
-import { MemberRole } from '@/store/slices/types/userSliceTypes';
 
 export enum NotificationType {
   CREATE_PROJECT = 'create_project',
@@ -15,13 +14,7 @@ export enum NotificationType {
 
 export type UpdateMemberRole = {
   socketId: string;
-  payload: UpdatedProjectAndUserRole;
-};
-
-export type UpdatedProjectAndUserRole = {
-  projectId: number;
-  memberId: number;
-  memberRole: MemberRole;
+  payload: UpdateMemberRoleTypes;
 };
 
 export type ProjectData = {

@@ -1,62 +1,55 @@
+import styles from './styles.module.scss';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { fetchOwnProjectsAction } from '@/store/actions/projectsActions/fetchOwnProjects';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ProjectListHeader from '@/components/headers/ProjectListHeader';
 import { setIsAddTaskForm, setShowMembers } from '@/store/slices/mainSlice';
 import { fetchForeignProjectsAction } from '@/store/actions/projectsActions/fetchForeignProjects';
-import OwnProjectList from './OwnProjectList';
-import ForeignProjectList from './ForeignProjectList';
 import { useInView } from 'react-intersection-observer';
-import {
-  clearForeignProjectsList,
-  clearOwnProjectsList,
-  setCurrentPageForeignProjectList,
-  setCurrentPageOwnProjectList,
-} from '@/store/slices/projectSlice';
+import { clearProjectsList, setCurrentPageProjectList } from '@/store/slices/projectSlice';
+import ProjectItem from './ProjectItem';
+import EmptyList from '@/components/errors/listError/EmptyList';
 
 function ProjectList() {
-  const { isSearching } = useAppSelector((state) => state.project);
+  const { isSearching, projects, isLoading } = useAppSelector((state) => state.project);
   const dispatch = useAppDispatch();
   const { status, list } = useParams();
-  const { ref: ownListRef, inView: OwnInView } = useInView({
-    threshold: 0,
-  });
-  const { ref: foreignListRef, inView: foreignInView } = useInView({
+  const { ref, inView } = useInView({
     threshold: 0,
   });
 
   useEffect(() => {
     if (list === 'own') {
-      dispatch(setCurrentPageOwnProjectList(1));
-      dispatch(clearOwnProjectsList());
+      dispatch(setCurrentPageProjectList(1));
+      dispatch(clearProjectsList());
     }
     if (list === 'foreign') {
-      dispatch(setCurrentPageForeignProjectList(1));
-      dispatch(clearForeignProjectsList());
+      dispatch(setCurrentPageProjectList(1));
+      dispatch(clearProjectsList());
     }
-  }, [status, isSearching]);
+  }, [status, isSearching, list]);
 
   useEffect(() => {
-    if (OwnInView) {
+    if (inView) {
       if (list === 'own' && status) {
         dispatch(
           fetchOwnProjectsAction({
             status,
           }),
         );
+      } else {
+        if (list === 'foreign' && status) {
+         
+          dispatch(
+            fetchForeignProjectsAction({
+              status,
+            }),
+          );
+        }
       }
     }
-    if (foreignInView) {
-      if (list === 'foreign' && status) {
-        dispatch(
-          fetchForeignProjectsAction({
-            status,
-          }),
-        );
-      }
-    }
-  }, [OwnInView, foreignInView, status, isSearching, list]);
+  }, [inView, status, isSearching, list]);
 
   useEffect(() => {
     dispatch(setIsAddTaskForm(false));
@@ -66,11 +59,24 @@ function ProjectList() {
   return (
     <>
       <ProjectListHeader />
-      {list === 'own' ? (
-        <OwnProjectList ownListRef={ownListRef} />
-      ) : (
-        <ForeignProjectList foreignListRef={foreignListRef} />
-      )}
+      <div className={styles.wrapper}>
+        <>
+          {projects?.length ? (
+            <div>
+              <div className={styles.projectsList}>
+                {projects.map((project) => (
+                  <Link to={`/profile/${list}/project/${project.id}/tasks-all`} key={project.id}>
+                    <ProjectItem project={project} />
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <>{!isLoading && <EmptyList>It's still empty here, add new projects!</EmptyList>}</>
+          )}
+        </>
+        <div ref={ref}></div>
+      </div>
     </>
   );
 }

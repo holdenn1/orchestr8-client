@@ -9,11 +9,11 @@ import profileIcon from 'icons/icons8-male-user-100.png';
 import EmptyList from '../errors/listError/EmptyList';
 import { MemberRole } from '@/store/slices/types/userSliceTypes';
 import { updateMemberRole } from '@/api/requests';
-import { updateRole } from '@/store/slices/projectSlice';
 import { useAuth } from '@/hooks/useAuth';
+import { updateMemberToProjectRole } from '@/store/slices/projectSlice';
 
 function Members() {
-  const { ownProjects, foreignProjects } = useAppSelector((state) => state.project);
+  const { projects } = useAppSelector((state) => state.project);
   const [currentProject, setCurrentProject] = useState<Project>();
   const { projectId, list } = useParams();
   const { id: userId } = useAuth();
@@ -21,19 +21,14 @@ function Members() {
 
   useEffect(() => {
     if (projectId) {
-      if (list === 'own') {
-        const project = ownProjects.find((project) => project.id === +projectId);
-        if (project) {
-          setCurrentProject(project);
-        }
-      } else {
-        const project = foreignProjects.find((project) => project.id === +projectId);
+      if (list) {
+        const project = projects.find((project) => project.id === +projectId);
         if (project) {
           setCurrentProject(project);
         }
       }
     }
-  }, [projectId, ownProjects]);
+  }, [projectId, projects]);
 
   const deleteMember = (id: number) => {
     const currentMembers = currentProject?.members.filter((member) => member.id === id);
@@ -48,7 +43,7 @@ function Members() {
       memberRole === MemberRole.PROJECT_MEMBER ? MemberRole.PROJECT_MANAGER : MemberRole.PROJECT_MEMBER;
     if (projectId) {
       await updateMemberRole(String(projectId), String(memberId), { memberRole: role });
-      dispatch(updateRole({ memberId, projectId: +projectId, role }));
+      dispatch(updateMemberToProjectRole({ memberId, projectId: +projectId, memberRole: role }));
     }
   };
 

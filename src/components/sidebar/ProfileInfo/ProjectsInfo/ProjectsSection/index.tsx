@@ -6,9 +6,7 @@ import { getOwnProjectsCountAction } from '@/store/actions/projectsActions/getOw
 import { getForeignProjectsCountAction } from '@/store/actions/projectsActions/getForeignProjectsCount';
 
 function ProjectsSection() {
-  const { ownProjects, ownProjectCount, foreignProjectCount, foreignProjects } = useAppSelector(
-    (state) => state.project,
-  );
+  const { projects, ownProjectCount, foreignProjectCount } = useAppSelector((state) => state.project);
   const { projectId } = useParams();
   const dispatch = useAppDispatch();
 
@@ -76,11 +74,8 @@ function ProjectsSection() {
 
   useEffect(() => {
     dispatch(getOwnProjectsCountAction());
-  }, [ownProjects]);
-
-  useEffect(() => {
     dispatch(getForeignProjectsCountAction());
-  }, [foreignProjects]);
+  }, [projects]);
 
   return (
     <div className='profile-nav-wrapper'>

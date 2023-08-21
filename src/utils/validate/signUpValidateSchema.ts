@@ -29,7 +29,7 @@ export default [
       ),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref('password'), null], 'Password must match')
+      .oneOf([yup.ref('password')], 'Password must match')
       .required('Confirm password is required'),
   }),
 ];

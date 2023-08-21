@@ -1,29 +1,29 @@
 import { getForeignProjectsRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCurrentPageForeignProjectList, setForeignProjects } from '@/store/slices/projectSlice';
 import { GetForeignProjectResponse } from '../types/projectTypes';
 import { RootState } from '@/store';
+import { setCurrentPageProjectList, setProjects } from '@/store/slices/projectSlice';
 
 export const fetchForeignProjectsAction = createAsyncThunk<void, { status: string }>(
   'project/fetchForeignProjectsAction',
-  async ({ status,  }, { dispatch, getState, rejectWithValue }) => {
+  async ({ status }, { dispatch, getState, rejectWithValue }) => {
     try {
       const {
-        project: { currentPageForeignProjectList, isSearching },
+        project: { currentPageProjectList, isSearching },
       } = getState() as RootState;
+
       if (!isSearching) {
-        
         const { data }: GetForeignProjectResponse = await getForeignProjectsRequest({
-          currentPage: String(currentPageForeignProjectList),
+          currentPage: String(currentPageProjectList),
           status,
         });
 
         if (data.length) {
-          dispatch(setCurrentPageForeignProjectList(currentPageForeignProjectList + 1));
+          dispatch(setCurrentPageProjectList(currentPageProjectList + 1));
         }
 
         if (data) {
-          dispatch(setForeignProjects(data));
+          dispatch(setProjects(data));
         }
       }
     } catch (e) {

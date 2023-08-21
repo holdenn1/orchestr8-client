@@ -1,6 +1,6 @@
 import { getOwnProjectsRequest } from '@/api/requests';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setCurrentPageOwnProjectList, setProjects } from '@/store/slices/projectSlice';
+import { setCurrentPageProjectList, setProjects } from '@/store/slices/projectSlice';
 import { GetOwnProjectResponse } from '../types/projectTypes';
 import { RootState } from '@/store';
 
@@ -9,16 +9,16 @@ export const fetchOwnProjectsAction = createAsyncThunk<void, { status: string }>
   async ({ status }, { dispatch, getState, rejectWithValue }) => {
     try {
       const {
-        project: { currentPageOwnProjectList, isSearching },
+        project: { currentPageProjectList, isSearching },
       } = getState() as RootState;
 
       if (!isSearching) {
         const { data }: GetOwnProjectResponse = await getOwnProjectsRequest(
           status,
-          String(currentPageOwnProjectList),
+          String(currentPageProjectList),
         );
         if (data.length) {
-          dispatch(setCurrentPageOwnProjectList(currentPageOwnProjectList + 1));
+          dispatch(setCurrentPageProjectList(currentPageProjectList + 1));
         }
 
         if (data) {
