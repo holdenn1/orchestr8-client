@@ -57,7 +57,9 @@ function SocketController() {
     } else {
       const url = location.href;
 
-      // dispatch(removeForeignProject(data.payload));
+      if (url.includes('foreign') && data.payload.owner.id !== userId) {
+        dispatch(removeForeignProject(data.payload));
+      }
       if (url.includes('tasks') && data.payload.owner.id !== userId) {
         navigate('/profile/foreign/projects/all-projects');
       }
