@@ -8,6 +8,8 @@
     'header header header'
     'profileNav profileContent profileInfo'
     'profileNav profileContent profileInfo';
+  position: relative;
+  overflow: hidden;
 
   @media screen and (max-width: 787px) {
     grid-template-columns: 80px 1fr 1fr;
