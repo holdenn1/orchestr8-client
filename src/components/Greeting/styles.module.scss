@@ -6,6 +6,8 @@
   width: 100%;
   height: 100vh;
   @include contentCenterFlex;
+  position: relative;
+  z-index: 1000;
   text-align: center;
   .contentWrapper {
     margin: 0 12px;

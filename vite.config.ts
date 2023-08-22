@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: "/orchestr8-client",
   resolve: {
     alias: {
       '@': '/src',

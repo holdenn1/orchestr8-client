@@ -1,7 +1,8 @@
 import axios, { CreateAxiosDefaults } from 'axios';
 import { refreshRequest } from '@/api/requests';
 
-export const BASE_URL = 'http://localhost:7000/';
+// export const BASE_URL = 'http://localhost:7000/';
+export const BASE_URL = 'https://orchestr-8-c6b8bc424a67.herokuapp.com/';
 
 const instance = axios.create({
   baseURL: BASE_URL,

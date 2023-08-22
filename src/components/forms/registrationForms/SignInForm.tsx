@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import TextInput from 'ui/inputs/formInputs/TextInput';
 import SignUpFormInputsWrapper from 'ui/wrappers/SignUpFormInputsWrapper';
 import signInValidateSchema from '@/utils/validate/signInValidateSchema';
+import mainImg from '@/assets/images/wallpaperflare.com_wallpaper (1).jpg'
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
 import { InitialValuesSignInForm } from 'components/forms/types';
 import { useAppDispatch } from '@/hooks/reduxHooks';
@@ -24,6 +25,7 @@ function SignInForm() {
 
   return (
     <div className={styles.formWrapper}>
+      <img className={styles.mainImg} src={mainImg} alt="" />
       <Formik
         initialValues={initialValues}
         validationSchema={signInValidateSchema}

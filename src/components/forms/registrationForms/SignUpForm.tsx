@@ -10,6 +10,7 @@ import Progress from 'components/forms/registrationForms/Progress';
 import FormNavigation from 'components/forms/registrationForms/FormNavigation';
 import { InitialValuesSignUpForm } from 'components/forms/types';
 import { useAppDispatch } from '@/hooks/reduxHooks';
+import mainImg from '@/assets/images/wallpaperflare.com_wallpaper (1).jpg'
 import { registrationUser } from '@/store/actions/authActions/registrationUser';
 import { useNavigate } from 'react-router-dom';
 
@@ -62,6 +63,8 @@ function SignUpForm() {
 
   return (
     <div className={styles.formWrapper}>
+        <img className={styles.mainImg} src={mainImg} alt="" />
+
     <Formik
       initialValues={initialValues}
       validationSchema={currentValidateSchema}
