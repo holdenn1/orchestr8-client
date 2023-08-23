@@ -1,4 +1,5 @@
-import { useAppSelector } from '@/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
+import { setIsMenu } from '@/store/slices/mainSlice';
 import { Project } from '@/store/slices/types/projectSliceTypes';
 import { Link, useParams } from 'react-router-dom';
 
@@ -9,6 +10,7 @@ type TasksSectionProps = {
 function TasksSection({ currentProject }: TasksSectionProps) {
   const { tasksCount } = useAppSelector((state) => state.task);
   const { projectId, list } = useParams();
+  const dispatch = useAppDispatch()
 
   const tasksList = [
     {
@@ -32,7 +34,7 @@ function TasksSection({ currentProject }: TasksSectionProps) {
       <h4 className='profile-nav-title' title={currentProject?.title}>
         Tasks for the project {currentProject?.title}
       </h4>
-      <div className='profile-list'>
+      <div onClick={() => dispatch(setIsMenu(false))} className='profile-list'>
         {tasksList.map((task) => (
           <Link key={task.id} to={`/profile/${list}/project/${projectId}/${task.link}`}>
             <div className='profile-list__item'>

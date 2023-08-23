@@ -29,11 +29,9 @@
     }
   }
 
-  .projIconWrapper,
-  .projIconWrapperMenu,
   .taskIconWrapper {
     @include iconWrapper;
-    right: 182px;
+    right: 172px;
     @media screen and (max-width: 520px) {
       visibility: visible;
     }
@@ -41,17 +39,34 @@
       visibility: hidden;
     }
   }
+  .projIconWrapper {
+    @include iconWrapper;
+    right: 122px;
+    @media screen and (max-width: 520px) {
+      visibility: visible;
+    }
+    @media screen and (max-width: 319px) {
+      visibility: hidden;
+    }
+  }
 
   .contactsIconProfileWrapper {
     @include iconWrapper;
-    right: 76px;
+    right: 66px;
     @media screen and (max-width: 787px) {
       visibility: visible;
     }
   }
 
   .projIconWrapperMenu {
-    right: 130px;
+    @include iconWrapper;
+    right: 178px;
+    @media screen and (max-width: 520px) {
+      visibility: visible;
+    }
+    @media screen and (max-width: 379px) {
+      visibility: hidden;
+    }
   }
   .bellIconWrapper {
     width: 24px;
@@ -59,7 +74,7 @@
     margin: 0 20px 0 auto;
     position: absolute;
     top: 20px;
-    right: 0px;
+    right: -10px;
     @include profleIconWrapper;
   }
 }

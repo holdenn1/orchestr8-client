@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { getOwnProjectsCountAction } from '@/store/actions/projectsActions/getOwnProjectsCount';
 import { getForeignProjectsCountAction } from '@/store/actions/projectsActions/getForeignProjectsCount';
+import { setIsMenu } from '@/store/slices/mainSlice';
 
 function ProjectsSection() {
   const { projects, ownProjectCount, foreignProjectCount } = useAppSelector((state) => state.project);
@@ -80,7 +81,7 @@ function ProjectsSection() {
   return (
     <div className='profile-nav-wrapper'>
       <h4 className='profile-nav-title'>Own projects</h4>
-      <div className='profile-list'>
+      <div onClick={() => dispatch(setIsMenu(false))} className='profile-list'>
         {ownProjectsCount.map((project) => (
           <Link key={project.id} to={`/profile/own/projects/${project.link}`}>
             <div className='profile-list__item'>
@@ -93,7 +94,7 @@ function ProjectsSection() {
       {!projectId && (
         <>
           <h4 className='profile-nav-title'>Member in</h4>
-          <div className='profile-list'>
+          <div onClick={() => dispatch(setIsMenu(false))} className='profile-list'>
             {foreignProjectsCount.map((project) => (
               <Link key={project.id} to={`/profile/foreign/projects/${project.link}`}>
                 <div className='profile-list__item'>
