@@ -45,7 +45,11 @@ function SocketController() {
   const handleProjectCreate = (data: ProjectData) => {
     if ((window as any)?.socket?.id === data.socketId) return;
     if (data.payload.members.some((member) => member.id === user.id)) {
-      dispatch(addForeignProject(data.payload));
+      const url = location.href;
+      dispatch(getForeignProjectsCountAction());
+      if (url.includes('foreign') && data.payload.owner.id !== userId) {
+        dispatch(addForeignProject(data.payload));
+      }
     }
   };
 
