@@ -9,6 +9,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { logoutUser } from '@/store/actions/authActions/logoutUser';
 import { setIsMenu } from '@/store/slices/mainSlice';
+import classNames from 'classnames';
 
 function ProfileHeader() {
   const { isMenu } = useAppSelector((state) => state.main);
@@ -33,7 +34,12 @@ function ProfileHeader() {
         </Link>
       )}
       {href.includes('project') && (
-        <Link className={styles.projIconWrapperMenu} to={`/profile/${list}/projects/all-projects`}>
+        <Link
+          className={classNames(styles.projIconWrapperMenu, {
+            [styles.projIconWrapperMenuTaskList]: !!projectId,
+          })}
+          to={`/profile/${list}/projects/all-projects`}
+        >
           <img className={styles.contactsIcon} src={projIcon} alt='contacts-icon' />
         </Link>
       )}
