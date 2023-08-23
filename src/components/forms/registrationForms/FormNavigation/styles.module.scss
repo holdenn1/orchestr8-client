@@ -10,6 +10,10 @@
     flex-direction: column-reverse;
     align-items: center;
   }
+  @media screen and (max-width: 590px) {
+    justify-content: center;
+  }
+
 
   .isAccount {
     margin: 10px;
