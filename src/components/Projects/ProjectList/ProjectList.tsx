@@ -40,7 +40,6 @@ function ProjectList() {
         );
       } else {
         if (list === 'foreign' && status) {
-         
           dispatch(
             fetchForeignProjectsAction({
               status,
@@ -61,21 +60,23 @@ function ProjectList() {
       <ProjectListHeader />
       <div className={styles.wrapper}>
         <>
-          {projects?.length ? (
-            <div className={styles.projectsListWrapper}>
-              <div className={styles.projectsList}>
-                {projects.map((project) => (
-                  <Link to={`/profile/${list}/project/${project.id}/tasks-all`} key={project.id}>
-                    <ProjectItem project={project} />
-                  </Link>
-                ))}
-              </div>
+          <div className={styles.projectsListWrapper}>
+            <div className={styles.projectsList}>
+              {projects.length ? (
+                <>
+                  {projects.map((project) => (
+                    <Link to={`/profile/${list}/project/${project.id}/tasks-all`} key={project.id}>
+                      <ProjectItem project={project} />
+                    </Link>
+                  ))}
+                </>
+              ) : (
+                <>{!isLoading && <EmptyList>It's still empty here, add new projects!</EmptyList>}</>
+              )}
             </div>
-          ) : (
-            <>{!isLoading && <EmptyList>It's still empty here, add new projects!</EmptyList>}</>
-          )}
+            <div ref={ref}></div>
+          </div>
         </>
-        <div ref={ref}></div>
       </div>
     </>
   );

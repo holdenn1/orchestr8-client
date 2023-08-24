@@ -54,13 +54,13 @@ function SocketController() {
   };
 
   const handleUpdateProject = (data: ProjectData) => {
+    const url = location.href;
     if ((window as any)?.socket?.id === data.socketId) return;
 
-    if (data.payload.members.some((member) => member.id === user.id)) {
+    dispatch(getForeignProjectsCountAction());
+    if (data.payload.members.some((member) => member.id === user.id) && url.includes('foreign')) {
       dispatch(updateForeignProject(data.payload));
     } else {
-      const url = location.href;
-
       if (url.includes('foreign') && data.payload.owner.id !== userId) {
         dispatch(removeForeignProject(data.payload));
       }

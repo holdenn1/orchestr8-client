@@ -1,5 +1,6 @@
 import axios, { CreateAxiosDefaults } from 'axios';
 import { refreshRequest } from '@/api/requests';
+import globalRouter from '@/router/globalRouter';
 
 // export const BASE_URL = 'http://localhost:7000/';
 export const BASE_URL = 'https://orchestr-8-c6b8bc424a67.herokuapp.com/';
@@ -18,7 +19,12 @@ instance.interceptors.request.use(
     config.headers.authorization = `Bearer ${accessToken}`;
     return config;
   },
-  (err) => Promise.reject(err),
+  (err) => {
+    if (err.response.data.statusCode == 401 && globalRouter.navigate) {
+      globalRouter.navigate('/sign-in');
+    }
+    return Promise.reject(err);
+  },
 );
 
 instance.interceptors.response.use(
@@ -37,6 +43,9 @@ instance.interceptors.response.use(
           const refreshToken = localStorage.getItem('refreshToken');
 
           if (!refreshToken) {
+            if (globalRouter.navigate) {
+              globalRouter.navigate('/sign-in');
+            }
             return Promise.reject(err);
           }
 
@@ -54,6 +63,9 @@ instance.interceptors.response.use(
         }
       }
     } catch (e) {
+      if (err.response.data.statusCode == 401 && globalRouter.navigate) {
+        globalRouter.navigate('/sign-in');
+      }
       localStorage.clear();
       return Promise.reject(err);
     }

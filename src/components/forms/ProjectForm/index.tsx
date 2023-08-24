@@ -11,7 +11,7 @@ import { createProject } from '@/store/actions/projectsActions/createProject';
 import { Member } from '@/store/slices/types/projectSliceTypes';
 import { useNavigate } from 'react-router-dom';
 import AddMember from './AddTaskForm/AddMember';
-import { setRecomendationMemberVisible, setSelectedMembersVisible } from '@/store/slices/mainSlice';
+import { setIsMenu, setRecomendationMemberVisible, setSelectedMembersVisible } from '@/store/slices/mainSlice';
 
 function ProjectForm() {
   const [selectedMembersList, setSelectedMembersList] = useState<Member[]>([]);
@@ -51,6 +51,7 @@ function ProjectForm() {
           onClick={() => {
             dispatch(setSelectedMembersVisible(false));
             dispatch(setRecomendationMemberVisible(false));
+            dispatch(setIsMenu(false))
           }}
         >
           <Form onClick={(e) => e.stopPropagation()}>
