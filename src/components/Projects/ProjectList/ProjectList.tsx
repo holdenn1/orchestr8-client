@@ -62,7 +62,7 @@ function ProjectList() {
       <div className={styles.wrapper}>
         <>
           {projects?.length ? (
-            <div>
+            <div className={styles.projectsListWrapper}>
               <div className={styles.projectsList}>
                 {projects.map((project) => (
                   <Link to={`/profile/${list}/project/${project.id}/tasks-all`} key={project.id}>

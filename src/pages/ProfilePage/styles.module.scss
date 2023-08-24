@@ -32,11 +32,9 @@
     grid-area: profileContent;
     border: 2px solid rgb(23, 120, 199);
     border-radius: 24px 24px 0 0;
-    overflow: hidden;
     box-sizing: border-box;
-    overflow-y: auto;
-    overflow-x: hidden;
     position: relative;
+    overflow: hidden;
     &::-webkit-scrollbar {
       display: none;
     }
