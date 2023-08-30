@@ -3,7 +3,7 @@ import { refreshRequest } from '@/api/requests';
 import globalRouter from '@/router/globalRouter';
 
 // export const BASE_URL = 'http://localhost:7000/';
-export const BASE_URL = 'https://orchestr-8-c6b8bc424a67.herokuapp.com/';
+export const BASE_URL = 'https://orchestr-8-server.onrender.com/';
 
 const instance = axios.create({
   baseURL: BASE_URL,
