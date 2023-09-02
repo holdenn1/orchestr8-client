@@ -31,7 +31,7 @@ function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
               className={classNames(styles.btnSub, { [styles.submitting]: isLoading })}
               disabled={isLoading}
             >
-              {isLoading ? 'Submit...' : 'Submit'}
+              {isLoading ? 'Submitting...' : 'Submit'}
             </button>
           )}
         </>
@@ -41,7 +41,7 @@ function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
           className={classNames(styles.btnSub, { [styles.submitting]: isLoading })}
           disabled={isLoading}
         >
-          {isLoading ? 'Submit...' : 'Submit'}
+          {isLoading ? 'Submitting...' : 'Submit'}
         </button>
       )}
     </div>
