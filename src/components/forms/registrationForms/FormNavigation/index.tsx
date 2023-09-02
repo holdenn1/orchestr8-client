@@ -1,12 +1,14 @@
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import MainButton from 'ui/buttons/MainButton';
-import SubmitButton from 'ui/buttons/SubmitButton';
 import { FormNavigationProps } from 'components/forms/types';
+import { useAppSelector } from '@/hooks/reduxHooks';
+import classNames from 'classnames';
 
 function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
+  const { isLoading } = useAppSelector((state) => state.account);
   const isRegistration = location.href.includes('sign-up');
-  
+
   return (
     <div className={styles.formNavigationwrapper}>
       {isRegistration ? (
@@ -24,11 +26,23 @@ function FormNavigation({ handleNext, handlePrev, step }: FormNavigationProps) {
           {step === 0 ? (
             <MainButton type='next' title='Next' onClick={handleNext} />
           ) : (
-            <SubmitButton>Submit</SubmitButton>
+            <button
+              type='submit'
+              className={classNames(styles.btnSub, { [styles.submitting]: isLoading })}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Submit...' : 'Submit'}
+            </button>
           )}
         </>
       ) : (
-        <SubmitButton>Submit</SubmitButton>
+        <button
+          type='submit'
+          className={classNames(styles.btnSub, { [styles.submitting]: isLoading })}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Submit...' : 'Submit'}
+        </button>
       )}
     </div>
   );

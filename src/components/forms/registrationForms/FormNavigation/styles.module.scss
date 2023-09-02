@@ -1,3 +1,4 @@
+@import 'src/styles/mixins/mainButton.scss';
 @import 'src/styles/variables';
 
 .formNavigationwrapper {
@@ -14,7 +15,6 @@
     justify-content: center;
   }
 
-
   .isAccount {
     margin: 10px;
     color: #616060;
@@ -23,6 +23,25 @@
     a {
       color: black;
       font-weight: $font-weight-title;
+    }
+  }
+}
+.btnSub {
+  @include mainButton(#1842b8, #1b1baa);
+}
+
+.submitting {
+  animation-name: submitting;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  @keyframes submitting {
+    0% {
+      box-shadow: 0px 0px 4px 2px #3030c4;
+    }
+
+    100% {
+      box-shadow: 0px 0px 12px 4px #1b1da3;
     }
   }
 }

@@ -12,6 +12,7 @@ import { setIsMenu } from '@/store/slices/mainSlice';
 import classNames from 'classnames';
 
 function ProfileHeader() {
+  const { isLoading } = useAppSelector((state) => state.account);
   const { isMenu } = useAppSelector((state) => state.main);
   const { list, projectId, taskId } = useParams();
   const navigate = useNavigate();
@@ -57,9 +58,14 @@ function ProfileHeader() {
           )}
         </div>
       )}
-      <div onClick={() => dispatch(logoutUser({ navigate }))} className={styles.bellIconWrapper}>
+      <button
+        type='button'
+        disabled={isLoading}
+        onClick={() => dispatch(logoutUser({ navigate }))}
+        className={classNames(styles.bellIconWrapper, { [styles.logoutActive]: isLoading })}
+      >
         <img src={bellIcon} alt='bell' />
-      </div>
+      </button>
     </header>
   );
 }

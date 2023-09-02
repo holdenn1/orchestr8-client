@@ -1,4 +1,4 @@
-import { Project } from "./projectSliceTypes";
+import { Project } from './projectSliceTypes';
 
 export enum MemberRole {
   PROJECT_MEMBER = 'project_member',
@@ -17,4 +17,5 @@ export type User = {
 
 export type InitialStateAccountSlice = {
   user: User;
+  isLoading: boolean;
 };

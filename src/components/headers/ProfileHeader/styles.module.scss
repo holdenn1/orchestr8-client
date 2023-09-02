@@ -69,7 +69,7 @@
     }
   }
 
-  .projIconWrapperMenuTaskList{
+  .projIconWrapperMenuTaskList {
     @include iconWrapper;
     right: 122px;
     @media screen and (max-width: 520px) {
@@ -80,12 +80,16 @@
     }
   }
   .bellIconWrapper {
-    width: 24px;
-    height: 24px;
+    width: 42px;
+    height: 42px;
+    background-color: white;
     margin: 0 20px 0 auto;
     position: absolute;
     top: 20px;
     right: -10px;
     @include profleIconWrapper;
+  }
+  .logoutActive {
+    background-color: rgb(189, 196, 206);
   }
 }
