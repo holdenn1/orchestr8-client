@@ -16,6 +16,9 @@ function App() {
   globalRouter.navigate = navigate;
 
   useEffect(() => {
+
+
+
     if (localStorage.getItem('refreshToken')) {
       dispatch(checkAuth({ navigate }));
     } else {
